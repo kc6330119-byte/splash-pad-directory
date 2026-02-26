@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page_title }}</title>
+    <meta name="description" content="{{ meta_description }}">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="{{ site_url }}{{ request_path | default('/') }}">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ site_url }}{{ request_path | default('/') }}">
+    <meta property="og:title" content="{{ page_title }}">
+    <meta property="og:description" content="{{ meta_description }}">
+    <meta property="og:image" content="{{ site_url }}/static/images/og-image.png">
+    <meta property="og:site_name" content="{{ site_name }}">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ page_title }}">
+    <meta name="twitter:description" content="{{ meta_description }}">
+    <meta name="twitter:image" content="{{ site_url }}/static/images/og-image.png">
+
+    <!-- SEO -->
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="{{ site_name }}">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": {{ site_name | tojson | safe }},
+        "url": {{ site_url | tojson | safe }},
+        "description": {{ site_description | tojson | safe }},
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": {
+                "@type": "EntryPoint",
+                "urlTemplate": {{ (site_url ~ "/state/{slug}.html") | tojson | safe }}
+            },
+            "query-input": "required name=slug"
+        }
+    }
+    </script>
+
+    {% if ga_measurement_id %}
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ ga_measurement_id }}"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '{{ ga_measurement_id }}');
+    </script>
+    {% endif %}
+
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9265762311868507"
+     crossorigin="anonymous"></script>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Custom styles -->
+    <link rel="stylesheet" href="/static/css/custom.css">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💧</text></svg>">
+
+    <style>
+        :root {
+            --color-primary: #0891b2;
+            --color-secondary: #0e7490;
+        }
+        .ad-container { min-height: 90px; }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col">
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm border-b sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <a href="/" class="flex items-center space-x-2">
+                        <span class="text-2xl">💧</span>
+                        <span class="font-bold text-xl text-gray-900">{{ site_name }}</span>
+                    </a>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-1">
+                    <!-- Categories dropdown -->
+                    <div class="relative group">
+                        <button class="text-gray-700 hover:text-cyan-600 px-3 py-2 text-sm font-medium flex items-center gap-1 rounded-md hover:bg-gray-50">
+                            Browse
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                            </svg>
+                        </button>
+                        <div class="absolute left-0 mt-1 w-60 bg-white rounded-xl shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150 z-50 border border-gray-100 py-2">
+                            {% for cat in categories %}
+                            <a href="/category/{{ cat.slug }}.html" class="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-cyan-50 hover:text-cyan-700">
+                                <span class="text-base">{{ cat.icon }}</span>
+                                <span>{{ cat.name }}</span>
+                            </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <a href="/about.html" class="text-gray-700 hover:text-cyan-600 px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-50">About</a>
+                    <a href="/contact.html" class="text-gray-700 hover:text-cyan-600 px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-50">Contact</a>
+                    <a href="/contact.html#submit" class="ml-2 px-4 py-2 bg-cyan-600 text-white text-sm font-semibold rounded-lg hover:bg-cyan-700 transition-colors">
+                        + Submit a Listing
+                    </a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-700 hover:text-cyan-600 p-2 rounded-md">
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-gray-100 bg-white">
+            <div class="px-3 pt-2 pb-3 space-y-1">
+                <p class="px-3 py-1 text-xs font-semibold text-gray-400 uppercase tracking-wider">Browse</p>
+                {% for cat in categories %}
+                <a href="/category/{{ cat.slug }}.html" class="flex items-center gap-2 px-3 py-2 text-sm font-medium text-gray-700 hover:bg-cyan-50 hover:text-cyan-700 rounded-md">
+                    {{ cat.icon }} {{ cat.name }}
+                </a>
+                {% endfor %}
+                <hr class="my-2 border-gray-100">
+                <a href="/about.html" class="block px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded-md">About</a>
+                <a href="/contact.html" class="block px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded-md">Contact</a>
+                <a href="/contact.html#submit" class="block mx-3 my-2 px-4 py-2 bg-cyan-600 text-white text-sm font-semibold rounded-lg text-center hover:bg-cyan-700">
+                    + Submit a Listing
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Ad Slot: Header Banner -->
+    <div class="ad-container my-4 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full">
+        <div class="bg-gray-100 border border-dashed border-gray-300 p-4 rounded text-center">
+            <p class="text-gray-400 text-xs">Advertisement</p>
+            <!-- AdSense unit here once approved -->
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="flex-grow">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Ad Slot: Footer Banner -->
+    <div class="ad-container my-8 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full">
+        <div class="bg-gray-100 border border-dashed border-gray-300 p-4 rounded text-center">
+            <p class="text-gray-400 text-xs">Advertisement</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- Brand -->
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex items-center space-x-2 mb-4">
+                        <span class="text-2xl">💧</span>
+                        <span class="font-bold text-xl">{{ site_name }}</span>
+                    </div>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-4">{{ site_description }}</p>
+                    <p class="text-gray-500 text-xs">&copy; {{ current_year }} {{ site_name }}. All rights reserved.</p>
+                </div>
+
+                <!-- Browse -->
+                <div>
+                    <h3 class="font-semibold mb-4 text-gray-100">Browse</h3>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        {% for cat in categories %}
+                        <li><a href="/category/{{ cat.slug }}.html" class="hover:text-white transition-colors">{{ cat.name }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <!-- Info -->
+                <div>
+                    <h3 class="font-semibold mb-4 text-gray-100">Info</h3>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="/about.html" class="hover:text-white transition-colors">About</a></li>
+                        <li><a href="/contact.html" class="hover:text-white transition-colors">Contact</a></li>
+                        <li><a href="/contact.html#submit" class="hover:text-white transition-colors">Submit a Listing</a></li>
+                        <li><a href="/privacy.html" class="hover:text-white transition-colors">Privacy Policy</a></li>
+                        <li><a href="/terms.html" class="hover:text-white transition-colors">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Menu Script -->
+    <script>
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>

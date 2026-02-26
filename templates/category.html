@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- Category Header -->
+<section class="bg-gradient-to-r from-cyan-600 to-sky-700 text-white py-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <nav class="text-sm text-cyan-200 mb-3">
+            <a href="/" class="hover:text-white">Home</a>
+            <span class="mx-2">/</span>
+            <span>{{ category.name }}</span>
+        </nav>
+        <div class="flex items-center gap-4">
+            <span class="text-5xl">{{ category.icon }}</span>
+            <div>
+                <h1 class="text-3xl md:text-4xl font-bold mb-1">{{ category.name }} Splash Pads</h1>
+                <p class="text-cyan-100 text-lg">
+                    {{ category.description }}
+                    {% if pads %}— {{ pads | length }} location{% if pads | length != 1 %}s{% endif %}{% endif %}
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Listings -->
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+
+    {% if pads %}
+    <!-- State filter bar -->
+    <div class="flex items-center justify-between mb-6">
+        <p class="text-sm text-gray-500">Showing {{ pads | length }} splash pad{% if pads | length != 1 %}s{% endif %}</p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        {% for pad in pads %}
+        {% include '_pad_card.html' %}
+        {% endfor %}
+    </div>
+
+    {% else %}
+    <!-- Empty State -->
+    <div class="text-center py-20">
+        <span class="text-6xl">{{ category.icon }}</span>
+        <h2 class="text-xl font-semibold text-gray-900 mt-6 mb-2">No listings yet in this category</h2>
+        <p class="text-gray-500 mb-8 max-w-md mx-auto">
+            Know of a splash pad that belongs here? Help us grow the directory!
+        </p>
+        <a href="/contact.html#submit"
+           class="inline-block px-6 py-3 bg-cyan-600 text-white font-semibold rounded-lg hover:bg-cyan-700 transition-colors">
+            Submit a Splash Pad
+        </a>
+    </div>
+    {% endif %}
+
+</div>
+
+<!-- Browse Other Categories -->
+<section class="bg-gray-50 border-t py-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-lg font-bold text-gray-900 mb-5">Browse Other Categories</h2>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            {% for cat in categories %}
+            {% if cat.slug != category.slug %}
+            <a href="/category/{{ cat.slug }}.html"
+               class="flex items-center gap-2 bg-white border border-gray-200 hover:border-cyan-400 hover:shadow-sm rounded-xl px-4 py-3 transition-all group">
+                <span class="text-xl">{{ cat.icon }}</span>
+                <span class="text-sm font-medium text-gray-700 group-hover:text-cyan-700">{{ cat.name }}</span>
+            </a>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% endblock %}

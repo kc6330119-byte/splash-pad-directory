@@ -5,6 +5,7 @@ Splash Pad Finder - Static Site Generator
 Fetches splash pad listings from Airtable and generates a static HTML site.
 Falls back to sample data if Airtable is not configured.
 """
+import json
 import os
 import shutil
 from datetime import datetime
@@ -189,6 +190,7 @@ def create_jinja_env():
     )
 
     env.filters["slugify"] = slugify
+    env.filters["tojson"] = lambda v: json.dumps(v, ensure_ascii=False)
 
     env.globals["site_name"] = config.SITE_NAME
     env.globals["site_url"] = config.SITE_URL
@@ -196,6 +198,7 @@ def create_jinja_env():
     env.globals["categories"] = config.CATEGORIES
     env.globals["us_states"] = config.US_STATES
     env.globals["current_year"] = datetime.now().year
+    env.globals["ga_measurement_id"] = config.GA_MEASUREMENT_ID
 
     return env
 
@@ -232,6 +235,7 @@ def build_homepage(env, pads):
         total_count=len(pads),
         page_title=config.DEFAULT_META_TITLE,
         meta_description=config.DEFAULT_META_DESCRIPTION,
+        request_path="/",
     )
 
     output_path = config.OUTPUT_DIR / "index.html"
@@ -253,6 +257,7 @@ def build_state_pages(env, pads):
             pads=state_pads,
             page_title=f"Splash Pads in {state['name']} - {config.SITE_NAME}",
             meta_description=f"Find {len(state_pads)} splash pads, spray parks, and water play areas in {state['name']}. Free and paid options for families.",
+            request_path=f"/state/{state['slug']}.html",
         )
 
         output_path = config.OUTPUT_DIR / "state" / f"{state['slug']}.html"
@@ -273,6 +278,7 @@ def build_pad_pages(env, pads):
             related_pads=related,
             page_title=f"{pad['name']} - {pad['city']}, {pad['state']} - {config.SITE_NAME}",
             meta_description=pad.get("description", "")[:160],
+            request_path=f"/pad/{pad['slug']}.html",
         )
 
         output_path = config.OUTPUT_DIR / "pad" / f"{pad['slug']}.html"
@@ -304,6 +310,7 @@ def build_category_pages(env, pads):
             pads=category_pads,
             page_title=f"{category['name']} Splash Pads - {config.SITE_NAME}",
             meta_description=category["description"],
+            request_path=f"/category/{category['slug']}.html",
         )
 
         output_path = config.OUTPUT_DIR / "category" / f"{category['slug']}.html"
@@ -403,6 +410,7 @@ def build_static_pages(env):
         html = template.render(
             page_title=f"{page['title']} - {config.SITE_NAME}",
             meta_description=page["description"],
+            request_path=f"/{page['output']}",
         )
         output_path = config.OUTPUT_DIR / page["output"]
         output_path.parent.mkdir(parents=True, exist_ok=True)

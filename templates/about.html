@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="py-12">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h1 class="text-3xl font-bold text-gray-900 mb-8">About Splash Pad Locator</h1>
+
+        <div class="space-y-6">
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-8">
+                <h2 class="text-xl font-semibold text-gray-900 mb-4">Our Mission</h2>
+                <p class="text-gray-600 leading-relaxed mb-4">
+                    Splash Pad Locator is dedicated to helping families find the best splash pads, spray parks,
+                    and water play areas across the United States. We believe every family deserves easy access
+                    to safe, fun, and affordable outdoor water play — especially during summer.
+                </p>
+                <p class="text-gray-600 leading-relaxed">
+                    Whether you're a parent looking for a free splash pad for a toddler, or a family planning
+                    a day trip, our directory makes it easy to find exactly what you need — with hours,
+                    photos, admission prices, and amenities all in one place.
+                </p>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-8">
+                <h2 class="text-xl font-semibold text-gray-900 mb-4">What We List</h2>
+                <ul class="space-y-3 text-gray-600">
+                    <li class="flex items-start gap-3">
+                        <span class="text-xl mt-0.5">💧</span>
+                        <div><strong>Splash Pads</strong> — Ground-level water jets, spray nozzles, and dumping features at parks and rec centers</div>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="text-xl mt-0.5">🌊</span>
+                        <div><strong>Spray Parks</strong> — Larger spray areas with multiple water features, often in dedicated parks</div>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="text-xl mt-0.5">🏠</span>
+                        <div><strong>Indoor Water Play</strong> — Year-round indoor water play areas, great for colder months</div>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="text-xl mt-0.5">🛝</span>
+                        <div><strong>Water Playgrounds</strong> — Playgrounds with integrated water features</div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-8">
+                <h2 class="text-xl font-semibold text-gray-900 mb-4">What We Include for Each Location</h2>
+                <div class="grid grid-cols-2 gap-3 text-sm text-gray-600">
+                    <div class="flex items-center gap-2">✓ <span>Hours of operation</span></div>
+                    <div class="flex items-center gap-2">✓ <span>Admission cost</span></div>
+                    <div class="flex items-center gap-2">✓ <span>Seasonal dates</span></div>
+                    <div class="flex items-center gap-2">✓ <span>Age range info</span></div>
+                    <div class="flex items-center gap-2">✓ <span>Available amenities</span></div>
+                    <div class="flex items-center gap-2">✓ <span>ADA accessibility</span></div>
+                    <div class="flex items-center gap-2">✓ <span>Directions link</span></div>
+                    <div class="flex items-center gap-2">✓ <span>Official website link</span></div>
+                    <div class="flex items-center gap-2">✓ <span>Phone number</span></div>
+                    <div class="flex items-center gap-2">✓ <span>Photos</span></div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-8">
+                <h2 class="text-xl font-semibold text-gray-900 mb-4">Submit a Listing</h2>
+                <p class="text-gray-600 leading-relaxed mb-4">
+                    Know of a splash pad that's not in our directory? We want to hear about it!
+                    Submit new listings through our contact form and we'll add it to the directory.
+                </p>
+                <a href="/contact.html#submit"
+                   class="inline-block px-5 py-2.5 bg-cyan-600 text-white font-semibold rounded-lg hover:bg-cyan-700 transition-colors text-sm">
+                    Submit a Splash Pad →
+                </a>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-8">
+                <h2 class="text-xl font-semibold text-gray-900 mb-4">Affiliate Disclosure</h2>
+                <p class="text-gray-600 leading-relaxed">
+                    Some links on this site may be affiliate links (such as links to summer gear, water shoes,
+                    or sunscreen on Amazon). We may earn a small commission if you purchase through these links,
+                    at no additional cost to you. This helps us keep the directory free and maintained.
+                    Our listings and editorial content are independent and not influenced by affiliate relationships.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

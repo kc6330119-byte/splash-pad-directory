@@ -16,10 +16,10 @@ DATA_DIR = BASE_DIR / "data"
 OUTPUT_DIR = BASE_DIR / "dist"
 
 # Site Configuration — UPDATE SITE_NAME and SITE_URL once domain is registered
-SITE_NAME = "Splash Pad Finder"
+SITE_NAME = "Splash Pad Locator"
 SITE_DESCRIPTION = "Find splash pads, spray parks, and water play areas near you. Free, family-friendly fun for kids of all ages."
-SITE_URL = os.getenv("SITE_URL", "https://splashpadfinder.com")
-SITE_AUTHOR = "Splash Pad Finder"
+SITE_URL = os.getenv("SITE_URL", "https://splashpadlocator.com")
+SITE_AUTHOR = "Splash Pad Locator"
 
 # Airtable Configuration
 AIRTABLE_API_KEY = os.getenv("AIRTABLE_API_KEY")
@@ -91,6 +91,9 @@ CATEGORIES = [
     {"name": "Indoor", "slug": "indoor", "description": "Year-round indoor water play areas", "icon": "🏠"},
     {"name": "Accessible", "slug": "accessible", "description": "ADA accessible splash pads and water play areas", "icon": "♿"},
 ]
+
+# Google Analytics
+GA_MEASUREMENT_ID = os.getenv("GA_MEASUREMENT_ID", "")
 
 # SEO Settings
 DEFAULT_META_TITLE = f"{SITE_NAME} - Find Splash Pads Near You"

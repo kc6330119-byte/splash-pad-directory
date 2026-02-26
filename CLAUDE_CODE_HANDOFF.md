@@ -1,4 +1,4 @@
-# Splash Pad Finder — Claude Code Handoff
+# Splash Pad Locator — Claude Code Handoff
 
 ## Project Summary
 Building a **national splash pad directory** targeting families searching for "splash pads near me" (100K–1M monthly searches). Static site built with Python/Jinja2, data from Airtable, hosted on Netlify. This is a pivot from a previous financial tools directory on the same Netlify and Airtable accounts.
@@ -28,7 +28,7 @@ Building a **national splash pad directory** targeting families searching for "s
 | Service | Details |
 |---------|---------|
 | **Netlify** | Same account, create a NEW site for this project |
-| **Airtable** | Same account, create a NEW Base called "Splash Pad Finder" |
+| **Airtable** | Same account, create a NEW Base called "Splash Pad Locator" |
 | **Google AdSense** | Publisher ID: `ca-pub-9265762311868507` (already in ads.txt) |
 | **Google Analytics** | Create a NEW property for the new domain |
 
@@ -91,7 +91,7 @@ splash-pad-directory/
 
 ## Airtable Setup
 
-### Create a new Base called: "Splash Pad Finder"
+### Create a new Base called: "Splash Pad Locator"
 ### Create a Table called: "SplashPads"
 
 ### Table Fields (exact names matter — build.py maps these)
@@ -246,12 +246,7 @@ For this site, suggest:
 
 ---
 
-## Domain Name Options (not yet registered)
-Kevin to register one of these:
-- splashpadfinder.com
-- splashpadlocator.com
-- findsplashpads.com
-- splashpadmap.com
-- mysplashpadguide.com
-
-Once registered, update `SITE_URL` in `.env` and in Netlify environment variables.
+## Domain
+**Registered: splashpadlocator.com** (registered via Netlify, Feb 2026)
+- `SITE_URL` already set to `https://splashpadlocator.com` in config.py and .env.example
+- Also set `SITE_URL=https://splashpadlocator.com` in Netlify site environment variables once the site is created
