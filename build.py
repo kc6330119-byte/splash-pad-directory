@@ -284,9 +284,9 @@ def build_homepage(env, pads, posts):
     by_state = group_pads_by_state(pads)
     state_counts = {s: len(v) for s, v in by_state.items()}
 
-    # Featured posts first, then recent, limit to 3 for homepage teaser
-    featured_posts = [p for p in posts if p.get("featured")][:3]
-    recent_posts = featured_posts or posts[:3]
+    # Separate featured post (hero card) from recent posts grid
+    featured_post = next((p for p in posts if p.get("featured")), None)
+    recent_posts = [p for p in posts if p is not featured_post][:3]
 
     html = template.render(
         featured_pads=featured,
@@ -294,6 +294,7 @@ def build_homepage(env, pads, posts):
         all_pads=pads,
         state_counts=state_counts,
         total_count=len(pads),
+        featured_post=featured_post,
         recent_posts=recent_posts,
         page_title=config.DEFAULT_META_TITLE,
         meta_description=config.DEFAULT_META_DESCRIPTION,
@@ -411,6 +412,18 @@ def build_post_pages(env, posts):
         output_path = config.OUTPUT_DIR / "blog" / f"{post['slug']}.html"
         output_path.write_text(html)
         print(f"Built: blog/{post['slug']}.html")
+
+
+def build_search_index(pads):
+    """Generate search-index.json for client-side search."""
+    index = [
+        {"name": p["name"], "city": p.get("city", ""), "state": p.get("state", ""), "slug": p["slug"]}
+        for p in pads if p.get("name") and p.get("slug")
+    ]
+    output_path = config.OUTPUT_DIR / "search-index.json"
+    with open(output_path, "w") as f:
+        json.dump(index, f, ensure_ascii=False)
+    print(f"Built: search-index.json ({len(index)} pads)")
 
 
 def build_sitemap(pads, posts):
@@ -548,6 +561,7 @@ def main():
     build_sitemap(pads, posts)
     build_robots()
     copy_ads_txt()
+    build_search_index(pads)
 
     print(f"\n{'='*50}")
     print(f"Build complete! Output in: {config.OUTPUT_DIR}")
