@@ -1,5 +1,64 @@
 {% extends "base.html" %}
 
+{% block extra_head %}
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+            "@type": "Question",
+            "name": "What is a splash pad?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "A splash pad (also called a spray pad or spray park) is a recreational water play area featuring ground-level water jets, spray nozzles, dumping buckets, and other interactive water features. Unlike pools or water parks, splash pads have no standing water — making them a safe, zero-depth option for young children and toddlers. Most are free to use and located in public parks."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Are splash pads free?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Many splash pads are completely free, especially those operated by city parks and recreation departments. Some privately operated splash pads or those inside water parks charge an admission fee. Use the Free Admission filter on Splash Pad Locator to find splash pads near you with no cost to enter."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "When do splash pads open for the season?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Most outdoor splash pads in the US open between Memorial Day (late May) and Labor Day (early September), though this varies by region. Warmer states like Florida, Texas, and Arizona may open earlier or run year-round. Always check the specific listing for seasonal dates before visiting."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Are splash pads safe for toddlers and babies?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes — splash pads are one of the safest water play options for toddlers and young children because there is no standing water to fall into or drown in. The ground-level water features are low-pressure and designed for kids of all ages. Adult supervision is always required. Swim diapers are recommended for infants."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "What's the difference between a splash pad and a spray park?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The terms are often used interchangeably. A splash pad typically refers to a smaller, ground-level water play area with spray jets embedded in the surface. A spray park usually refers to a larger dedicated facility with multiple water structures and features for a wider age range. Both are zero-depth with no standing water."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "What should I bring to a splash pad?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Pack swimwear or clothes that can get wet, water shoes, sunscreen, towels, a change of clothes, and plenty of water to drink. For toddlers, bring swim diapers. If the splash pad has picnic areas, pack a lunch or snacks."
+            }
+        }
+    ]
+}
+</script>
+{% endblock %}
+
 {% block content %}
 
 <!-- Hero Section -->
@@ -149,6 +208,98 @@
     </div>
 </section>
 
+<!-- FAQ Section -->
+<section class="py-12 bg-white border-t border-gray-100">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-10">
+            <h2 class="text-2xl font-bold text-gray-900 mb-2">Frequently Asked Questions</h2>
+            <p class="text-gray-500">Everything families need to know about splash pads</p>
+        </div>
+
+        <div class="space-y-4" id="faq-list">
+
+            <div class="faq-item bg-gray-50 border border-gray-200 rounded-xl overflow-hidden">
+                <button class="faq-btn w-full text-left px-6 py-4 flex items-center justify-between font-semibold text-gray-900 hover:bg-gray-100 transition-colors"
+                        aria-expanded="false">
+                    <span>What is a splash pad?</span>
+                    <svg class="faq-icon w-5 h-5 text-gray-500 transition-transform flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                    </svg>
+                </button>
+                <div class="faq-answer hidden px-6 pb-5 text-gray-600 leading-relaxed text-sm">
+                    A splash pad (also called a spray pad or spray park) is a recreational water play area featuring ground-level water jets, spray nozzles, dumping buckets, and other interactive water features. Unlike pools or water parks, splash pads have no standing water — making them a safe, zero-depth option for young children and toddlers. Most are free to use and located in public parks.
+                </div>
+            </div>
+
+            <div class="faq-item bg-gray-50 border border-gray-200 rounded-xl overflow-hidden">
+                <button class="faq-btn w-full text-left px-6 py-4 flex items-center justify-between font-semibold text-gray-900 hover:bg-gray-100 transition-colors"
+                        aria-expanded="false">
+                    <span>Are splash pads free?</span>
+                    <svg class="faq-icon w-5 h-5 text-gray-500 transition-transform flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                    </svg>
+                </button>
+                <div class="faq-answer hidden px-6 pb-5 text-gray-600 leading-relaxed text-sm">
+                    Many splash pads are completely free, especially those operated by city parks and recreation departments. Some privately operated splash pads or those inside water parks charge an admission fee. Use our <a href="/category/free-admission.html" class="text-cyan-600 hover:underline">Free Admission</a> filter to find splash pads near you with no cost to enter.
+                </div>
+            </div>
+
+            <div class="faq-item bg-gray-50 border border-gray-200 rounded-xl overflow-hidden">
+                <button class="faq-btn w-full text-left px-6 py-4 flex items-center justify-between font-semibold text-gray-900 hover:bg-gray-100 transition-colors"
+                        aria-expanded="false">
+                    <span>When do splash pads open for the season?</span>
+                    <svg class="faq-icon w-5 h-5 text-gray-500 transition-transform flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                    </svg>
+                </button>
+                <div class="faq-answer hidden px-6 pb-5 text-gray-600 leading-relaxed text-sm">
+                    Most outdoor splash pads in the US open between Memorial Day (late May) and Labor Day (early September), though this varies by region. Warmer states like Florida, Texas, and Arizona may open earlier or run year-round. Cooler northern states typically have shorter seasons. Always check the specific listing for seasonal dates before visiting, as hours and opening dates vary by location.
+                </div>
+            </div>
+
+            <div class="faq-item bg-gray-50 border border-gray-200 rounded-xl overflow-hidden">
+                <button class="faq-btn w-full text-left px-6 py-4 flex items-center justify-between font-semibold text-gray-900 hover:bg-gray-100 transition-colors"
+                        aria-expanded="false">
+                    <span>Are splash pads safe for toddlers and babies?</span>
+                    <svg class="faq-icon w-5 h-5 text-gray-500 transition-transform flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                    </svg>
+                </button>
+                <div class="faq-answer hidden px-6 pb-5 text-gray-600 leading-relaxed text-sm">
+                    Yes — splash pads are one of the safest water play options for toddlers and young children because there is no standing water to fall into or drown in. The ground-level water features are low-pressure and designed for kids of all ages. That said, adult supervision is always required. Swim diapers are recommended for infants. Browse our <a href="/category/toddlers.html" class="text-cyan-600 hover:underline">Best for Toddlers</a> listings for the most toddler-friendly options.
+                </div>
+            </div>
+
+            <div class="faq-item bg-gray-50 border border-gray-200 rounded-xl overflow-hidden">
+                <button class="faq-btn w-full text-left px-6 py-4 flex items-center justify-between font-semibold text-gray-900 hover:bg-gray-100 transition-colors"
+                        aria-expanded="false">
+                    <span>What's the difference between a splash pad and a spray park?</span>
+                    <svg class="faq-icon w-5 h-5 text-gray-500 transition-transform flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                    </svg>
+                </button>
+                <div class="faq-answer hidden px-6 pb-5 text-gray-600 leading-relaxed text-sm">
+                    The terms are often used interchangeably. A splash pad typically refers to a smaller, ground-level water play area — often a flat pad with spray jets embedded in the surface. A spray park usually refers to a larger dedicated facility with multiple water structures, spray zones, and features for a wider age range. Both are zero-depth (no standing water) and suitable for children.
+                </div>
+            </div>
+
+            <div class="faq-item bg-gray-50 border border-gray-200 rounded-xl overflow-hidden">
+                <button class="faq-btn w-full text-left px-6 py-4 flex items-center justify-between font-semibold text-gray-900 hover:bg-gray-100 transition-colors"
+                        aria-expanded="false">
+                    <span>What should I bring to a splash pad?</span>
+                    <svg class="faq-icon w-5 h-5 text-gray-500 transition-transform flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                    </svg>
+                </button>
+                <div class="faq-answer hidden px-6 pb-5 text-gray-600 leading-relaxed text-sm">
+                    Pack swimwear or clothes that can get wet, water shoes (splash pad surfaces can get hot in direct sun), sunscreen, towels, a change of clothes, and plenty of water to drink. For toddlers, bring swim diapers. If the splash pad has picnic areas, pack a lunch or snacks. Check our listings for amenities like shade, restrooms, and snack bars so you know what's available on-site before you go.
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
 <script>
 function goToState() {
     const slug = document.getElementById('state-select').value;
@@ -157,6 +308,27 @@ function goToState() {
 // Also navigate on change for quick selection
 document.getElementById('state-select').addEventListener('change', function() {
     if (this.value) goToState();
+});
+
+// FAQ accordion
+document.querySelectorAll('.faq-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+        const answer = this.nextElementSibling;
+        const icon = this.querySelector('.faq-icon');
+        const isOpen = !answer.classList.contains('hidden');
+
+        // Close all
+        document.querySelectorAll('.faq-answer').forEach(function(a) { a.classList.add('hidden'); });
+        document.querySelectorAll('.faq-icon').forEach(function(i) { i.style.transform = ''; });
+        document.querySelectorAll('.faq-btn').forEach(function(b) { b.setAttribute('aria-expanded', 'false'); });
+
+        // Open clicked (if it was closed)
+        if (!isOpen) {
+            answer.classList.remove('hidden');
+            icon.style.transform = 'rotate(180deg)';
+            this.setAttribute('aria-expanded', 'true');
+        }
+    });
 });
 </script>
 

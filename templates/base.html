@@ -46,6 +46,8 @@
     }
     </script>
 
+    {% block extra_head %}{% endblock %}
+
     {% if ga_measurement_id %}
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id={{ ga_measurement_id }}"></script>
