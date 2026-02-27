@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+
+{% block extra_head %}
+{% autoescape false %}
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": {{ post.title | tojson }},
+    "description": {{ (post.meta_description or post.excerpt) | tojson }},
+    {% if post.featured_image %}
+    "image": {{ post.featured_image | tojson }},
+    {% endif %}
+    "author": {
+        "@type": "Organization",
+        "name": {{ post.author | tojson }}
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": {{ site_name | tojson }},
+        "url": {{ site_url | tojson }}
+    },
+    {% if post.publish_date %}
+    "datePublished": {{ post.publish_date | tojson }},
+    {% endif %}
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": {{ (site_url ~ "/blog/" ~ post.slug ~ ".html") | tojson }}
+    }
+}
+</script>
+{% endautoescape %}
+{% endblock %}
+
+{% block content %}
+
+<!-- Breadcrumb -->
+<div class="bg-white border-b">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+        <nav class="flex text-sm text-gray-500" aria-label="Breadcrumb">
+            <a href="/" class="hover:text-cyan-600">Home</a>
+            <span class="mx-2">/</span>
+            <a href="/blog.html" class="hover:text-cyan-600">Blog</a>
+            <span class="mx-2">/</span>
+            <span class="text-gray-900 font-medium truncate">{{ post.title }}</span>
+        </nav>
+    </div>
+</div>
+
+<!-- Featured Image -->
+{% if post.featured_image %}
+<div class="w-full h-64 md:h-80 overflow-hidden">
+    <img src="{{ post.featured_image }}" alt="{{ post.title }}"
+         class="w-full h-full object-cover"
+         referrerpolicy="no-referrer"
+         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+    <div style="display:none" class="w-full h-full flex items-center justify-center bg-gradient-to-br from-cyan-200 to-sky-300">
+        <span class="text-8xl opacity-30">💧</span>
+    </div>
+</div>
+{% endif %}
+
+<!-- Article -->
+<article class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+
+    <!-- Header -->
+    <header class="mb-8">
+        <h1 class="text-3xl md:text-4xl font-bold text-gray-900 leading-tight mb-4">
+            {{ post.title }}
+        </h1>
+        <div class="flex flex-wrap items-center gap-3 text-sm text-gray-500 border-b border-gray-100 pb-6">
+            {% if post.publish_date %}
+            <span>📅 {{ post.publish_date | format_date }}</span>
+            {% endif %}
+            {% if post.author %}
+            <span>·</span>
+            <span>✍️ {{ post.author }}</span>
+            {% endif %}
+        </div>
+    </header>
+
+    <!-- Content -->
+    <div class="prose-content">
+        {{ post.content | markdown }}
+    </div>
+
+    <!-- Footer -->
+    <footer class="mt-12 pt-8 border-t border-gray-100">
+        <a href="/blog.html"
+           class="inline-flex items-center gap-2 text-cyan-600 hover:text-cyan-700 font-semibold text-sm transition-colors">
+            ← Back to Blog
+        </a>
+    </footer>
+
+</article>
+
+<!-- Related Posts -->
+{% set related = [] %}
+{% for p in all_posts %}
+    {% if p.slug != post.slug and related | length < 3 %}
+        {% set related = related.append(p) or related %}
+    {% endif %}
+{% endfor %}
+
+{% if related %}
+<section class="bg-gray-50 border-t py-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-lg font-bold text-gray-900 mb-6">More from the Blog</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+            {% for p in related %}
+            <a href="/blog/{{ p.slug }}.html"
+               class="bg-white border border-gray-100 rounded-xl p-5 hover:shadow-sm hover:border-cyan-200 transition-all group">
+                <p class="text-xs text-gray-400 mb-2">{{ p.publish_date | format_date }}</p>
+                <h3 class="font-semibold text-gray-900 group-hover:text-cyan-600 leading-snug text-sm">{{ p.title }}</h3>
+                {% if p.excerpt %}
+                <p class="text-xs text-gray-500 mt-2 line-clamp-2">{{ p.excerpt }}</p>
+                {% endif %}
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+{% endblock %}

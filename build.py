@@ -11,7 +11,9 @@ import shutil
 from datetime import datetime
 from pathlib import Path
 
+import markdown as md_lib
 from jinja2 import Environment, FileSystemLoader
+from markupsafe import Markup
 from slugify import slugify
 
 import config
@@ -167,6 +169,49 @@ def get_pads():
     return pads
 
 
+def fetch_blog_posts():
+    """Fetch published blog posts from Airtable."""
+    if not config.AIRTABLE_API_KEY or not config.AIRTABLE_BASE_ID:
+        return []
+
+    try:
+        from pyairtable import Api
+
+        api = Api(config.AIRTABLE_API_KEY)
+        table = api.table(config.AIRTABLE_BASE_ID, config.AIRTABLE_BLOG_TABLE_NAME)
+        records = table.all()
+
+        posts = []
+        for record in records:
+            fields = record.get("fields", {})
+
+            if fields.get("Status") != "Published":
+                continue
+
+            title = fields.get("Title", "")
+            post = {
+                "title": title,
+                "slug": fields.get("Slug", "") or slugify(title),
+                "content": fields.get("Content", ""),
+                "excerpt": fields.get("Excerpt", ""),
+                "author": fields.get("Author", "Splash Pad Locator Staff"),
+                "publish_date": fields.get("Publish Date", ""),
+                "featured_image": fields.get("Featured Image", ""),
+                "meta_description": fields.get("Meta Description", ""),
+                "status": fields.get("Status", "Published"),
+                "featured": fields.get("Featured", False),
+            }
+            posts.append(post)
+
+        posts.sort(key=lambda x: x.get("publish_date", ""), reverse=True)
+        print(f"Fetched {len(posts)} blog posts from Airtable.")
+        return posts
+
+    except Exception as e:
+        print(f"Note: Could not fetch blog posts ({e})")
+        return []
+
+
 def setup_output_directory():
     """Create clean output directory."""
     if config.OUTPUT_DIR.exists():
@@ -176,6 +221,7 @@ def setup_output_directory():
     (config.OUTPUT_DIR / "state").mkdir()
     (config.OUTPUT_DIR / "pad").mkdir()
     (config.OUTPUT_DIR / "category").mkdir()
+    (config.OUTPUT_DIR / "blog").mkdir()
 
     # Copy static files
     if config.STATIC_DIR.exists():
@@ -189,8 +235,19 @@ def create_jinja_env():
         autoescape=True
     )
 
+    def format_date(date_str):
+        if not date_str:
+            return ""
+        try:
+            dt = datetime.strptime(str(date_str)[:10], "%Y-%m-%d")
+            return dt.strftime("%B ") + str(dt.day) + dt.strftime(", %Y")
+        except (ValueError, TypeError):
+            return date_str
+
     env.filters["slugify"] = slugify
     env.filters["tojson"] = lambda v: json.dumps(v, ensure_ascii=False)
+    env.filters["markdown"] = lambda text: Markup(md_lib.markdown(text or "", extensions=["extra", "nl2br"]))
+    env.filters["format_date"] = format_date
 
     env.globals["site_name"] = config.SITE_NAME
     env.globals["site_url"] = config.SITE_URL
@@ -213,7 +270,7 @@ def group_pads_by_state(pads):
     return grouped
 
 
-def build_homepage(env, pads):
+def build_homepage(env, pads, posts):
     """Build the homepage."""
     template = env.get_template("index.html")
 
@@ -227,12 +284,17 @@ def build_homepage(env, pads):
     by_state = group_pads_by_state(pads)
     state_counts = {s: len(v) for s, v in by_state.items()}
 
+    # Featured posts first, then recent, limit to 3 for homepage teaser
+    featured_posts = [p for p in posts if p.get("featured")][:3]
+    recent_posts = featured_posts or posts[:3]
+
     html = template.render(
         featured_pads=featured,
         recent_pads=recent,
         all_pads=pads,
         state_counts=state_counts,
         total_count=len(pads),
+        recent_posts=recent_posts,
         page_title=config.DEFAULT_META_TITLE,
         meta_description=config.DEFAULT_META_DESCRIPTION,
         request_path="/",
@@ -318,10 +380,44 @@ def build_category_pages(env, pads):
         print(f"Built: category/{category['slug']}.html ({len(category_pads)} pads)")
 
 
-def build_sitemap(pads):
+def build_blog_page(env, posts):
+    """Build the blog listing page."""
+    template = env.get_template("blog.html")
+    html = template.render(
+        posts=posts,
+        page_title=f"Blog - {config.SITE_NAME}",
+        meta_description="Tips, guides, and articles to help families find and enjoy splash pads across America.",
+        request_path="/blog.html",
+    )
+    output_path = config.OUTPUT_DIR / "blog.html"
+    output_path.write_text(html)
+    print(f"Built: blog.html ({len(posts)} posts)")
+
+
+def build_post_pages(env, posts):
+    """Build individual blog post pages."""
+    template = env.get_template("post.html")
+
+    for post in posts:
+        if not post.get("slug"):
+            continue
+        html = template.render(
+            post=post,
+            all_posts=posts,
+            page_title=f"{post['title']} - {config.SITE_NAME}",
+            meta_description=post.get("meta_description") or post.get("excerpt", "")[:160],
+            request_path=f"/blog/{post['slug']}.html",
+        )
+        output_path = config.OUTPUT_DIR / "blog" / f"{post['slug']}.html"
+        output_path.write_text(html)
+        print(f"Built: blog/{post['slug']}.html")
+
+
+def build_sitemap(pads, posts):
     """Generate sitemap.xml."""
     urls = [
         f"{config.SITE_URL}/",
+        f"{config.SITE_URL}/blog.html",
         f"{config.SITE_URL}/about.html",
         f"{config.SITE_URL}/contact.html",
         f"{config.SITE_URL}/privacy.html",
@@ -336,6 +432,10 @@ def build_sitemap(pads):
 
     for pad in pads:
         urls.append(f"{config.SITE_URL}/pad/{pad['slug']}.html")
+
+    for post in posts:
+        if post.get("slug"):
+            urls.append(f"{config.SITE_URL}/blog/{post['slug']}.html")
 
     sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n'
     sitemap += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
@@ -430,17 +530,22 @@ def main():
     print("\nFetching splash pads...")
     pads = get_pads()
 
+    print("\nFetching blog posts...")
+    posts = fetch_blog_posts()
+
     env = create_jinja_env()
 
     print("\nBuilding pages...")
-    build_homepage(env, pads)
+    build_homepage(env, pads, posts)
     build_state_pages(env, pads)
     build_pad_pages(env, pads)
     build_category_pages(env, pads)
     build_static_pages(env)
+    build_blog_page(env, posts)
+    build_post_pages(env, posts)
 
     print("\nBuilding SEO files...")
-    build_sitemap(pads)
+    build_sitemap(pads, posts)
     build_robots()
     copy_ads_txt()
 

@@ -10,6 +10,19 @@
     min-height: 90px;
 }
 
+/* Blog post content typography */
+.prose-content h2 { font-size: 1.5rem; font-weight: 700; margin: 2rem 0 0.75rem; color: #111827; }
+.prose-content h3 { font-size: 1.2rem; font-weight: 600; margin: 1.5rem 0 0.5rem; color: #111827; }
+.prose-content p { margin-bottom: 1.25rem; color: #374151; line-height: 1.8; }
+.prose-content ul { list-style: disc; padding-left: 1.5rem; margin-bottom: 1.25rem; color: #374151; }
+.prose-content ol { list-style: decimal; padding-left: 1.5rem; margin-bottom: 1.25rem; color: #374151; }
+.prose-content li { margin-bottom: 0.4rem; line-height: 1.75; }
+.prose-content strong { font-weight: 700; color: #111827; }
+.prose-content a { color: #0891b2; text-decoration: underline; }
+.prose-content a:hover { color: #0e7490; }
+.prose-content blockquote { border-left: 4px solid #0891b2; padding-left: 1rem; margin: 1.5rem 0; color: #6b7280; font-style: italic; }
+.prose-content hr { border-color: #e5e7eb; margin: 2rem 0; }
+
 /* Smooth card hover */
 .listing-card {
     transition: transform 0.2s ease, box-shadow 0.2s ease;
