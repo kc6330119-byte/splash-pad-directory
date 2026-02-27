@@ -5,7 +5,12 @@
     <div class="h-48 bg-cyan-50 overflow-hidden relative flex-shrink-0">
         {% if pad.photo_url %}
         <img src="{{ pad.photo_url }}" alt="{{ pad.name }}"
-             class="w-full h-full object-cover" loading="lazy">
+             class="w-full h-full object-cover" loading="lazy"
+             referrerpolicy="no-referrer"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div style="display:none" class="w-full h-full flex items-center justify-center bg-gradient-to-br from-cyan-100 to-sky-200">
+            <span class="text-6xl opacity-30">💧</span>
+        </div>
         {% else %}
         <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-cyan-100 to-sky-200">
             <span class="text-6xl opacity-30">💧</span>
