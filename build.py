@@ -191,7 +191,7 @@ def fetch_blog_posts():
             title = fields.get("Title", "")
             post = {
                 "title": title,
-                "slug": fields.get("Slug", "") or slugify(title),
+                "slug": (fields.get("Slug", "") or slugify(title)).strip(),
                 "content": fields.get("Content", ""),
                 "excerpt": fields.get("Excerpt", ""),
                 "author": fields.get("Author", "Splash Pad Locator Staff"),

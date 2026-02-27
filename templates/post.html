@@ -122,4 +122,16 @@
 </section>
 {% endif %}
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script>
+(function() {
+    document.querySelectorAll('canvas[data-chart]').forEach(function(canvas) {
+        try {
+            var config = JSON.parse(canvas.getAttribute('data-chart'));
+            new Chart(canvas, config);
+        } catch(e) {}
+    });
+})();
+</script>
+
 {% endblock %}
