@@ -146,6 +146,7 @@ def fetch_from_airtable():
                 "type": fields.get("Type", "Splash Pad"),
                 "season": fields.get("Season", ""),
                 "status": fields.get("Status", "Active"),
+                "featured": fields.get("Featured", False),
                 "date_added": fields.get("Date Added", ""),
                 "rating": fields.get("Rating", 0),
                 "review_count": fields.get("Review Count", 0),
@@ -274,7 +275,7 @@ def build_homepage(env, pads, posts):
     """Build the homepage."""
     template = env.get_template("index.html")
 
-    featured = [p for p in pads if p.get("status") == "Featured"][:config.FEATURED_COUNT]
+    featured = [p for p in pads if p.get("featured")][:config.FEATURED_COUNT]
     if not featured:
         featured = pads[:config.FEATURED_COUNT]
 
