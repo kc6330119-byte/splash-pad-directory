@@ -361,6 +361,8 @@ def build_category_pages(env, pads):
         "with-restrooms": lambda p: "Restrooms" in p.get("features", []),
         "with-picnic-areas": lambda p: "Picnic Area" in p.get("features", []),
         "indoor": lambda p: p.get("type") in ["Indoor Water Play", "Indoor Splash Pad"],
+        "amusement-parks": lambda p: p.get("type") == "Amusement Park",
+        "water-parks": lambda p: p.get("type") in ["Water Park", "Resort Water Park"],
         "accessible": lambda p: "Accessibility" in p.get("features", []),
     }
 

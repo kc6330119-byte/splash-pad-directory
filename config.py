@@ -91,6 +91,8 @@ CATEGORIES = [
     {"name": "With Picnic Areas", "slug": "with-picnic-areas", "description": "Splash pads near picnic tables or pavilions", "icon": "🧺"},
     {"name": "Indoor", "slug": "indoor", "description": "Year-round indoor water play areas", "icon": "🏠"},
     {"name": "Accessible", "slug": "accessible", "description": "ADA accessible splash pads and water play areas", "icon": "♿"},
+    {"name": "Amusement Parks", "slug": "amusement-parks", "description": "Theme and amusement parks with splash pad and water attractions", "icon": "🎢"},
+    {"name": "Water Parks", "slug": "water-parks", "description": "Dedicated water parks and resort water parks with slides and attractions", "icon": "🌊"},
 ]
 
 # Google Analytics
