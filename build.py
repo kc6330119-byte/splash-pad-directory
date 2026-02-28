@@ -530,14 +530,16 @@ STATIC_PAGES = [
 ]
 
 
-def build_static_pages(env):
+def build_static_pages(env, pads=None):
     """Build static informational pages."""
+    total_count = len(pads) if pads else 0
     for page in STATIC_PAGES:
         template = env.get_template(page["template"])
         html = template.render(
             page_title=f"{page['title']} - {config.SITE_NAME}",
             meta_description=page["description"],
             request_path=f"/{page['output']}",
+            total_count=total_count,
         )
         output_path = config.OUTPUT_DIR / page["output"]
         output_path.parent.mkdir(parents=True, exist_ok=True)
@@ -567,7 +569,7 @@ def main():
     build_state_pages(env, pads)
     build_pad_pages(env, pads)
     build_category_pages(env, pads)
-    build_static_pages(env)
+    build_static_pages(env, pads)
     build_blog_page(env, posts)
     build_post_pages(env, posts)
 

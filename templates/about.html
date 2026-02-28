@@ -3,66 +3,135 @@
 {% block content %}
 <section class="py-12">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 class="text-3xl font-bold text-gray-900 mb-8">About Splash Pad Locator</h1>
+
+        <h1 class="text-3xl font-bold text-gray-900 mb-2">About Splash Pad Locator</h1>
+        <p class="text-gray-500 mb-8">The most complete splash pad directory in the United States</p>
+
+        <!-- Stats Bar -->
+        <div class="grid grid-cols-3 gap-4 mb-8">
+            <div class="bg-cyan-50 border border-cyan-100 rounded-xl p-5 text-center">
+                <div class="text-3xl font-bold text-cyan-700">{{ total_count | default('2,900') }}+</div>
+                <div class="text-sm text-cyan-600 mt-1">Locations Listed</div>
+            </div>
+            <div class="bg-cyan-50 border border-cyan-100 rounded-xl p-5 text-center">
+                <div class="text-3xl font-bold text-cyan-700">50</div>
+                <div class="text-sm text-cyan-600 mt-1">States Covered</div>
+            </div>
+            <div class="bg-cyan-50 border border-cyan-100 rounded-xl p-5 text-center">
+                <div class="text-3xl font-bold text-cyan-700">Free</div>
+                <div class="text-sm text-cyan-600 mt-1">Always Free to Use</div>
+            </div>
+        </div>
 
         <div class="space-y-6">
+
+            <!-- Our Story -->
             <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-8">
-                <h2 class="text-xl font-semibold text-gray-900 mb-4">Our Mission</h2>
+                <h2 class="text-xl font-semibold text-gray-900 mb-4">Our Story</h2>
                 <p class="text-gray-600 leading-relaxed mb-4">
-                    Splash Pad Locator is dedicated to helping families find the best splash pads, spray parks,
-                    and water play areas across the United States. We believe every family deserves easy access
-                    to safe, fun, and affordable outdoor water play — especially during summer.
+                    Splash Pad Locator was built by a parent who got tired of the same frustrating experience:
+                    searching online for a splash pad near a new city, finding outdated blog posts, broken links,
+                    and listings with no hours, no photos, and no indication of whether the place was even still open.
+                </p>
+                <p class="text-gray-600 leading-relaxed mb-4">
+                    The idea was simple — build the resource that should have existed all along. A single,
+                    searchable directory covering every splash pad, spray park, aquatic center, and water play area
+                    in the United States, with real information that helps families actually plan a visit.
                 </p>
                 <p class="text-gray-600 leading-relaxed">
-                    Whether you're a parent looking for a free splash pad for a toddler, or a family planning
-                    a day trip, our directory makes it easy to find exactly what you need — with hours,
-                    photos, admission prices, and amenities all in one place.
+                    Today, Splash Pad Locator is one of the most comprehensive water play directories in the country,
+                    with over {{ total_count | default('2,900') }} locations across all 50 states — and growing every week.
                 </p>
             </div>
 
+            <!-- Our Mission -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-8">
+                <h2 class="text-xl font-semibold text-gray-900 mb-4">Our Mission</h2>
+                <p class="text-gray-600 leading-relaxed mb-4">
+                    Our mission is to make water play accessible to every family in America. Splash pads and spray
+                    parks are one of the few truly free, all-ages outdoor activities available in most communities —
+                    but only if families can find them.
+                </p>
+                <p class="text-gray-600 leading-relaxed">
+                    We believe no family should miss a great splash pad simply because it wasn't easy to find.
+                    Whether you're a local parent looking for something new, or a family on a road trip searching
+                    for a place to cool off, Splash Pad Locator is here to help.
+                </p>
+            </div>
+
+            <!-- What We List -->
             <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-8">
                 <h2 class="text-xl font-semibold text-gray-900 mb-4">What We List</h2>
+                <p class="text-gray-600 leading-relaxed mb-5">
+                    Our directory covers the full spectrum of water play — from small neighborhood spray pads
+                    operated by city parks departments to large regional water parks and indoor aquatic centers.
+                </p>
                 <ul class="space-y-3 text-gray-600">
                     <li class="flex items-start gap-3">
                         <span class="text-xl mt-0.5">💧</span>
-                        <div><strong>Splash Pads</strong> — Ground-level water jets, spray nozzles, and dumping features at parks and rec centers</div>
+                        <div><strong>Splash Pads & Spray Parks</strong> — Ground-level water jets, spray nozzles, and interactive water features at parks and recreation centers. Most are free and open seasonally.</div>
                     </li>
                     <li class="flex items-start gap-3">
                         <span class="text-xl mt-0.5">🌊</span>
-                        <div><strong>Spray Parks</strong> — Larger spray areas with multiple water features, often in dedicated parks</div>
+                        <div><strong>Water Parks & Aquatic Centers</strong> — Larger facilities with slides, wave pools, lazy rivers, and admission fees. Great for a full-day family outing.</div>
                     </li>
                     <li class="flex items-start gap-3">
                         <span class="text-xl mt-0.5">🏠</span>
-                        <div><strong>Indoor Water Play</strong> — Year-round indoor water play areas, great for colder months</div>
+                        <div><strong>Indoor Water Play</strong> — Year-round indoor water play areas inside recreation centers, resort water parks, and family entertainment venues.</div>
                     </li>
                     <li class="flex items-start gap-3">
-                        <span class="text-xl mt-0.5">🛝</span>
-                        <div><strong>Water Playgrounds</strong> — Playgrounds with integrated water features</div>
+                        <span class="text-xl mt-0.5">🎢</span>
+                        <div><strong>Amusement & Theme Parks</strong> — Major parks with dedicated water play areas and splash zones alongside their other attractions.</div>
                     </li>
                 </ul>
             </div>
 
+            <!-- What We Include -->
             <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-8">
                 <h2 class="text-xl font-semibold text-gray-900 mb-4">What We Include for Each Location</h2>
+                <p class="text-gray-600 leading-relaxed mb-5">
+                    Every listing in our directory includes as much practical information as possible so you can
+                    plan your visit without surprises.
+                </p>
                 <div class="grid grid-cols-2 gap-3 text-sm text-gray-600">
                     <div class="flex items-center gap-2">✓ <span>Hours of operation</span></div>
                     <div class="flex items-center gap-2">✓ <span>Admission cost</span></div>
-                    <div class="flex items-center gap-2">✓ <span>Seasonal dates</span></div>
-                    <div class="flex items-center gap-2">✓ <span>Age range info</span></div>
-                    <div class="flex items-center gap-2">✓ <span>Available amenities</span></div>
+                    <div class="flex items-center gap-2">✓ <span>Seasonal opening dates</span></div>
+                    <div class="flex items-center gap-2">✓ <span>Age range information</span></div>
+                    <div class="flex items-center gap-2">✓ <span>On-site amenities</span></div>
                     <div class="flex items-center gap-2">✓ <span>ADA accessibility</span></div>
-                    <div class="flex items-center gap-2">✓ <span>Directions link</span></div>
+                    <div class="flex items-center gap-2">✓ <span>Google Maps directions</span></div>
                     <div class="flex items-center gap-2">✓ <span>Official website link</span></div>
                     <div class="flex items-center gap-2">✓ <span>Phone number</span></div>
                     <div class="flex items-center gap-2">✓ <span>Photos</span></div>
                 </div>
             </div>
 
+            <!-- Accuracy -->
             <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-8">
-                <h2 class="text-xl font-semibold text-gray-900 mb-4">Submit a Listing</h2>
+                <h2 class="text-xl font-semibold text-gray-900 mb-4">Our Commitment to Accuracy</h2>
                 <p class="text-gray-600 leading-relaxed mb-4">
-                    Know of a splash pad that's not in our directory? We want to hear about it!
-                    Submit new listings through our contact form and we'll add it to the directory.
+                    We work continuously to keep listings accurate and up to date. Hours, admission prices, and
+                    seasonal dates can change — we encourage visitors to check directly with a facility before
+                    making a special trip.
+                </p>
+                <p class="text-gray-600 leading-relaxed mb-4">
+                    If you notice an error, an outdated listing, or a splash pad that's missing from our directory,
+                    please let us know. Your corrections help every family who visits the site after you.
+                </p>
+                <a href="/contact.html"
+                   class="inline-block px-5 py-2.5 bg-cyan-600 text-white font-semibold rounded-lg hover:bg-cyan-700 transition-colors text-sm">
+                    Report an Error or Submit a Listing →
+                </a>
+            </div>
+
+            <!-- Submit -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-8">
+                <h2 class="text-xl font-semibold text-gray-900 mb-4">Help Us Grow</h2>
+                <p class="text-gray-600 leading-relaxed mb-4">
+                    Know of a splash pad, spray park, or water play area that isn't in our directory yet?
+                    We want to hear about it. New submissions are reviewed and added regularly — your local
+                    knowledge helps families across the country discover great places to play.
                 </p>
                 <a href="/contact.html#submit"
                    class="inline-block px-5 py-2.5 bg-cyan-600 text-white font-semibold rounded-lg hover:bg-cyan-700 transition-colors text-sm">
@@ -70,15 +139,17 @@
                 </a>
             </div>
 
+            <!-- Affiliate Disclosure -->
             <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-8">
                 <h2 class="text-xl font-semibold text-gray-900 mb-4">Affiliate Disclosure</h2>
                 <p class="text-gray-600 leading-relaxed">
-                    Some links on this site may be affiliate links (such as links to summer gear, water shoes,
-                    or sunscreen on Amazon). We may earn a small commission if you purchase through these links,
-                    at no additional cost to you. This helps us keep the directory free and maintained.
-                    Our listings and editorial content are independent and not influenced by affiliate relationships.
+                    Some links on this site may be affiliate links — for example, links to water shoes, sunscreen,
+                    or swim gear. We may earn a small commission if you purchase through these links, at no
+                    additional cost to you. This helps us keep the directory free and maintained. Our listings
+                    and editorial content are always independent and are not influenced by affiliate relationships.
                 </p>
             </div>
+
         </div>
     </div>
 </section>
