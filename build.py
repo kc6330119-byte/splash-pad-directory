@@ -527,6 +527,12 @@ STATIC_PAGES = [
         "title": "Message Sent",
         "description": "Thank you for contacting us.",
     },
+    {
+        "template": "submit.html",
+        "output": "submit.html",
+        "title": "Submit a Splash Pad",
+        "description": "Submit a splash pad, spray park, or water play area to be added to our directory.",
+    },
 ]
 
 
