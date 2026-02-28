@@ -150,6 +150,8 @@ def fetch_from_airtable():
                 "date_added": fields.get("Date Added", ""),
                 "rating": fields.get("Rating", 0),
                 "review_count": fields.get("Review Count", 0),
+                "latitude": fields.get("Latitude", ""),
+                "longitude": fields.get("Longitude", ""),
             }
             pads.append(pad)
 
