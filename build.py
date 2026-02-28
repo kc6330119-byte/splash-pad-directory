@@ -370,9 +370,18 @@ def build_category_pages(env, pads):
         filter_fn = category_filters.get(category["slug"], lambda p: True)
         category_pads = [p for p in pads if filter_fn(p)]
 
+        # Build state list sorted by count desc for sidebar filter
+        state_counts = {}
+        for p in category_pads:
+            s = p.get("state", "")
+            if s:
+                state_counts[s] = state_counts.get(s, 0) + 1
+        state_list = sorted(state_counts.items(), key=lambda x: (-x[1], x[0]))
+
         html = template.render(
             category=category,
             pads=category_pads,
+            state_list=state_list,
             page_title=f"{category['name']} Splash Pads - {config.SITE_NAME}",
             meta_description=category["description"],
             request_path=f"/category/{category['slug']}.html",

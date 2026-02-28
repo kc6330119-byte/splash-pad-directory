@@ -27,15 +27,67 @@
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
 
     {% if pads %}
-    <!-- State filter bar -->
-    <div class="flex items-center justify-between mb-6">
-        <p class="text-sm text-gray-500">Showing {{ pads | length }} splash pad{% if pads | length != 1 %}s{% endif %}</p>
+
+    <!-- Mobile: horizontal scrollable state pills -->
+    <div class="lg:hidden mb-5 -mx-4 px-4">
+        <p class="text-xs text-gray-500 mb-2 font-medium uppercase tracking-wide">Filter by State</p>
+        <div class="flex gap-2 overflow-x-auto pb-2" style="scrollbar-width:none;-ms-overflow-style:none;">
+            <button data-state-filter="all"
+                    class="state-btn flex-shrink-0 px-3 py-1.5 rounded-full text-sm font-medium bg-cyan-600 text-white transition-colors whitespace-nowrap">
+                All ({{ pads | length }})
+            </button>
+            {% for state_name, count in state_list %}
+            <button data-state-filter="{{ state_name }}"
+                    class="state-btn flex-shrink-0 px-3 py-1.5 rounded-full text-sm font-medium bg-gray-100 text-gray-700 hover:bg-cyan-50 hover:text-cyan-700 transition-colors whitespace-nowrap">
+                {{ state_name }} ({{ count }})
+            </button>
+            {% endfor %}
+        </div>
     </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        {% for pad in pads %}
-        {% include '_pad_card.html' %}
-        {% endfor %}
+    <!-- Desktop: sidebar + grid -->
+    <div class="lg:flex lg:gap-8 lg:items-start">
+
+        <!-- Sidebar -->
+        <aside class="hidden lg:block w-52 flex-shrink-0">
+            <div class="bg-white border border-gray-100 rounded-xl shadow-sm sticky top-20 overflow-hidden">
+                <div class="px-4 py-3 border-b border-gray-100">
+                    <h2 class="font-semibold text-gray-800 text-sm">Filter by State</h2>
+                </div>
+                <div class="overflow-y-auto" style="max-height:72vh;">
+                    <button data-state-filter="all"
+                            class="state-btn w-full text-left px-4 py-2.5 text-sm flex justify-between items-center bg-cyan-50 text-cyan-700 font-medium">
+                        <span>All States</span>
+                        <span class="text-xs bg-cyan-100 text-cyan-700 rounded-full px-1.5 py-0.5 font-normal">{{ pads | length }}</span>
+                    </button>
+                    {% for state_name, count in state_list %}
+                    <button data-state-filter="{{ state_name }}"
+                            class="state-btn w-full text-left px-4 py-2.5 text-sm flex justify-between items-center border-t border-gray-50 text-gray-700 hover:bg-gray-50 transition-colors">
+                        <span class="truncate mr-2">{{ state_name }}</span>
+                        <span class="text-xs text-gray-400 flex-shrink-0">{{ count }}</span>
+                    </button>
+                    {% endfor %}
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main content -->
+        <div class="flex-1 min-w-0">
+            <p class="text-sm text-gray-500 mb-5" id="results-count">
+                Showing {{ pads | length }} splash pad{% if pads | length != 1 %}s{% endif %}
+            </p>
+
+            <div id="pads-grid" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+                {% for pad in pads %}
+                {% include '_pad_card.html' %}
+                {% endfor %}
+            </div>
+
+            <p id="no-results" class="hidden text-center py-20 text-gray-400 text-lg">
+                No results found for that state.
+            </p>
+        </div>
+
     </div>
 
     {% else %}
@@ -72,5 +124,60 @@
         </div>
     </div>
 </section>
+
+<script>
+(function () {
+    var cards = Array.from(document.querySelectorAll('#pads-grid .listing-card'));
+    var btns  = Array.from(document.querySelectorAll('.state-btn'));
+    var countEl    = document.getElementById('results-count');
+    var grid       = document.getElementById('pads-grid');
+    var noResults  = document.getElementById('no-results');
+    var totalCount = cards.length;
+
+    function filterByState(state) {
+        var visible = 0;
+
+        cards.forEach(function (card) {
+            var show = (state === 'all' || card.dataset.state === state);
+            card.style.display = show ? '' : 'none';
+            if (show) visible++;
+        });
+
+        // Update count label
+        var label = 'Showing ' + visible + ' splash pad' + (visible !== 1 ? 's' : '');
+        if (state !== 'all') label += ' in ' + state;
+        countEl.textContent = label;
+
+        // Show/hide no-results message
+        noResults.classList.toggle('hidden', visible > 0);
+        grid.classList.toggle('hidden', visible === 0);
+
+        // Update active styles
+        btns.forEach(function (btn) {
+            var active = btn.dataset.stateFilter === state;
+            var inSidebar = !!btn.closest('aside');
+
+            if (inSidebar) {
+                btn.classList.toggle('bg-cyan-50',   active);
+                btn.classList.toggle('text-cyan-700', active);
+                btn.classList.toggle('font-medium',   active);
+                btn.classList.toggle('hover\\:bg-gray-50', !active);
+            } else {
+                // Mobile pills
+                btn.classList.toggle('bg-cyan-600', active);
+                btn.classList.toggle('text-white',  active);
+                btn.classList.toggle('bg-gray-100', !active);
+                btn.classList.toggle('text-gray-700', !active);
+            }
+        });
+    }
+
+    btns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            filterByState(this.dataset.stateFilter);
+        });
+    });
+})();
+</script>
 
 {% endblock %}
