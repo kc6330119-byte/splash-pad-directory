@@ -314,9 +314,13 @@ def build_state_pages(env, pads):
     template = env.get_template("state.html")
     grouped = group_pads_by_state(pads)
 
+    MIN_PADS_FOR_INDEX = 5
+
     for state in config.US_STATES:
         state_pads = grouped.get(state["slug"], [])
         state_pads.sort(key=lambda x: x.get("city", ""))
+
+        thin_state = len(state_pads) < MIN_PADS_FOR_INDEX
 
         html = template.render(
             state=state,
@@ -324,6 +328,7 @@ def build_state_pages(env, pads):
             page_title=f"Splash Pads in {state['name']} - {config.SITE_NAME}",
             meta_description=f"Find {len(state_pads)} splash pads, spray parks, and water play areas in {state['name']}. Free and paid options for families.",
             request_path=f"/state/{state['slug']}.html",
+            noindex=thin_state,
         )
 
         output_path = config.OUTPUT_DIR / "state" / f"{state['slug']}.html"
@@ -331,13 +336,32 @@ def build_state_pages(env, pads):
         print(f"Built: state/{state['slug']}.html ({len(state_pads)} pads)")
 
 
+def is_thin_pad(pad):
+    """Check if a pad page has too little content to be indexed."""
+    desc = str(pad.get("description", "")).strip()
+    desc_ok = len(desc) >= 100 and desc.lower() != "nan"
+    hours_ok = bool(str(pad.get("hours", "")).strip()) and str(pad.get("hours", "")).strip().lower() != "nan"
+    features = pad.get("features", [])
+    features_ok = isinstance(features, list) and len(features) > 0
+    type_val = str(pad.get("type", "")).strip()
+    type_ok = bool(type_val) and type_val.lower() not in ("nan", "splash pad")
+
+    content_signals = sum([desc_ok, hours_ok, features_ok, type_ok])
+    return content_signals <= 1
+
+
 def build_pad_pages(env, pads):
     """Build individual splash pad detail pages."""
     template = env.get_template("pad.html")
+    noindex_count = 0
 
     for pad in pads:
         # Related pads: same state, different pad
         related = [p for p in pads if p["slug"] != pad["slug"] and p.get("state_slug") == pad.get("state_slug")][:4]
+
+        thin = is_thin_pad(pad)
+        if thin:
+            noindex_count += 1
 
         html = template.render(
             pad=pad,
@@ -345,11 +369,13 @@ def build_pad_pages(env, pads):
             page_title=f"{pad['name']} - {pad['city']}, {pad['state']} - {config.SITE_NAME}",
             meta_description=pad.get("description", "")[:160],
             request_path=f"/pad/{pad['slug']}.html",
+            noindex=thin,
         )
 
         output_path = config.OUTPUT_DIR / "pad" / f"{pad['slug']}.html"
         output_path.write_text(html)
-        print(f"Built: pad/{pad['slug']}.html")
+
+    print(f"Built: {len(pads)} pad pages ({noindex_count} noindexed as thin content)")
 
 
 def build_category_pages(env, pads):
@@ -451,14 +477,18 @@ def build_sitemap(pads, posts):
         f"{config.SITE_URL}/terms.html",
     ]
 
+    grouped = group_pads_by_state(pads)
     for state in config.US_STATES:
-        urls.append(f"{config.SITE_URL}/state/{state['slug']}.html")
+        state_pads = grouped.get(state["slug"], [])
+        if len(state_pads) >= 5:
+            urls.append(f"{config.SITE_URL}/state/{state['slug']}.html")
 
     for category in config.CATEGORIES:
         urls.append(f"{config.SITE_URL}/category/{category['slug']}.html")
 
     for pad in pads:
-        urls.append(f"{config.SITE_URL}/pad/{pad['slug']}.html")
+        if not is_thin_pad(pad):
+            urls.append(f"{config.SITE_URL}/pad/{pad['slug']}.html")
 
     for post in posts:
         if post.get("slug"):

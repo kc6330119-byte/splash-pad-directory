@@ -6,6 +6,8 @@
     <title>{{ page_title }}</title>
     <meta name="description" content="{{ meta_description }}">
 
+    {% if noindex %}<meta name="robots" content="noindex, follow">{% endif %}
+
     <!-- Canonical URL -->
     <link rel="canonical" href="{{ site_url }}{{ request_path | default('/') }}">
 

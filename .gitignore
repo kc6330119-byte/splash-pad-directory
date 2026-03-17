@@ -13,6 +13,13 @@ dist/
 # Blog drafts (working files, not part of build)
 blog-drafts/
 
+# Data files (Outscraper extracts, Search Console exports, working CSVs)
+data/
+
+# AdSense planning docs (internal only)
+ADSENSE_PRESUBMISSION_PLAN.md
+ADSENSE_RESUBMISSION_PLAN.md
+
 # macOS
 .DS_Store
 
