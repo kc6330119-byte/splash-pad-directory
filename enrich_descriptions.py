@@ -326,9 +326,185 @@ def generate_description(pad: dict) -> str:
     return " ".join(parts)
 
 
+def generate_supplement(pad: dict) -> str:
+    """Build supplementary content to append to an existing short description.
+    Skips the opening sentence (the existing description already introduces the facility)
+    and generates admission, features, age range, rating, and closing sections only."""
+    slug = pad.get("slug", pad.get("name", ""))
+    h = int(hashlib.md5(slug.encode()).hexdigest(), 16)
+
+    parts = []
+    name = pad["name"]
+    city = pad.get("city", "")
+    admission = pad.get("admission", "")
+    features = pad.get("features", [])
+    if isinstance(features, str):
+        features = [features] if features else []
+    age_range = pad.get("age_range", [])
+    if isinstance(age_range, str):
+        age_range = [age_range] if age_range else []
+    rating = pad.get("rating", 0)
+    review_count = pad.get("review_count", 0)
+
+    FEATURE_INFO = {
+        "Restrooms": "on-site restrooms",
+        "Restroom": "on-site restrooms",
+        "Shade": "shaded areas to escape the sun",
+        "Picnic Area": "picnic areas for family lunches",
+        "Picnic Areas": "picnic areas for family lunches",
+        "Playground": "an adjacent playground",
+        "Parking": "convenient parking",
+        "Accessibility": "accessible design for visitors of all abilities",
+        "Concessions": "a concession stand for snacks and drinks",
+    }
+
+    # ── Admission info ────────────────────────────────────────────────────
+    if admission:
+        adm_variant = (h >> 4) % 3
+        if admission == "Free":
+            if adm_variant == 0:
+                parts.append(
+                    "Admission is free, making it an accessible option for "
+                    "families looking for no-cost summer fun."
+                )
+            elif adm_variant == 1:
+                parts.append(
+                    "Best of all, there's no admission fee — families can visit "
+                    "as often as they like without worrying about cost."
+                )
+            else:
+                parts.append(
+                    "The facility is free to the public, which makes it easy to "
+                    "stop by for a quick cool-down or spend a full afternoon."
+                )
+        elif admission == "Paid":
+            if adm_variant == 0:
+                parts.append(
+                    "Admission is paid, with pricing that reflects the full range "
+                    "of water attractions and amenities available."
+                )
+            elif adm_variant == 1:
+                parts.append(
+                    "There is an admission fee, but the facilities and attractions "
+                    "make it a worthwhile outing for a family day."
+                )
+            else:
+                parts.append(
+                    "The facility charges admission, and it's a good idea to check "
+                    "the website for current pricing and any seasonal passes available."
+                )
+
+    # ── Features ──────────────────────────────────────────────────────────
+    if features:
+        described = []
+        for feat in features[:4]:
+            info = FEATURE_INFO.get(feat)
+            if info:
+                described.append(info)
+
+        if described:
+            feat_variant = (h >> 8) % 4
+            if feat_variant == 0:
+                intro = "Visitors will also find "
+            elif feat_variant == 1:
+                intro = "Additional amenities include "
+            elif feat_variant == 2:
+                intro = "The facility also offers "
+            else:
+                intro = "Families can take advantage of "
+
+            if len(described) == 1:
+                parts.append(f"{intro}{described[0]}.")
+            elif len(described) == 2:
+                parts.append(f"{intro}{described[0]} and {described[1]}.")
+            else:
+                feat_str = ", ".join(described[:-1]) + f", and {described[-1]}"
+                parts.append(f"{intro}{feat_str}.")
+
+    # ── Age range ─────────────────────────────────────────────────────────
+    if age_range:
+        age_variant = (h >> 12) % 3
+        if "Toddlers" in age_range and len(age_range) > 1:
+            if age_variant == 0:
+                parts.append(
+                    "The water features are suitable for multiple age groups, "
+                    "including toddlers, making it a great choice for families "
+                    "with young children."
+                )
+            elif age_variant == 1:
+                age_str = ", ".join(str(a) for a in age_range)
+                parts.append(
+                    f"Water play areas cater to {age_str}, with gentler features "
+                    f"available for the youngest visitors."
+                )
+            else:
+                parts.append(
+                    "Parents of toddlers will appreciate the age-appropriate "
+                    "water features alongside options for older kids."
+                )
+        elif "Toddlers" in age_range:
+            parts.append(
+                "The gentle water features make this an especially good fit "
+                "for toddlers and very young children."
+            )
+
+    # ── Rating ────────────────────────────────────────────────────────────
+    if rating and float(rating) >= 4.0:
+        rating_val = float(rating)
+        rating_variant = (h >> 16) % 3
+        review_str = ""
+        if review_count and int(review_count) > 0:
+            review_str = f" based on {int(review_count)} reviews"
+
+        if rating_variant == 0:
+            parts.append(
+                f"The facility has earned a {rating_val}-star rating on Google"
+                f"{review_str}, reflecting the positive experiences of visiting families."
+            )
+        elif rating_variant == 1:
+            parts.append(
+                f"Visitors have rated {name} {rating_val} out of 5 stars on "
+                f"Google{review_str}."
+            )
+        else:
+            parts.append(
+                f"With a {rating_val}-star Google rating{review_str}, {name} is "
+                f"well regarded by the local community."
+            )
+
+    # ── Closing sentence ──────────────────────────────────────────────────
+    close_variant = (h >> 20) % 4
+    if close_variant == 0 and city:
+        parts.append(
+            "Check the facility's website or contact them directly for current "
+            "hours, seasonal schedules, and any updates before visiting."
+        )
+    elif close_variant == 1:
+        parts.append(
+            "Whether you're planning a quick splash break or a full afternoon "
+            "of water play, this facility is worth adding to your summer lineup."
+        )
+    elif close_variant == 2:
+        parts.append(
+            "It's a good idea to arrive early on hot days, as popular splash "
+            "facilities can get busy by late morning."
+        )
+    else:
+        parts.append(
+            "Pack sunscreen, water shoes, and a towel — and plan for a fun day "
+            "of water play the whole family can enjoy."
+        )
+
+    return " ".join(parts)
+
+
+APPEND_THRESHOLD = 150  # append mode targets descriptions 100-149 chars
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--apply", action="store_true", help="Write enriched descriptions to Airtable")
+    parser.add_argument("--append", action="store_true", help="Append supplementary content to short (100-149 char) descriptions")
     args = parser.parse_args()
 
     api = Api(AIRTABLE_API_KEY)
@@ -340,15 +516,12 @@ def main():
     updates = []
     replaced_irrelevant = 0
     enriched_thin = 0
+    appended = 0
 
     for record in records:
         fields = record.get("fields", {})
         record_id = record["id"]
         desc = str(fields.get("Description", "")).strip()
-
-        # Skip records with adequate descriptions
-        if desc and len(desc) >= MIN_DESC_LENGTH and not is_irrelevant(desc):
-            continue
 
         pad = {
             "name": fields.get("Name", ""),
@@ -364,14 +537,33 @@ def main():
             "hours": fields.get("Hours", ""),
         }
 
-        new_desc = generate_description(pad)
+        if args.append:
+            # Append mode: target descriptions 100-149 chars
+            if not desc or len(desc) < MIN_DESC_LENGTH or len(desc) >= APPEND_THRESHOLD:
+                continue
+            if is_irrelevant(desc):
+                continue  # these should be caught by a normal --apply run first
 
-        if is_irrelevant(desc):
-            replaced_irrelevant += 1
-            label = "REPLACE (irrelevant)"
+            supplement = generate_supplement(pad)
+            if not supplement:
+                continue
+
+            new_desc = f"{desc} {supplement}"
+            appended += 1
+            label = "APPEND"
         else:
-            enriched_thin += 1
-            label = "ENRICH (thin)"
+            # Replace mode: target descriptions < 100 chars or irrelevant
+            if desc and len(desc) >= MIN_DESC_LENGTH and not is_irrelevant(desc):
+                continue
+
+            new_desc = generate_description(pad)
+
+            if is_irrelevant(desc):
+                replaced_irrelevant += 1
+                label = "REPLACE (irrelevant)"
+            else:
+                enriched_thin += 1
+                label = "ENRICH (thin)"
 
         updates.append({
             "id": record_id,
@@ -385,8 +577,11 @@ def main():
 
     print(f"{'='*55}")
     print(f"Total to update:       {len(updates)}")
-    print(f"  Replaced irrelevant: {replaced_irrelevant}")
-    print(f"  Enriched thin:       {enriched_thin}")
+    if args.append:
+        print(f"  Appended:            {appended}")
+    else:
+        print(f"  Replaced irrelevant: {replaced_irrelevant}")
+        print(f"  Enriched thin:       {enriched_thin}")
 
     if not args.apply:
         print(f"\nDry run — no changes written. Use --apply to update Airtable.")
