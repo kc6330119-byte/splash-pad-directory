@@ -23,6 +23,14 @@
     </div>
 </section>
 
+{% if state.description %}
+<div class="bg-gray-50 border-b">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <p class="text-gray-600 leading-relaxed max-w-4xl">{{ state.description }}</p>
+    </div>
+</div>
+{% endif %}
+
 <!-- Filter Bar -->
 {% if pads %}
 <div class="bg-white border-b sticky top-16 z-30 shadow-sm">

@@ -23,6 +23,14 @@
     </div>
 </section>
 
+{% if category.intro %}
+<div class="bg-gray-50 border-b">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <p class="text-gray-600 leading-relaxed max-w-4xl">{{ category.intro }}</p>
+    </div>
+</div>
+{% endif %}
+
 <!-- Listings -->
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
 
