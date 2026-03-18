@@ -297,6 +297,7 @@ def build_homepage(env, pads, posts):
         all_pads=pads,
         state_counts=state_counts,
         total_count=len(pads),
+        posts=posts,
         featured_post=featured_post,
         recent_posts=recent_posts,
         page_title=config.DEFAULT_META_TITLE,
