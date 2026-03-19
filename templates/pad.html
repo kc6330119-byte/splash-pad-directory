@@ -267,6 +267,27 @@
             </div>
             {% endif %}
 
+            <!-- Share -->
+            <div class="bg-white border border-gray-100 rounded-xl p-5 shadow-sm mb-6">
+                <h3 class="font-semibold text-gray-900 mb-3">Share This Splash Pad</h3>
+                <div class="flex flex-wrap gap-2">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ site_url }}/pad/{{ pad.slug }}.html"
+                       target="_blank" rel="noopener noreferrer"
+                       class="px-3 py-1.5 bg-gray-50 hover:bg-cyan-50 hover:text-cyan-700 text-gray-600 text-xs font-medium rounded-lg border border-gray-100 transition-colors">
+                        Facebook
+                    </a>
+                    <a href="https://twitter.com/intent/tweet?url={{ site_url }}/pad/{{ pad.slug }}.html&text={{ pad.name | urlencode }}%20-%20{{ pad.city | urlencode }}%2C%20{{ pad.state | urlencode }}"
+                       target="_blank" rel="noopener noreferrer"
+                       class="px-3 py-1.5 bg-gray-50 hover:bg-cyan-50 hover:text-cyan-700 text-gray-600 text-xs font-medium rounded-lg border border-gray-100 transition-colors">
+                        X / Twitter
+                    </a>
+                    <a href="mailto:?subject={{ pad.name | urlencode }}&body=Check out {{ pad.name | urlencode }} in {{ pad.city | urlencode }}%2C {{ pad.state | urlencode }}: {{ site_url }}/pad/{{ pad.slug }}.html"
+                       class="px-3 py-1.5 bg-gray-50 hover:bg-cyan-50 hover:text-cyan-700 text-gray-600 text-xs font-medium rounded-lg border border-gray-100 transition-colors">
+                        Email
+                    </a>
+                </div>
+            </div>
+
             <!-- Suggest an Edit -->
             <div class="bg-gray-50 border border-gray-200 rounded-xl p-4 text-center">
                 <p class="text-sm text-gray-600 mb-2">Is something incorrect or outdated?</p>
