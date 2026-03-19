@@ -254,6 +254,19 @@
             </div>
             {% endif %}
 
+            <!-- Local Weather -->
+            {% if pad.latitude and pad.longitude %}
+            <div class="bg-white border border-gray-100 rounded-xl p-5 shadow-sm mb-6">
+                <h3 class="font-semibold text-gray-900 mb-4">Local Weather</h3>
+                <a href="https://forecast.weather.gov/MapClick.php?lat={{ pad.latitude }}&lon={{ pad.longitude }}"
+                   target="_blank" rel="noopener noreferrer"
+                   class="flex items-center gap-3 w-full py-2.5 px-3 bg-gray-50 hover:bg-cyan-50 hover:text-cyan-700 text-gray-700 text-sm font-medium rounded-lg border border-gray-100 transition-colors">
+                    🌤 Check Current Weather & Forecast
+                </a>
+                <p class="text-xs text-gray-400 mt-2">Via National Weather Service (weather.gov)</p>
+            </div>
+            {% endif %}
+
             <!-- Suggest an Edit -->
             <div class="bg-gray-50 border border-gray-200 rounded-xl p-4 text-center">
                 <p class="text-sm text-gray-600 mb-2">Is something incorrect or outdated?</p>
