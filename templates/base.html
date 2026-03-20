@@ -288,7 +288,7 @@
                 .catch(() => {});
         }
 
-        function filterPads(query) {
+        function searchFilterPads(query) {
             if (!searchIndex || query.length < 2) return [];
             const q = query.toLowerCase();
             return searchIndex.filter(p =>
@@ -332,7 +332,7 @@
             const query = this.value.trim();
             if (query.length < 2) { searchResults.classList.add('hidden'); return; }
             loadSearchIndex(() => {
-                searchResults.innerHTML = renderResults(filterPads(query));
+                searchResults.innerHTML = renderResults(searchFilterPads(query));
                 searchResults.classList.remove('hidden');
             });
         });
@@ -345,7 +345,7 @@
             const query = this.value.trim();
             if (query.length < 2) { mobileResults.classList.add('hidden'); return; }
             loadSearchIndex(() => {
-                mobileResults.innerHTML = renderResults(filterPads(query));
+                mobileResults.innerHTML = renderResults(searchFilterPads(query));
                 mobileResults.classList.remove('hidden');
             });
         });
