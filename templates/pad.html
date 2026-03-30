@@ -1,5 +1,35 @@
 {% extends "base.html" %}
 
+{% block extra_head %}
+{% autoescape false %}
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": {{ (site_url ~ "/") | tojson }}
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "name": {{ pad.state | tojson }},
+            "item": {{ (site_url ~ "/state/" ~ pad.state_slug ~ ".html") | tojson }}
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "name": {{ pad.name | tojson }}
+        }
+    ]
+}
+</script>
+{% endautoescape %}
+{% endblock %}
+
 {% block content %}
 
 <!-- Breadcrumb -->
