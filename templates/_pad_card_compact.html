@@ -1,0 +1,27 @@
+<!-- Compact pad list item — used on state pages with 50+ listings to reduce HTML size for crawl efficiency -->
+<div class="flex items-center justify-between py-2.5 border-b border-gray-100 hover:bg-gray-50 group" data-admission="{{ pad.admission }}" data-state="{{ pad.state }}">
+    <div class="min-w-0 flex-1">
+        <a href="/pad/{{ pad.slug }}.html"
+           class="font-medium text-gray-900 hover:text-cyan-600 transition-colors text-sm truncate block">
+            {{ pad.name }}
+        </a>
+        <span class="text-xs text-gray-500">📍 {{ pad.city }}{% if pad.type %} · {{ pad.type }}{% endif %}</span>
+    </div>
+    <div class="flex items-center gap-2 ml-3 flex-shrink-0">
+        {% if pad.admission %}
+        <span class="text-xs px-2 py-0.5 rounded-full font-medium
+            {% if pad.admission == 'Free' %}bg-green-100 text-green-800
+            {% elif pad.admission == 'Paid' %}bg-amber-100 text-amber-800
+            {% else %}bg-blue-100 text-blue-800{% endif %}">
+            {{ pad.admission }}
+        </span>
+        {% endif %}
+        {% if pad.rating %}
+        <span class="text-xs text-gray-500">★ {{ pad.rating }}</span>
+        {% endif %}
+        <a href="/pad/{{ pad.slug }}.html"
+           class="text-xs text-cyan-600 hover:text-cyan-700 font-medium opacity-0 group-hover:opacity-100 transition-opacity">
+            View →
+        </a>
+    </div>
+</div>

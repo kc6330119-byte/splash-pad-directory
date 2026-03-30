@@ -468,37 +468,40 @@ def build_search_index(pads):
 
 
 def build_sitemap(pads, posts):
-    """Generate sitemap.xml."""
-    urls = [
-        f"{config.SITE_URL}/",
-        f"{config.SITE_URL}/blog.html",
-        f"{config.SITE_URL}/about.html",
-        f"{config.SITE_URL}/contact.html",
-        f"{config.SITE_URL}/privacy.html",
-        f"{config.SITE_URL}/terms.html",
+    """Generate sitemap.xml with lastmod and priority to accelerate Google indexing."""
+    today = datetime.now().strftime("%Y-%m-%d")
+
+    # (url, priority, lastmod)
+    entries = [
+        (f"{config.SITE_URL}/", "1.0", today),
+        (f"{config.SITE_URL}/blog.html", "0.8", today),
+        (f"{config.SITE_URL}/about.html", "0.5", today),
+        (f"{config.SITE_URL}/contact.html", "0.4", today),
+        (f"{config.SITE_URL}/privacy.html", "0.3", today),
+        (f"{config.SITE_URL}/terms.html", "0.3", today),
     ]
 
     grouped = group_pads_by_state(pads)
     for state in config.US_STATES:
         state_pads = grouped.get(state["slug"], [])
         if len(state_pads) >= 5:
-            urls.append(f"{config.SITE_URL}/state/{state['slug']}.html")
+            entries.append((f"{config.SITE_URL}/state/{state['slug']}.html", "0.8", today))
 
     for category in config.CATEGORIES:
-        urls.append(f"{config.SITE_URL}/category/{category['slug']}.html")
+        entries.append((f"{config.SITE_URL}/category/{category['slug']}.html", "0.7", today))
 
     for pad in pads:
         if not is_thin_pad(pad):
-            urls.append(f"{config.SITE_URL}/pad/{pad['slug']}.html")
+            entries.append((f"{config.SITE_URL}/pad/{pad['slug']}.html", "0.6", today))
 
     for post in posts:
         if post.get("slug"):
-            urls.append(f"{config.SITE_URL}/blog/{post['slug']}.html")
+            entries.append((f"{config.SITE_URL}/blog/{post['slug']}.html", "0.8", today))
 
     sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n'
     sitemap += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
-    for url in urls:
-        sitemap += f"  <url><loc>{url}</loc></url>\n"
+    for url, priority, lastmod in entries:
+        sitemap += f"  <url><loc>{url}</loc><lastmod>{lastmod}</lastmod><priority>{priority}</priority></url>\n"
     sitemap += "</urlset>"
 
     output_path = config.OUTPUT_DIR / "sitemap.xml"
