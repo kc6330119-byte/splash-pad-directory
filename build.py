@@ -327,7 +327,7 @@ def build_state_pages(env, pads):
             state=state,
             pads=state_pads,
             page_title=f"Splash Pads in {state['name']} - {config.SITE_NAME}",
-            meta_description=f"Find {len(state_pads)} splash pads, spray parks, and water play areas in {state['name']}. Free and paid options for families.",
+            meta_description=state["description"][:155],
             request_path=f"/state/{state['slug']}.html",
             noindex=thin_state,
         )
@@ -413,7 +413,7 @@ def build_category_pages(env, pads):
             pads=category_pads,
             state_list=state_list,
             page_title=f"{category['name']} Splash Pads - {config.SITE_NAME}",
-            meta_description=category["description"],
+            meta_description=category["intro"][:155],
             request_path=f"/category/{category['slug']}.html",
         )
 
