@@ -595,9 +595,20 @@ def download_pad_images(pads):
     Downloading at build time and serving from /static/images/ makes them permanent.
     Pads whose URLs have already expired will have photo_url cleared so the template
     gradient fallback activates.
+
+    Images are saved to both dist/static/images/ (for the current build) and
+    static/images/ (source tree, committed to git) so they survive across Netlify builds.
+    On subsequent builds, setup_output_directory() copies static/images/ → dist/static/images/
+    before this function runs, so the cache hit avoids re-downloading.
     """
     images_dir = config.OUTPUT_DIR / "static" / "images"
     images_dir.mkdir(parents=True, exist_ok=True)
+
+    # Source-level backup: committed to git so images persist across Netlify builds.
+    # setup_output_directory() copies static/ → dist/static/ before this runs, so
+    # anything saved here is available in images_dir on the next build.
+    source_images_dir = config.STATIC_DIR / "images"
+    source_images_dir.mkdir(parents=True, exist_ok=True)
 
     downloaded = 0
     skipped = 0
@@ -636,6 +647,10 @@ def download_pad_images(pads):
                 with open(local_path, "wb") as f:
                     for chunk in response.iter_content(chunk_size=8192):
                         f.write(chunk)
+                # Also save to source static dir so git commit persists it across builds
+                source_path = source_images_dir / f"{slug}.jpg"
+                if not source_path.exists():
+                    shutil.copy2(local_path, source_path)
                 pad["photo_url"] = f"/static/images/{slug}.jpg"
                 downloaded += 1
             else:
