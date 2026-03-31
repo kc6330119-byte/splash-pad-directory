@@ -11,6 +11,7 @@ import shutil
 from datetime import datetime
 from pathlib import Path
 
+import requests
 import markdown as md_lib
 from jinja2 import Environment, FileSystemLoader
 from markupsafe import Markup
@@ -587,6 +588,68 @@ def build_static_pages(env, pads=None):
         print(f"Built: {page['output']}")
 
 
+def download_pad_images(pads):
+    """Download external photo URLs locally to avoid Google Places URL expiry (403 errors).
+
+    Google Places photo URLs (lh3.googleusercontent.com) have signed tokens that expire.
+    Downloading at build time and serving from /static/images/ makes them permanent.
+    Pads whose URLs have already expired will have photo_url cleared so the template
+    gradient fallback activates.
+    """
+    images_dir = config.OUTPUT_DIR / "static" / "images"
+    images_dir.mkdir(parents=True, exist_ok=True)
+
+    downloaded = 0
+    skipped = 0
+    failed = 0
+
+    headers = {
+        "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+        "Referer": "https://www.google.com/",
+        "Accept": "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8",
+    }
+
+    for pad in pads:
+        url = pad.get("photo_url", "").strip()
+        slug = pad.get("slug", "").strip()
+
+        if not url or not slug:
+            skipped += 1
+            continue
+
+        # If already a local path, nothing to do
+        if url.startswith("/static/"):
+            skipped += 1
+            continue
+
+        local_path = images_dir / f"{slug}.jpg"
+
+        # Reuse existing downloaded file if present (avoids re-downloading on incremental builds)
+        if local_path.exists():
+            pad["photo_url"] = f"/static/images/{slug}.jpg"
+            skipped += 1
+            continue
+
+        try:
+            response = requests.get(url, headers=headers, timeout=15, stream=True)
+            if response.status_code == 200:
+                with open(local_path, "wb") as f:
+                    for chunk in response.iter_content(chunk_size=8192):
+                        f.write(chunk)
+                pad["photo_url"] = f"/static/images/{slug}.jpg"
+                downloaded += 1
+            else:
+                print(f"  Image {response.status_code}: {pad.get('name', slug)} — clearing photo_url")
+                pad["photo_url"] = ""
+                failed += 1
+        except Exception as e:
+            print(f"  Image error for {pad.get('name', slug)}: {e} — clearing photo_url")
+            pad["photo_url"] = ""
+            failed += 1
+
+    print(f"Images: {downloaded} downloaded, {skipped} skipped/cached, {failed} failed (will use gradient fallback)")
+
+
 def main():
     """Main build process."""
     print(f"\n{'='*50}")
@@ -598,6 +661,9 @@ def main():
 
     print("\nFetching splash pads...")
     pads = get_pads()
+
+    print("\nDownloading pad images (caches Google URLs locally)...")
+    download_pad_images(pads)
 
     print("\nFetching blog posts...")
     posts = fetch_blog_posts()
