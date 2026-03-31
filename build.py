@@ -127,6 +127,7 @@ def fetch_from_airtable():
 
             state_name = fields.get("State", "")
             pad = {
+                "_airtable_id": record.get("id", ""),
                 "name": fields.get("Name", ""),
                 "slug": slugify(fields.get("Name", "") + "-" + fields.get("City", "")),
                 "description": fields.get("Description", ""),
@@ -162,6 +163,23 @@ def fetch_from_airtable():
     except Exception as e:
         print(f"Error fetching from Airtable: {e}")
         return None
+
+
+def clear_airtable_photo_url(airtable_id):
+    """Clear the Photo URL field in Airtable for a pad with an expired URL.
+
+    This prevents future builds from repeatedly attempting expired Google Places URLs.
+    Only runs when AIRTABLE_API_KEY and AIRTABLE_BASE_ID are configured.
+    """
+    if not config.AIRTABLE_API_KEY or not config.AIRTABLE_BASE_ID or not airtable_id:
+        return
+    try:
+        from pyairtable import Api
+        api = Api(config.AIRTABLE_API_KEY)
+        table = api.table(config.AIRTABLE_BASE_ID, config.AIRTABLE_TABLE_NAME)
+        table.update(airtable_id, {"Photo URL": ""})
+    except Exception as e:
+        print(f"  Warning: could not clear Airtable photo_url for {airtable_id}: {e}")
 
 
 def get_pads():
@@ -654,8 +672,9 @@ def download_pad_images(pads):
                 pad["photo_url"] = f"/static/images/{slug}.jpg"
                 downloaded += 1
             else:
-                print(f"  Image {response.status_code}: {pad.get('name', slug)} — clearing photo_url")
+                print(f"  Image {response.status_code}: {pad.get('name', slug)} — clearing photo_url in Airtable")
                 pad["photo_url"] = ""
+                clear_airtable_photo_url(pad.get("_airtable_id", ""))
                 failed += 1
         except Exception as e:
             print(f"  Image error for {pad.get('name', slug)}: {e} — clearing photo_url")
