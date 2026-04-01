@@ -347,7 +347,7 @@ def build_state_pages(env, pads):
             pads=state_pads,
             page_title=f"Splash Pads in {state['name']} - {config.SITE_NAME}",
             meta_description=state["description"][:155],
-            request_path=f"/state/{state['slug']}.html",
+            request_path=f"/state/{state['slug']}",
             noindex=thin_state,
         )
 
@@ -357,7 +357,12 @@ def build_state_pages(env, pads):
 
 
 def is_thin_pad(pad):
-    """Check if a pad page has too little content to be indexed."""
+    """Check if a pad page has too little content to be indexed.
+
+    A pad is thin only if it lacks a meaningful description AND has fewer than
+    2 other content signals.  A good description (>=100 chars) on its own is
+    enough to merit indexing.
+    """
     desc = str(pad.get("description", "")).strip()
     desc_ok = len(desc) >= 100 and desc.lower() != "nan"
     hours_ok = bool(str(pad.get("hours", "")).strip()) and str(pad.get("hours", "")).strip().lower() != "nan"
@@ -366,7 +371,11 @@ def is_thin_pad(pad):
     type_val = str(pad.get("type", "")).strip()
     type_ok = bool(type_val) and type_val.lower() not in ("nan", "splash pad")
 
-    content_signals = sum([desc_ok, hours_ok, features_ok, type_ok])
+    # A substantive description alone is enough to index
+    if desc_ok:
+        return False
+
+    content_signals = sum([hours_ok, features_ok, type_ok])
     return content_signals <= 1
 
 
@@ -388,7 +397,7 @@ def build_pad_pages(env, pads):
             related_pads=related,
             page_title=f"{pad['name']} - {pad['city']}, {pad['state']} - {config.SITE_NAME}",
             meta_description=pad.get("description", "")[:160],
-            request_path=f"/pad/{pad['slug']}.html",
+            request_path=f"/pad/{pad['slug']}",
             noindex=thin,
         )
 
@@ -433,7 +442,7 @@ def build_category_pages(env, pads):
             state_list=state_list,
             page_title=f"{category['name']} Splash Pads - {config.SITE_NAME}",
             meta_description=category["intro"][:155],
-            request_path=f"/category/{category['slug']}.html",
+            request_path=f"/category/{category['slug']}",
         )
 
         output_path = config.OUTPUT_DIR / "category" / f"{category['slug']}.html"
@@ -448,7 +457,7 @@ def build_blog_page(env, posts):
         posts=posts,
         page_title=f"Blog - {config.SITE_NAME}",
         meta_description="Tips, guides, and articles to help families find and enjoy splash pads across America.",
-        request_path="/blog.html",
+        request_path="/blog",
     )
     output_path = config.OUTPUT_DIR / "blog.html"
     output_path.write_text(html)
@@ -467,7 +476,7 @@ def build_post_pages(env, posts):
             all_posts=posts,
             page_title=f"{post['title']} - {config.SITE_NAME}",
             meta_description=post.get("meta_description") or post.get("excerpt", "")[:160],
-            request_path=f"/blog/{post['slug']}.html",
+            request_path=f"/blog/{post['slug']}",
         )
         output_path = config.OUTPUT_DIR / "blog" / f"{post['slug']}.html"
         output_path.write_text(html)
@@ -597,7 +606,7 @@ def build_static_pages(env, pads=None):
         html = template.render(
             page_title=f"{page['title']} - {config.SITE_NAME}",
             meta_description=page["description"],
-            request_path=f"/{page['output']}",
+            request_path=f"/{page['output'].replace('/index.html', '').replace('.html', '')}",
             total_count=total_count,
         )
         output_path = config.OUTPUT_DIR / page["output"]

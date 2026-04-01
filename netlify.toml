@@ -5,7 +5,52 @@
 [build.environment]
   PYTHON_VERSION = "3.9"
 
-# Pretty URL redirects
+# --- 301 Redirects for broken/removed pages ---
+
+[[redirects]]
+  from = "/pad/hathaway-park-winston-salem.html"
+  to = "/state/north-carolina"
+  status = 301
+
+[[redirects]]
+  from = "/pad/hathaway-park-winston-salem"
+  to = "/state/north-carolina"
+  status = 301
+
+[[redirects]]
+  from = "/pad/woodside-lake-park-streetsboro.html"
+  to = "/state/ohio"
+  status = 301
+
+[[redirects]]
+  from = "/pad/woodside-lake-park-streetsboro"
+  to = "/state/ohio"
+  status = 301
+
+# --- Clean URL rewrites (serve .html files at extensionless paths) ---
+
+[[redirects]]
+  from = "/pad/*"
+  to = "/pad/:splat.html"
+  status = 200
+
+[[redirects]]
+  from = "/state/*"
+  to = "/state/:splat.html"
+  status = 200
+
+[[redirects]]
+  from = "/category/*"
+  to = "/category/:splat.html"
+  status = 200
+
+[[redirects]]
+  from = "/blog/*"
+  to = "/blog/:splat.html"
+  status = 200
+
+# --- Pretty URL redirects for static pages ---
+
 [[redirects]]
   from = "/contact"
   to = "/contact.html"
@@ -24,6 +69,16 @@
 [[redirects]]
   from = "/terms"
   to = "/terms.html"
+  status = 200
+
+[[redirects]]
+  from = "/submit"
+  to = "/submit.html"
+  status = 200
+
+[[redirects]]
+  from = "/blog"
+  to = "/blog.html"
   status = 200
 
 [[redirects]]
