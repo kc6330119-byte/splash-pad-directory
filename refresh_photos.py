@@ -60,8 +60,8 @@ def fetch_pads_missing_photos():
     api = Api(AIRTABLE_API_KEY)
     table = api.table(AIRTABLE_BASE_ID, AIRTABLE_TABLE_NAME)
 
-    # filterByFormula: Photo URL is blank and record is not a draft
-    formula = "AND({Photo URL} = '', {Status} != 'Draft')"
+    # filterByFormula: Photo URL is blank
+    formula = "{Photo URL} = ''"
     records = table.all(formula=formula)
     print(f"Found {len(records)} pads with empty Photo URL.")
     return records
