@@ -499,32 +499,32 @@ def build_sitemap(pads, posts):
     """Generate sitemap.xml with lastmod and priority to accelerate Google indexing."""
     today = datetime.now().strftime("%Y-%m-%d")
 
-    # (url, priority, lastmod)
+    # Use clean URLs (no .html) to match canonical tags set in base.html
     entries = [
         (f"{config.SITE_URL}/", "1.0", today),
-        (f"{config.SITE_URL}/blog.html", "0.8", today),
-        (f"{config.SITE_URL}/about.html", "0.5", today),
-        (f"{config.SITE_URL}/contact.html", "0.4", today),
-        (f"{config.SITE_URL}/privacy.html", "0.3", today),
-        (f"{config.SITE_URL}/terms.html", "0.3", today),
+        (f"{config.SITE_URL}/blog", "0.8", today),
+        (f"{config.SITE_URL}/about", "0.5", today),
+        (f"{config.SITE_URL}/contact", "0.4", today),
+        (f"{config.SITE_URL}/privacy", "0.3", today),
+        (f"{config.SITE_URL}/terms", "0.3", today),
     ]
 
     grouped = group_pads_by_state(pads)
     for state in config.US_STATES:
         state_pads = grouped.get(state["slug"], [])
         if len(state_pads) >= 5:
-            entries.append((f"{config.SITE_URL}/state/{state['slug']}.html", "0.8", today))
+            entries.append((f"{config.SITE_URL}/state/{state['slug']}", "0.8", today))
 
     for category in config.CATEGORIES:
-        entries.append((f"{config.SITE_URL}/category/{category['slug']}.html", "0.7", today))
+        entries.append((f"{config.SITE_URL}/category/{category['slug']}", "0.7", today))
 
     for pad in pads:
         if not is_thin_pad(pad):
-            entries.append((f"{config.SITE_URL}/pad/{pad['slug']}.html", "0.6", today))
+            entries.append((f"{config.SITE_URL}/pad/{pad['slug']}", "0.6", today))
 
     for post in posts:
         if post.get("slug"):
-            entries.append((f"{config.SITE_URL}/blog/{post['slug']}.html", "0.8", today))
+            entries.append((f"{config.SITE_URL}/blog/{post['slug']}", "0.8", today))
 
     sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n'
     sitemap += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
