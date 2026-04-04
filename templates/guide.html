@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+
+{% block extra_head %}
+{% autoescape false %}
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": {{ guide_title | tojson }},
+    "description": {{ meta_description | tojson }},
+    "author": {
+        "@type": "Organization",
+        "name": {{ site_name | tojson }},
+        "url": {{ site_url | tojson }}
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": {{ site_name | tojson }},
+        "url": {{ site_url | tojson }}
+    },
+    "datePublished": {{ guide_date | tojson }},
+    "dateModified": {{ guide_date | tojson }},
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": {{ (site_url ~ "/splash-pad-guide") | tojson }}
+    }
+}
+</script>
+{% endautoescape %}
+{% endblock %}
+
+{% block content %}
+
+<!-- Breadcrumb -->
+<div class="bg-white border-b">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+        <nav class="flex text-sm text-gray-500" aria-label="Breadcrumb">
+            <a href="/" class="hover:text-cyan-600">Home</a>
+            <span class="mx-2">/</span>
+            <a href="/blog.html" class="hover:text-cyan-600">Blog</a>
+            <span class="mx-2">/</span>
+            <span class="text-gray-900 font-medium">{{ guide_title }}</span>
+        </nav>
+    </div>
+</div>
+
+<!-- Guide Header -->
+<section class="bg-gradient-to-br from-cyan-600 to-sky-700 text-white py-12 md:py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <span class="inline-block text-xs font-semibold bg-white/20 px-3 py-1 rounded-full mb-4 uppercase tracking-wider">Family Guide</span>
+        <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-4">{{ guide_title }}</h1>
+        <p class="text-cyan-100 text-lg max-w-2xl mx-auto">{{ guide_subtitle }}</p>
+        <p class="text-cyan-200 text-sm mt-4">Updated {{ guide_date | format_date }}</p>
+    </div>
+</section>
+
+<!-- Table of Contents + Article -->
+<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+
+    <!-- Table of Contents -->
+    <nav class="bg-cyan-50 border border-cyan-100 rounded-xl p-6 mb-10" aria-label="Table of contents">
+        <h2 class="text-sm font-bold text-gray-900 uppercase tracking-wider mb-3">In This Guide</h2>
+        <ol class="space-y-2 text-sm">
+            {% for section in guide_sections %}
+            <li>
+                <a href="#{{ section.id }}" class="text-cyan-700 hover:text-cyan-900 hover:underline font-medium">
+                    {{ loop.index }}. {{ section.title }}
+                </a>
+            </li>
+            {% endfor %}
+        </ol>
+    </nav>
+
+    <!-- Intro -->
+    <div class="prose-content mb-10">
+        {{ guide_intro | markdown }}
+    </div>
+
+    <!-- Sections -->
+    {% for section in guide_sections %}
+    <section id="{{ section.id }}" class="mb-12 scroll-mt-24">
+        <h2 class="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-3">
+            {% if section.icon %}<span class="text-2xl">{{ section.icon }}</span>{% endif %}
+            {{ section.title }}
+        </h2>
+        <div class="prose-content">
+            {{ section.content | markdown }}
+        </div>
+    </section>
+    {% endfor %}
+
+    <!-- Decision Checklist -->
+    {% if guide_checklist %}
+    <section id="checklist" class="mb-12 scroll-mt-24">
+        <h2 class="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-3">
+            <span class="text-2xl">&#9745;</span>
+            Splash Pad Decision Checklist
+        </h2>
+        <p class="text-gray-600 mb-6">Use this quick-reference checklist before choosing a splash pad for your next visit.</p>
+        <div class="bg-gray-50 border border-gray-200 rounded-xl p-6 md:p-8">
+            <ul class="space-y-3">
+                {% for item in guide_checklist %}
+                <li class="flex items-start gap-3">
+                    <span class="mt-0.5 flex-shrink-0 w-5 h-5 border-2 border-gray-300 rounded bg-white"></span>
+                    <span class="text-gray-700 text-sm leading-relaxed">{{ item }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </section>
+    {% endif %}
+
+</div>
+
+<!-- CTA Section -->
+<section class="bg-gradient-to-r from-cyan-50 to-sky-50 border-t border-b border-cyan-100 py-12">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-2xl font-bold text-gray-900 mb-3">Ready to Find a Splash Pad?</h2>
+        <p class="text-gray-600 mb-6">Search over {{ total_count | default('3,000') }}+ splash pads, spray parks, and water play areas across all 50 states.</p>
+        <div class="flex flex-col sm:flex-row gap-3 justify-center">
+            <a href="/"
+               class="px-6 py-3 bg-cyan-600 text-white font-semibold rounded-lg hover:bg-cyan-700 transition-colors text-sm">
+                Browse All Splash Pads
+            </a>
+            <a href="/category/free-admission.html"
+               class="px-6 py-3 bg-white text-cyan-700 font-semibold rounded-lg border border-cyan-200 hover:bg-cyan-50 transition-colors text-sm">
+                Find Free Splash Pads
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Regional Quick Links -->
+<section class="py-12 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-xl font-bold text-gray-900 mb-6 text-center">Explore Splash Pads by State</h2>
+        <div class="flex flex-wrap justify-center gap-2">
+            {% for state in us_states[:20] %}
+            <a href="/state/{{ state.slug }}.html"
+               class="px-3 py-1.5 bg-gray-100 hover:bg-cyan-50 hover:text-cyan-700 text-gray-600 text-xs font-medium rounded-full transition-colors">
+                {{ state.name }}
+            </a>
+            {% endfor %}
+            <a href="/" class="px-3 py-1.5 bg-cyan-100 text-cyan-700 text-xs font-medium rounded-full hover:bg-cyan-200 transition-colors">
+                View All States &rarr;
+            </a>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

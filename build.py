@@ -483,6 +483,193 @@ def build_post_pages(env, posts):
         print(f"Built: blog/{post['slug']}.html")
 
 
+def build_guide_page(env, pads):
+    """Build the splash pad guide page."""
+    template = env.get_template("guide.html")
+
+    guide_title = "How to Choose a Splash Pad: What Families Should Look For"
+    guide_subtitle = "A practical, parent-tested guide to picking the right splash pad for your family — from free vs. paid options to safety, accessibility, and what to pack."
+    guide_date = "2026-04-04"
+
+    guide_intro = (
+        "Taking the kids to a splash pad should be simple — but with thousands of options across the country, "
+        "picking the right one can be surprisingly tricky. Is it free or paid? Are there restrooms? Will your "
+        "toddler actually enjoy it, or is it built for older kids?\n\n"
+        "This guide walks you through everything families should consider before heading out, so you spend less "
+        "time researching and more time playing."
+    )
+
+    guide_sections = [
+        {
+            "id": "free-vs-paid",
+            "icon": "💲",
+            "title": "Free vs. Paid Splash Pads",
+            "content": (
+                "Most city and county park splash pads are **completely free** — you just show up during operating "
+                "hours and play. These are usually smaller, located inside public parks, and don't require "
+                "reservations.\n\n"
+                "Paid splash pads are typically part of larger water parks, aquatic centers, or amusement parks. "
+                "They tend to offer more elaborate water features, slides, and amenities like locker rooms and "
+                "snack bars.\n\n"
+                "**When free makes sense:** Quick weekday outings, toddler play dates, budget-friendly summer fun.\n\n"
+                "**When paid is worth it:** Full-day excursions, birthday parties, older kids who want bigger thrills.\n\n"
+                "Use our [Free Admission](/category/free-admission.html) filter to browse all no-cost options near you."
+            ),
+        },
+        {
+            "id": "age-suitability",
+            "icon": "👶",
+            "title": "Age Suitability",
+            "content": (
+                "Not all splash pads are created equal when it comes to age ranges. Some have gentle ground-level "
+                "bubblers perfect for babies and toddlers, while others feature high-pressure jets and tall dump "
+                "buckets designed for school-age kids.\n\n"
+                "**What to look for by age:**\n\n"
+                "- **Babies & Toddlers (0–3):** Look for zero-depth areas with low-pressure spray features and "
+                "soft, non-slip surfaces. Check our [Best for Toddlers](/category/toddlers.html) listings.\n"
+                "- **Preschoolers (3–5):** Interactive features like spray tunnels, animal-shaped sprayers, and "
+                "small dump buckets keep this age group engaged.\n"
+                "- **School-Age Kids (6–12):** Water cannons, tipping buckets, and multi-level spray structures "
+                "provide the excitement they need.\n"
+                "- **All Ages:** The best family splash pads separate zones by intensity so every age has something "
+                "to enjoy.\n\n"
+                "Many listings on Splash Pad Locator include age range tags so you can filter before you visit."
+            ),
+        },
+        {
+            "id": "amenities",
+            "icon": "🏖️",
+            "title": "Amenities Checklist",
+            "content": (
+                "The splash pad itself might be great — but the experience depends just as much on what's around it. "
+                "Before you go, check for these amenities:\n\n"
+                "- **Shade structures** — Essential for hot summer days. Without shade, surfaces heat up and young "
+                "skin burns fast. Browse our [Splash Pads with Shade](/category/with-shade.html) listings.\n"
+                "- **Restrooms** — Especially important with young children. Check our "
+                "[With Restrooms](/category/with-restrooms.html) filter.\n"
+                "- **Parking** — Some urban splash pads rely on street parking; suburban ones usually have lots.\n"
+                "- **Picnic areas** — Pack a lunch and make it a full outing. Filter by "
+                "[Picnic Areas](/category/with-picnic-areas.html).\n"
+                "- **Nearby food** — Snack bars, food trucks, or restaurants within walking distance.\n"
+                "- **Adult seating** — Benches, chairs, or grassy areas where parents can sit while supervising.\n"
+                "- **Playground nearby** — Some parks combine splash pads with traditional playgrounds for dry play options."
+            ),
+        },
+        {
+            "id": "safety",
+            "icon": "🛡️",
+            "title": "Safety & Supervision",
+            "content": (
+                "Splash pads are one of the safest water-play options because there's no standing water — but a few "
+                "things are still worth checking:\n\n"
+                "- **Staffed vs. unstaffed:** Some splash pads have attendants; most public ones do not. "
+                "Plan to actively supervise your children regardless.\n"
+                "- **Surface material:** Look for textured, non-slip surfaces. Rubber and rubberized concrete "
+                "are best; smooth tile or concrete can get slippery and hot.\n"
+                "- **Water pressure:** High-pressure jets can knock over toddlers. Scout the pad before letting "
+                "young kids explore freely.\n"
+                "- **Drainage:** Good splash pads drain quickly so there are no puddles for kids to slip in.\n"
+                "- **Sun exposure:** Surfaces in full sun can reach temperatures hot enough to burn bare feet. "
+                "Water shoes are a smart precaution.\n\n"
+                "**Always:** Apply sunscreen before arrival, bring water to drink, and never leave children unattended."
+            ),
+        },
+        {
+            "id": "accessibility",
+            "icon": "♿",
+            "title": "Accessibility",
+            "content": (
+                "Many modern splash pads are designed with accessibility in mind, but features vary widely.\n\n"
+                "**ADA considerations:**\n\n"
+                "- Wheelchair-accessible paths to and through the splash area\n"
+                "- Ground-level spray features reachable from a seated position\n"
+                "- Transfer-friendly surfaces\n"
+                "- Accessible restrooms and parking nearby\n\n"
+                "**Sensory-friendly features:**\n\n"
+                "Some children with sensory sensitivities may find loud, high-pressure splash pads overwhelming. "
+                "Look for pads with:\n\n"
+                "- Adjustable or gentle spray settings\n"
+                "- Quieter water flow features (bubblers, gentle arches)\n"
+                "- Off-peak hours with fewer crowds\n\n"
+                "Filter by [Accessible Splash Pads](/category/accessible.html) on our directory to find "
+                "options near you."
+            ),
+        },
+        {
+            "id": "seasonal-timing",
+            "icon": "📅",
+            "title": "Seasonal Timing",
+            "content": (
+                "Splash pad seasons vary dramatically by region:\n\n"
+                "- **Southern states** ([Texas](/state/texas.html), [Florida](/state/florida.html), "
+                "[Arizona](/state/arizona.html)): Many open as early as March and run through October — "
+                "some operate year-round.\n"
+                "- **Midwest & Mid-Atlantic** ([Illinois](/state/illinois.html), [Ohio](/state/ohio.html), "
+                "[Pennsylvania](/state/pennsylvania.html)): Typically Memorial Day through Labor Day "
+                "(late May – early September).\n"
+                "- **Northern states** ([Minnesota](/state/minnesota.html), [Michigan](/state/michigan.html), "
+                "[New York](/state/new-york.html)): Shorter seasons, often mid-June through August.\n\n"
+                "**Best times to visit:**\n\n"
+                "- **Weekday mornings** are typically the least crowded.\n"
+                "- **Avoid 12–3pm** on the hottest days — surfaces are scorching and UV exposure peaks.\n"
+                "- **Early season** (opening weekend) can be hit-or-miss as maintenance schedules ramp up.\n\n"
+                "Always check the individual listing on Splash Pad Locator for current hours and seasonal dates."
+            ),
+        },
+        {
+            "id": "ratings-reviews",
+            "icon": "⭐",
+            "title": "Using Ratings & Reviews",
+            "content": (
+                "Star ratings and reviews help you compare splash pads — but they're most useful when you know "
+                "what to look for:\n\n"
+                "- **4.5+ stars** with 50+ reviews: A safe bet. Consistently well-maintained and popular.\n"
+                "- **4.0–4.4 stars:** Usually good, but read the recent reviews — they may flag seasonal issues "
+                "like broken features or reduced hours.\n"
+                "- **Below 4.0 stars:** Not necessarily bad, but worth digging into the reviews for specifics. "
+                "A low rating might reflect a parking issue, not the splash pad itself.\n\n"
+                "**Tips for reading reviews:**\n\n"
+                "- Filter for recent reviews (last season or current year)\n"
+                "- Look for reviews from parents with kids the same age as yours\n"
+                "- Pay attention to mentions of cleanliness, maintenance, and shade\n"
+                "- Photos in reviews are more useful than star counts"
+            ),
+        },
+    ]
+
+    guide_checklist = [
+        "Is it free or paid? If paid, what's the admission cost for your family size?",
+        "Is it age-appropriate for your children? Look for dedicated toddler zones if needed.",
+        "Are there restrooms on-site or nearby?",
+        "Is there shade — both for the kids and for parent seating areas?",
+        "What's the parking situation? Is there a lot, or street parking only?",
+        "Is the splash pad currently open for the season? Check the listing for hours.",
+        "What's the surface material? Non-slip and cool surfaces are safest for bare feet.",
+        "Are there accessibility features if needed (wheelchair paths, ground-level sprays)?",
+        "Is there food nearby, or should you pack lunch and snacks?",
+        "Did you check recent reviews for maintenance or cleanliness issues?",
+        "Do you have sunscreen, water shoes, towels, and a change of clothes packed?",
+        "Is there a playground or other dry-play option nearby for when the kids are done with water?",
+    ]
+
+    html = template.render(
+        guide_title=guide_title,
+        guide_subtitle=guide_subtitle,
+        guide_date=guide_date,
+        guide_intro=guide_intro,
+        guide_sections=guide_sections,
+        guide_checklist=guide_checklist,
+        total_count=len(pads),
+        page_title=f"{guide_title} - {config.SITE_NAME}",
+        meta_description="A parent's guide to choosing the right splash pad. Covers free vs. paid, age suitability, amenities, safety, accessibility, seasonal timing, and a printable decision checklist.",
+        request_path="/splash-pad-guide",
+    )
+
+    output_path = config.OUTPUT_DIR / "splash-pad-guide.html"
+    output_path.write_text(html)
+    print("Built: splash-pad-guide.html")
+
+
 def build_search_index(pads):
     """Generate search-index.json for client-side search."""
     index = [
@@ -503,6 +690,7 @@ def build_sitemap(pads, posts):
     entries = [
         (f"{config.SITE_URL}/", "1.0", today),
         (f"{config.SITE_URL}/blog", "0.8", today),
+        (f"{config.SITE_URL}/splash-pad-guide", "0.8", today),
         (f"{config.SITE_URL}/about", "0.5", today),
         (f"{config.SITE_URL}/contact", "0.4", today),
         (f"{config.SITE_URL}/privacy", "0.3", today),
@@ -721,6 +909,7 @@ def main():
     build_static_pages(env, pads)
     build_blog_page(env, posts)
     build_post_pages(env, posts)
+    build_guide_page(env, pads)
 
     print("\nBuilding SEO files...")
     build_sitemap(pads, posts)
