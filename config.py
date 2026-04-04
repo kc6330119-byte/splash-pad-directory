@@ -171,7 +171,10 @@ GA_MEASUREMENT_ID = os.getenv("GA_MEASUREMENT_ID", "")
 # MailChimp
 # Set to the MailChimp embedded form action URL, e.g.:
 #   https://xxxxxx.us1.list-manage.com/subscribe/post?u=XXXXXXXX&id=XXXXXXXX
-MAILCHIMP_FORM_URL = os.getenv("MAILCHIMP_FORM_URL", "")
+MAILCHIMP_FORM_URL = os.getenv(
+    "MAILCHIMP_FORM_URL",
+    "https://doggroomerlocator.us12.list-manage.com/subscribe/post?u=21343a587fbb950d8b649ee6d&id=d901746875&f_id=0017dde3f0"
+)
 
 # SEO Settings
 DEFAULT_META_TITLE = f"{SITE_NAME} - Find Splash Pads Near You"
