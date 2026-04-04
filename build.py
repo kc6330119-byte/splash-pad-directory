@@ -278,6 +278,7 @@ def create_jinja_env():
     env.globals["us_states"] = config.US_STATES
     env.globals["current_year"] = datetime.now().year
     env.globals["ga_measurement_id"] = config.GA_MEASUREMENT_ID
+    env.globals["mailchimp_form_url"] = config.MAILCHIMP_FORM_URL
 
     return env
 

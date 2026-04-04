@@ -168,6 +168,11 @@ CATEGORIES = [
 # Google Analytics
 GA_MEASUREMENT_ID = os.getenv("GA_MEASUREMENT_ID", "")
 
+# MailChimp
+# Set to the MailChimp embedded form action URL, e.g.:
+#   https://xxxxxx.us1.list-manage.com/subscribe/post?u=XXXXXXXX&id=XXXXXXXX
+MAILCHIMP_FORM_URL = os.getenv("MAILCHIMP_FORM_URL", "")
+
 # SEO Settings
 DEFAULT_META_TITLE = f"{SITE_NAME} - Find Splash Pads Near You"
 DEFAULT_META_DESCRIPTION = SITE_DESCRIPTION
