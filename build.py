@@ -355,7 +355,7 @@ def build_state_pages(env, pads):
             state=state,
             pads=state_pads,
             page_title=f"Splash Pads in {state['name']} - {config.SITE_NAME}",
-            meta_description=state["description"][:155],
+            meta_description=state.get("meta_description") or state["description"][:155],
             request_path=f"/state/{state['slug']}",
             noindex=thin_state,
         )
