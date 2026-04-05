@@ -269,6 +269,192 @@ PAD_NOINDEX_SLUGS = {
     "kings-island-mason": "Amusement park ticket booth listing, not a splash pad venue page — off-topic impressions.",
 }
 
+# City pages — keyed by state slug, each city entry drives a /city/<slug> page.
+# Add new states here as city-level content is created.
+CITY_PAGES = {
+    "tennessee": [
+        {
+            "name": "Nashville",
+            "slug": "nashville-tennessee",
+            "state": "Tennessee",
+            "state_slug": "tennessee",
+            "meta_description": "Find splash pads in Nashville, TN — free spray parks, city water play areas, and family-friendly aquatic facilities in Davidson County. Updated 2026.",
+            "description": (
+                "Nashville's park system includes several free community splash pads spread across "
+                "Davidson County, giving families access to water play without a long drive or admission fee. "
+                "Metro Nashville Parks operates splash pads at Shelby Park, Centennial Park, and several "
+                "neighborhood recreation centers — most open Memorial Day weekend and run through Labor Day. "
+                "The city's rapid population growth over the past decade has pushed investment in new aquatic "
+                "amenities, and surrounding communities in Williamson and Rutherford counties have added their "
+                "own facilities to serve the metro's expanding suburbs. Murfreesboro, just 30 miles southeast, "
+                "has built a strong parks network that includes free splash areas. Nashville summers are hot "
+                "and humid, with July and August highs consistently in the 90s, making water play genuinely "
+                "essential for families with young children. Morning visits — before 11 a.m. — are the most "
+                "comfortable and least crowded. Most city-operated splash pads are free of charge. Bring "
+                "sunscreen, a change of clothes, and water, and check Metro Parks hours before you go as "
+                "schedules may vary by location."
+            ),
+            "faq": [
+                {
+                    "q": "Are Nashville splash pads free?",
+                    "a": "Most Metro Nashville Parks splash pads are free and open to the public during regular park hours. Some aquatic centers within recreation facilities may charge a small admission fee — check the specific location before visiting.",
+                },
+                {
+                    "q": "When do Nashville splash pads open for the season?",
+                    "a": "Nashville splash pads typically open around Memorial Day weekend (late May) and operate through Labor Day (early September). Some locations may open earlier or close later depending on weather and staffing.",
+                },
+                {
+                    "q": "What is the best time to visit a Nashville splash pad?",
+                    "a": "Weekday mornings before 11 a.m. are the least crowded and most comfortable, especially in July and August when afternoon temperatures regularly reach the 90s. Bring sunscreen and arrive early for the best experience.",
+                },
+            ],
+        },
+        {
+            "name": "Murfreesboro",
+            "slug": "murfreesboro-tennessee",
+            "state": "Tennessee",
+            "state_slug": "tennessee",
+            "meta_description": "Find splash pads in Murfreesboro, TN — free spray parks and water play in Rutherford County. Family-friendly aquatic facilities updated for 2026.",
+            "description": (
+                "Murfreesboro, located about 35 miles southeast of Nashville in Rutherford County, has "
+                "developed a strong parks network to serve its rapidly growing population — and water play "
+                "is a central part of that investment. The city's parks and recreation department operates "
+                "community splash pads that provide free, accessible water play for families across the "
+                "community. Murfreesboro is one of the fastest-growing cities in Tennessee, and its parks "
+                "infrastructure has kept pace with that growth. The Murfreesboro area's summers are hot "
+                "and humid, typical of Middle Tennessee, with peak season running from June through August. "
+                "Most city splash pads are free of charge and open during regular park hours throughout the "
+                "summer season. Greenway trails connect several parks, making it easy to combine a splash "
+                "pad visit with a walk or bike ride. The Stones River Greenway and surrounding park network "
+                "give Murfreesboro families a variety of outdoor options alongside the splash facilities. "
+                "Check the Murfreesboro Parks and Recreation website for current hours and seasonal dates "
+                "before visiting."
+            ),
+            "faq": [
+                {
+                    "q": "Are Murfreesboro splash pads free?",
+                    "a": "Yes, Murfreesboro's city-operated splash pads are free and open to the public during regular park hours. No admission fee is required at most locations.",
+                },
+                {
+                    "q": "When do Murfreesboro splash pads open?",
+                    "a": "Murfreesboro splash pads typically open in late May or early June and operate through Labor Day weekend. Check the city's Parks and Recreation department for exact dates each season.",
+                },
+                {
+                    "q": "What parks in Murfreesboro have splash pads?",
+                    "a": "Murfreesboro Parks and Recreation operates splash pad facilities at several community parks. Visit the city's parks website or call ahead to confirm which locations are active this season.",
+                },
+            ],
+        },
+        {
+            "name": "Hendersonville",
+            "slug": "hendersonville-tennessee",
+            "state": "Tennessee",
+            "state_slug": "tennessee",
+            "meta_description": "Find splash pads in Hendersonville, TN — free spray parks and water play in Sumner County. Family water play areas updated for 2026.",
+            "description": (
+                "Hendersonville sits on Old Hickory Lake in Sumner County, about 18 miles northeast of "
+                "Nashville, and offers a suburban setting that blends lakeside recreation with community park "
+                "amenities including water play facilities for families. The city's parks department serves "
+                "a community that has grown substantially as part of the greater Nashville metro area, and "
+                "splash pad access is part of that parks investment. Sumner County's warm summers — with "
+                "peak temperatures in the 90s through July and August — drive strong demand for outdoor "
+                "water play from Memorial Day through Labor Day. Most Hendersonville and Sumner County park "
+                "splash pads are free to use during regular park hours. The area's proximity to Old Hickory "
+                "Lake also gives families additional water recreation options, though the splash pads provide "
+                "a safe, supervised alternative for younger children. Check with the Hendersonville Parks "
+                "and Recreation department or Sumner County Parks for current seasonal schedules and "
+                "locations before planning a visit."
+            ),
+            "faq": [
+                {
+                    "q": "Are Hendersonville splash pads free?",
+                    "a": "Most Hendersonville and Sumner County splash pads are free and open to the public during regular park hours. No admission fee is required at city-operated spray parks.",
+                },
+                {
+                    "q": "When is the splash pad season in Hendersonville?",
+                    "a": "Hendersonville splash pads typically open around Memorial Day weekend and operate through Labor Day. Contact Hendersonville Parks and Recreation for exact seasonal dates and locations.",
+                },
+                {
+                    "q": "What else is there to do near splash pads in Hendersonville?",
+                    "a": "Hendersonville's location on Old Hickory Lake means many parks are near waterfront areas with walking trails, picnic facilities, and lake access — making it easy to combine a splash pad visit with other outdoor activities.",
+                },
+            ],
+        },
+        {
+            "name": "Clarksville",
+            "slug": "clarksville-tennessee",
+            "state": "Tennessee",
+            "state_slug": "tennessee",
+            "meta_description": "Find splash pads in Clarksville, TN — free spray parks and water play in Montgomery County. Family aquatic facilities updated for 2026.",
+            "description": (
+                "Clarksville, Tennessee's fifth-largest city, sits at the confluence of the Cumberland and "
+                "Red rivers in Montgomery County about 45 miles northwest of Nashville. The city's parks "
+                "and recreation system serves a large and growing population — anchored significantly by "
+                "Fort Campbell, which straddles the Tennessee-Kentucky border nearby — with community parks "
+                "that include water play facilities for families. Clarksville summers are among the hottest "
+                "in Tennessee, with July averages well into the 90s, making splash pads a key community "
+                "amenity from late spring through early fall. The city has invested in its parks network, "
+                "and splash areas are part of that infrastructure. Clarksville's Liberty Park, one of the "
+                "largest urban parks in the state, offers multiple recreational amenities along the "
+                "Cumberland River. Most city-operated splash pads are free of charge. Seasonal hours "
+                "typically align with Memorial Day through Labor Day. Check with Clarksville Parks and "
+                "Recreation for current locations, hours, and any temporary closures."
+            ),
+            "faq": [
+                {
+                    "q": "Are Clarksville splash pads free?",
+                    "a": "Yes, most Clarksville Parks and Recreation splash pads are free and open to the public. Some aquatic center features may have admission fees — check the specific location before visiting.",
+                },
+                {
+                    "q": "When do Clarksville splash pads open for summer?",
+                    "a": "Clarksville splash pads typically open around Memorial Day and run through Labor Day. Check Clarksville Parks and Recreation for the current season's exact dates.",
+                },
+                {
+                    "q": "Is Liberty Park a good place for families with splash pads?",
+                    "a": "Liberty Park is one of Clarksville's signature recreational destinations along the Cumberland River. Check with the parks department to confirm current water play facilities and amenities at the park.",
+                },
+            ],
+        },
+        {
+            "name": "Chattanooga",
+            "slug": "chattanooga-tennessee",
+            "state": "Tennessee",
+            "state_slug": "tennessee",
+            "meta_description": "Find splash pads in Chattanooga, TN — free spray parks and water play in Hamilton County. Family-friendly aquatic facilities updated for 2026.",
+            "description": (
+                "Chattanooga has built an identity as one of Tennessee's premier outdoor recreation cities, "
+                "and its parks system reflects that reputation with well-maintained facilities that include "
+                "community water play areas for families. Situated along the Tennessee River at the base of "
+                "Lookout Mountain, Chattanooga's park network blends greenway trails, river access, and "
+                "neighborhood amenities that include splash pads and spray features. The city's outdoor "
+                "culture — shaped by its mountain biking trails, rock climbing access, and revitalized "
+                "riverfront — extends to family-friendly water play. Hamilton County Parks and the City of "
+                "Chattanooga operate facilities across the metro area. Chattanooga's summers are hot and "
+                "humid, with peak temperatures in the upper 80s and 90s through July and August, creating "
+                "genuine demand for water play from Memorial Day through Labor Day. Most city-operated "
+                "splash pads are free of charge. The revitalized North Shore and South Side neighborhoods "
+                "have seen increased recreational investment, and splash facilities are part of that growth. "
+                "Check with Chattanooga Parks and Recreation or Hamilton County Parks for current "
+                "seasonal schedules before visiting."
+            ),
+            "faq": [
+                {
+                    "q": "Are Chattanooga splash pads free?",
+                    "a": "Most Chattanooga city-operated splash pads are free and open to the public during regular park hours. Some aquatic facilities within recreation centers may charge admission.",
+                },
+                {
+                    "q": "When do Chattanooga splash pads open?",
+                    "a": "Chattanooga splash pads typically open around Memorial Day weekend and run through Labor Day. Check Chattanooga Parks and Recreation or Hamilton County Parks for seasonal dates.",
+                },
+                {
+                    "q": "What neighborhoods in Chattanooga have splash pads?",
+                    "a": "Chattanooga has water play facilities distributed across several neighborhoods. The North Shore, South Side, and various community parks throughout Hamilton County have seen recreational investment. Check with the parks department for current active locations.",
+                },
+            ],
+        },
+    ],
+}
+
 # Build Settings
 ITEMS_PER_PAGE = 24
 FEATURED_COUNT = 6

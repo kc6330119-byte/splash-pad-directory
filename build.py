@@ -443,9 +443,12 @@ def build_state_pages(env, pads):
 
         thin_state = len(state_pads) < MIN_PADS_FOR_INDEX
 
+        city_pages = config.CITY_PAGES.get(state["slug"], [])
+
         html = template.render(
             state=state,
             pads=state_pads,
+            city_pages=city_pages,
             page_title=f"Splash Pads in {state['name']} - {config.SITE_NAME}",
             meta_description=state.get("meta_description") or state["description"][:155],
             request_path=f"/state/{state['slug']}",
@@ -455,6 +458,40 @@ def build_state_pages(env, pads):
         output_path = config.OUTPUT_DIR / "state" / f"{state['slug']}.html"
         output_path.write_text(html)
         print(f"Built: state/{state['slug']}.html ({len(state_pads)} pads)")
+
+
+def build_city_pages(env, pads):
+    """Build city-level landing pages defined in config.CITY_PAGES."""
+    template = env.get_template("city.html")
+    output_dir = config.OUTPUT_DIR / "city"
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    for state_slug, cities in config.CITY_PAGES.items():
+        for city in cities:
+            city_name_lower = city["name"].lower()
+            city_pads = [
+                p for p in pads
+                if p.get("state_slug") == state_slug
+                and p.get("city", "").strip().lower() == city_name_lower
+            ]
+            city_pads.sort(key=lambda x: x.get("name", ""))
+
+            # Sibling cities in the same state (excluding current)
+            other_cities = [c for c in cities if c["slug"] != city["slug"]]
+
+            html = template.render(
+                city=city,
+                pads=city_pads,
+                other_cities=other_cities,
+                page_title=f"Splash Pads in {city['name']}, {city['state']} - {config.SITE_NAME}",
+                meta_description=city["meta_description"],
+                request_path=f"/city/{city['slug']}",
+                noindex=False,
+            )
+
+            output_path = output_dir / f"{city['slug']}.html"
+            output_path.write_text(html)
+            print(f"Built: city/{city['slug']}.html ({len(city_pads)} pads)")
 
 
 def is_thin_pad(pad):
@@ -812,6 +849,10 @@ def build_sitemap(pads, posts):
     for category in config.CATEGORIES:
         entries.append((f"{config.SITE_URL}/category/{category['slug']}", "0.7", today))
 
+    for state_slug, cities in config.CITY_PAGES.items():
+        for city in cities:
+            entries.append((f"{config.SITE_URL}/city/{city['slug']}", "0.8", today))
+
     for pad in pads:
         if not is_thin_pad(pad):
             entries.append((f"{config.SITE_URL}/pad/{pad['slug']}", "0.6", today))
@@ -1010,6 +1051,7 @@ def main():
     print("\nBuilding pages...")
     build_homepage(env, pads, posts)
     build_state_pages(env, pads)
+    build_city_pages(env, pads)
     build_pad_pages(env, pads)
     build_category_pages(env, pads)
     build_static_pages(env, pads)

@@ -106,6 +106,16 @@
   to = "/blog/:splat.html"
   status = 200
 
+[[redirects]]
+  from = "/city/*.html"
+  to = "/city/:splat"
+  status = 301
+
+[[redirects]]
+  from = "/city/*"
+  to = "/city/:splat.html"
+  status = 200
+
 # --- Pretty URL rewrites for static pages ---
 
 [[redirects]]

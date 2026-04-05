@@ -1,0 +1,262 @@
+{% extends "base.html" %}
+
+{% block extra_head %}
+{% autoescape false %}
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": {{ (site_url ~ "/") | tojson }}
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "name": {{ city.state | tojson }},
+            "item": {{ (site_url ~ "/state/" ~ city.state_slug) | tojson }}
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "name": {{ city.name | tojson }}
+        }
+    ]
+}
+</script>
+
+{% if pads %}
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": {{ ("Splash Pads in " ~ city.name ~ ", " ~ city.state) | tojson }},
+    "description": {{ ("Find free and family-friendly splash pads in " ~ city.name ~ ", " ~ city.state) | tojson }},
+    "numberOfItems": {{ pads | length }},
+    "itemListElement": [
+        {% for pad in pads %}
+        {
+            "@type": "ListItem",
+            "position": {{ loop.index }},
+            "item": {
+                "@type": "LocalBusiness",
+                "name": {{ pad.name | tojson }},
+                "url": {{ (site_url ~ "/pad/" ~ pad.slug) | tojson }}{% if pad.address %},
+                "address": {
+                    "@type": "PostalAddress",
+                    "streetAddress": {{ pad.address | tojson }},
+                    "addressLocality": {{ pad.city | tojson }},
+                    "addressRegion": {{ pad.state | tojson }}{% if pad.zip %},
+                    "postalCode": {{ pad.zip | tojson }}{% endif %}
+                }{% endif %}
+            }
+        }{% if not loop.last %},{% endif %}
+        {% endfor %}
+    ]
+}
+</script>
+{% endif %}
+
+{% if city.faq %}
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {% for item in city.faq %}
+        {
+            "@type": "Question",
+            "name": {{ item.q | tojson }},
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": {{ item.a | tojson }}
+            }
+        }{% if not loop.last %},{% endif %}
+        {% endfor %}
+    ]
+}
+</script>
+{% endif %}
+{% endautoescape %}
+{% endblock %}
+
+{% block content %}
+
+<!-- City Header -->
+<section class="bg-gradient-to-r from-cyan-600 to-sky-700 text-white py-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <nav class="text-sm text-cyan-200 mb-3">
+            <a href="/" class="hover:text-white">Home</a>
+            <span class="mx-2">/</span>
+            <a href="/state/{{ city.state_slug }}" class="hover:text-white">{{ city.state }}</a>
+            <span class="mx-2">/</span>
+            <span>{{ city.name }}</span>
+        </nav>
+        <h1 class="text-3xl md:text-4xl font-bold mb-2">
+            Splash Pads in {{ city.name }}, {{ city.state }}
+        </h1>
+        <p class="text-cyan-100 text-lg">
+            {% if pads %}
+            {{ pads | length }} splash pad{% if pads | length != 1 %}s{% endif %} found in {{ city.name }}
+            {% else %}
+            Free &amp; family-friendly water play in {{ city.name }}
+            {% endif %}
+        </p>
+    </div>
+</section>
+
+<!-- City Description -->
+{% if city.description %}
+<div class="bg-gray-50 border-b">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <p class="text-gray-600 leading-relaxed max-w-4xl">{{ city.description }}</p>
+    </div>
+</div>
+{% endif %}
+
+<!-- Filter Bar -->
+{% if pads %}
+<div class="bg-white border-b sticky top-16 z-30 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center gap-3 overflow-x-auto">
+        <span class="text-xs font-semibold text-gray-500 uppercase tracking-wider whitespace-nowrap">Filter:</span>
+        <button onclick="filterPads('all')" data-filter="all"
+            class="filter-btn active text-sm px-3 py-1.5 rounded-full border font-medium whitespace-nowrap transition-colors
+                   bg-cyan-600 text-white border-cyan-600">
+            All
+        </button>
+        <button onclick="filterPads('Free')" data-filter="Free"
+            class="filter-btn text-sm px-3 py-1.5 rounded-full border font-medium whitespace-nowrap transition-colors
+                   border-gray-300 text-gray-600 hover:border-green-400 hover:text-green-700">
+            🆓 Free Admission
+        </button>
+        <button onclick="filterPads('Paid')" data-filter="Paid"
+            class="filter-btn text-sm px-3 py-1.5 rounded-full border font-medium whitespace-nowrap transition-colors
+                   border-gray-300 text-gray-600 hover:border-amber-400 hover:text-amber-700">
+            💰 Paid Admission
+        </button>
+    </div>
+</div>
+{% endif %}
+
+<!-- Listings -->
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+
+    {% if pads %}
+    <div id="pad-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        {% for pad in pads %}
+        {% include '_pad_card.html' %}
+        {% endfor %}
+    </div>
+
+    <!-- No results message (shown when filter hides all) -->
+    <div id="no-results" class="hidden text-center py-16">
+        <span class="text-5xl">💧</span>
+        <p class="text-gray-500 mt-4">No splash pads match this filter. <button onclick="filterPads('all')" class="text-cyan-600 hover:underline">Show all</button></p>
+    </div>
+
+    {% else %}
+    <!-- Empty state with submit CTA -->
+    <div class="text-center py-20">
+        <span class="text-6xl">💧</span>
+        <h2 class="text-xl font-semibold text-gray-900 mt-6 mb-2">
+            Know a splash pad in {{ city.name }}?
+        </h2>
+        <p class="text-gray-500 mb-8 max-w-md mx-auto">
+            We're building out our {{ city.name }} listings. Help us grow the directory by submitting a splash pad you know about!
+        </p>
+        <a href="/contact#submit"
+           class="inline-block px-6 py-3 bg-cyan-600 text-white font-semibold rounded-lg hover:bg-cyan-700 transition-colors">
+            Submit a Splash Pad
+        </a>
+    </div>
+    {% endif %}
+
+</div>
+
+<!-- FAQ Section -->
+{% if city.faq %}
+<section class="bg-gray-50 border-t py-10">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-xl font-bold text-gray-900 mb-6">
+            Frequently Asked Questions — Splash Pads in {{ city.name }}
+        </h2>
+        <div class="space-y-4">
+            {% for item in city.faq %}
+            <details class="bg-white rounded-xl border border-gray-200 px-5 py-4 group">
+                <summary class="font-semibold text-gray-900 cursor-pointer list-none flex items-center justify-between">
+                    {{ item.q }}
+                    <span class="ml-4 text-cyan-600 group-open:rotate-180 transition-transform duration-200 text-lg leading-none select-none">&#8964;</span>
+                </summary>
+                <p class="mt-3 text-gray-600 text-sm leading-relaxed">{{ item.a }}</p>
+            </details>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Browse Other Cities in This State -->
+{% if other_cities %}
+<section class="bg-white border-t py-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-lg font-bold text-gray-900 mb-4">More Cities in {{ city.state }}</h2>
+        <div class="flex flex-wrap gap-2">
+            {% for c in other_cities %}
+            <a href="/city/{{ c.slug }}"
+               class="text-sm px-3 py-1.5 bg-gray-50 border border-gray-200 hover:border-cyan-400 hover:text-cyan-700 rounded-lg transition-colors text-gray-700 font-medium">
+                {{ c.name }}
+            </a>
+            {% endfor %}
+        </div>
+        <div class="mt-4">
+            <a href="/state/{{ city.state_slug }}" class="text-sm text-cyan-600 hover:underline">
+                ← All splash pads in {{ city.state }}
+            </a>
+        </div>
+    </div>
+</section>
+{% else %}
+<!-- Back to state link when no sibling cities -->
+<section class="bg-white border-t py-6">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <a href="/state/{{ city.state_slug }}" class="text-sm text-cyan-600 hover:underline">
+            ← All splash pads in {{ city.state }}
+        </a>
+    </div>
+</section>
+{% endif %}
+
+{% if pads %}
+<script>
+function filterPads(admission) {
+    const cards = document.querySelectorAll('#pad-grid > div');
+    let visible = 0;
+
+    cards.forEach(function(card) {
+        const cardAdmission = card.dataset.admission || '';
+        if (admission === 'all' || cardAdmission === admission) {
+            card.style.display = '';
+            visible++;
+        } else {
+            card.style.display = 'none';
+        }
+    });
+
+    document.getElementById('no-results').classList.toggle('hidden', visible > 0);
+
+    document.querySelectorAll('.filter-btn').forEach(function(btn) {
+        const isActive = btn.dataset.filter === admission;
+        btn.classList.toggle('bg-cyan-600', isActive);
+        btn.classList.toggle('text-white', isActive);
+        btn.classList.toggle('border-cyan-600', isActive);
+        btn.classList.toggle('border-gray-300', !isActive);
+        btn.classList.toggle('text-gray-600', !isActive);
+    });
+}
+</script>
+{% endif %}
+
+{% endblock %}
