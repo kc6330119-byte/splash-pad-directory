@@ -20,6 +20,72 @@ from slugify import slugify
 import config
 
 
+def generate_pad_faq(pad):
+    """Generate 2-3 FAQ Q&A pairs from a pad's existing data fields.
+
+    Used as a fallback when no custom FAQ is stored in Airtable. Returns a list
+    of {"q": "...", "a": "..."} dicts. Only generates questions for which a
+    meaningful answer can be derived from the available data.
+    """
+    name = pad.get("name", "this splash pad")
+    faqs = []
+
+    # Admission / cost question
+    admission = pad.get("admission", "")
+    price = pad.get("price", "")
+    if admission == "Free":
+        faqs.append({
+            "q": f"Is {name} free?",
+            "a": f"Yes, {name} is free and open to the public. No admission fee is required.",
+        })
+    elif admission == "Paid" and price:
+        faqs.append({
+            "q": f"How much does {name} cost?",
+            "a": f"Admission to {name} is {price}.",
+        })
+    elif admission:
+        faqs.append({
+            "q": f"Is there an admission fee at {name}?",
+            "a": f"Admission is listed as {admission}. Check the official website or call ahead to confirm current pricing.",
+        })
+
+    # Hours question
+    hours = pad.get("hours", "")
+    if hours:
+        faqs.append({
+            "q": f"What are the hours at {name}?",
+            "a": f"{name} is open {hours}. Hours may vary on holidays — call ahead or check the official website to confirm.",
+        })
+
+    # Season question
+    season = pad.get("season", "")
+    if season and season.lower() not in ("year-round", "year round"):
+        faqs.append({
+            "q": f"What season is {name} open?",
+            "a": f"{name} is typically open {season}. Opening and closing dates may shift slightly by year depending on weather.",
+        })
+
+    # Age range question
+    age_range = pad.get("age_range", [])
+    if age_range:
+        ages = ", ".join(age_range)
+        faqs.append({
+            "q": f"What age groups is {name} suitable for?",
+            "a": f"{name} is suitable for {ages}.",
+        })
+
+    # Accessibility question
+    features = pad.get("features", [])
+    if "Accessibility" in features:
+        faqs.append({
+            "q": f"Is {name} accessible for guests with disabilities?",
+            "a": f"Yes, {name} includes accessible water features designed for guests of all abilities.",
+        })
+
+    # Return up to 3 FAQs
+    return faqs[:3]
+
+
 def get_sample_data():
     """Return sample splash pads for testing without Airtable."""
     return [
@@ -48,6 +114,8 @@ def get_sample_data():
             "date_added": "2025-01-01",
             "rating": 4.7,
             "review_count": 128,
+            "faq": [],
+            "last_verified": "",
         },
         {
             "name": "Riverside Water Park",
@@ -74,6 +142,8 @@ def get_sample_data():
             "date_added": "2025-01-02",
             "rating": 4.5,
             "review_count": 89,
+            "faq": [],
+            "last_verified": "",
         },
         {
             "name": "Maple Grove Spray Park",
@@ -100,6 +170,8 @@ def get_sample_data():
             "date_added": "2025-01-03",
             "rating": 4.3,
             "review_count": 56,
+            "faq": [],
+            "last_verified": "",
         },
     ]
 
@@ -134,6 +206,24 @@ def fetch_from_airtable():
                 continue
 
             state_name = fields.get("State", "")
+            # Parse FAQ: stored in Airtable as a JSON array [{"q":"...","a":"..."}]
+            # or as newline-separated "Q: ...\nA: ..." blocks.
+            raw_faq = fields.get("FAQ", "")
+            custom_faq = []
+            if raw_faq:
+                try:
+                    custom_faq = json.loads(raw_faq)
+                except (json.JSONDecodeError, TypeError):
+                    # Parse "Q: ...\nA: ..." plain-text format
+                    lines = [l.strip() for l in raw_faq.strip().splitlines() if l.strip()]
+                    current_q = None
+                    for line in lines:
+                        if line.startswith("Q:"):
+                            current_q = line[2:].strip()
+                        elif line.startswith("A:") and current_q:
+                            custom_faq.append({"q": current_q, "a": line[2:].strip()})
+                            current_q = None
+
             pad = {
                 "_airtable_id": record.get("id", ""),
                 "name": fields.get("Name", ""),
@@ -162,6 +252,8 @@ def fetch_from_airtable():
                 "review_count": fields.get("Review Count", 0),
                 "latitude": fields.get("Latitude", ""),
                 "longitude": fields.get("Longitude", ""),
+                "faq": custom_faq,
+                "last_verified": fields.get("Last Verified", ""),
             }
             pads.append(pad)
 
@@ -401,8 +493,12 @@ def build_pad_pages(env, pads):
         if thin:
             noindex_count += 1
 
+        # Use custom FAQ from Airtable if present, otherwise auto-generate from pad data
+        faq = pad.get("faq") or generate_pad_faq(pad)
+
         html = template.render(
             pad=pad,
+            faq=faq,
             related_pads=related,
             page_title=f"{pad['name']} - {pad['city']}, {pad['state']} - {config.SITE_NAME}",
             meta_description=pad.get("description", "")[:160],
