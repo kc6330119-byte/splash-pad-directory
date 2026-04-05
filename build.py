@@ -125,6 +125,14 @@ def fetch_from_airtable():
             if fields.get("Status") == "Draft":
                 continue
 
+            # Skip off-topic listings (theme parks, water parks, aquatic centers)
+            OFF_TOPIC_PREFIXES = (
+                "Six Flags", "Great Wolf Lodge", "Kings Island",
+                "Kings Dominion", "Kroger Aquatic Center", "Rivertown",
+            )
+            if any(fields.get("Name", "").startswith(p) for p in OFF_TOPIC_PREFIXES):
+                continue
+
             state_name = fields.get("State", "")
             pad = {
                 "_airtable_id": record.get("id", ""),
@@ -389,7 +397,7 @@ def build_pad_pages(env, pads):
         # Related pads: same state, different pad
         related = [p for p in pads if p["slug"] != pad["slug"] and p.get("state_slug") == pad.get("state_slug")][:4]
 
-        thin = is_thin_pad(pad)
+        thin = is_thin_pad(pad) or pad["slug"] in config.PAD_NOINDEX_SLUGS
         if thin:
             noindex_count += 1
 
@@ -472,11 +480,12 @@ def build_post_pages(env, posts):
     for post in posts:
         if not post.get("slug"):
             continue
+        overrides = config.BLOG_META_OVERRIDES.get(post["slug"], {})
         html = template.render(
             post=post,
             all_posts=posts,
-            page_title=f"{post['title']} - {config.SITE_NAME}",
-            meta_description=post.get("meta_description") or post.get("excerpt", "")[:160],
+            page_title=overrides.get("page_title") or f"{post['title']} - {config.SITE_NAME}",
+            meta_description=overrides.get("meta_description") or post.get("meta_description") or post.get("excerpt", "")[:160],
             request_path=f"/blog/{post['slug']}",
         )
         output_path = config.OUTPUT_DIR / "blog" / f"{post['slug']}.html"

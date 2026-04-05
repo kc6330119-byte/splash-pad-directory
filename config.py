@@ -134,33 +134,43 @@ US_STATES = [
 # Feature filter categories (used for filter pages and nav)
 CATEGORIES = [
     {"name": "Free Admission", "slug": "free-admission", "icon": "🆓",
+     "seo_title": "Free Splash Pads Near You",
      "description": "Splash pads with no admission cost",
      "intro": "Free splash pads are one of the best-kept secrets for family fun. Operated by city parks departments and community recreation centers, these facilities offer the same water play experience as paid attractions — ground-level jets, spray nozzles, and interactive features — without any cost. Many are located in public parks with playgrounds, restrooms, and picnic areas, making them a complete family outing at zero cost."},
     {"name": "Best for Toddlers", "slug": "toddlers", "icon": "👶",
+     "seo_title": "Best Splash Pads for Toddlers Near You",
      "description": "Gentle water features ideal for toddlers and young children",
      "intro": "Toddler-friendly splash pads feature gentle, low-pressure water jets and shallow ground-level spray areas designed for the youngest visitors. These facilities avoid the high-intensity sprayers and deep water that can overwhelm small children, offering a safe introduction to water play. Many also include shaded seating areas where parents can watch comfortably. If your child is between 1 and 4, these are the splash pads to start with."},
     {"name": "Best for Families", "slug": "families", "icon": "👨‍👩‍👧‍👦",
+     "seo_title": "Best Family Splash Pads Near You",
      "description": "Large splash pads with features for all ages",
      "intro": "Family splash pads offer something for every age — from gentle spray areas for toddlers to high-energy water cannons and dumping buckets for older kids. These larger facilities are designed so siblings of different ages can all play together without anyone being bored or overwhelmed. Many include adjacent playgrounds, picnic areas, and restrooms so families can spend a full morning or afternoon."},
     {"name": "With Shade", "slug": "with-shade", "icon": "⛱️",
+     "seo_title": "Splash Pads with Shade Near You",
      "description": "Splash pads with shaded areas to keep the sun off",
      "intro": "Shade matters — especially at splash pads where kids can spend hours in direct sunlight. These facilities include covered pavilions, shade sails, trees, or other structures that protect visitors from UV exposure. Shaded splash pads are particularly important in southern and desert states where summer sun intensity peaks. Even with shade, sunscreen is still recommended, but having a shaded rest area makes a big difference for both kids and parents."},
     {"name": "With Restrooms", "slug": "with-restrooms", "icon": "🚻",
-     "description": "Splash pads that have on-site restrooms",
-     "intro": "On-site restrooms are one of those amenities you don't think about until you need them — and at a splash pad with young children, you'll need them. These facilities have dedicated restroom buildings, often including changing areas where families can get into and out of swimwear. It's a practical detail that separates a quick splash from a full outing."},
+     "seo_title": "Splash Pads with Restrooms Near You",
+     "description": "Browse splash pads with on-site restrooms and family changing areas",
+     "intro": "On-site restrooms are one of those amenities you don't think about until you need them — and at a splash pad with young children, you'll need them. Every splash pad listed here has dedicated restroom facilities on-site, often including family changing rooms where you can get kids into and out of swimwear without hunting for a nearby building. Whether you're planning a quick stop or a full morning out, restroom access turns a splashing session into a proper outing. Use the state filter below to find locations near you."},
     {"name": "With Picnic Areas", "slug": "with-picnic-areas", "icon": "🧺",
+     "seo_title": "Splash Pads with Picnic Areas Near You",
      "description": "Splash pads near picnic tables or pavilions",
      "intro": "Splash pads with picnic areas let families turn water play into a full outing. Pack a lunch, claim a table, and alternate between eating and splashing without having to leave and come back. Many facilities include shaded pavilions, grills, or nearby concession stands. It's the difference between a 30-minute splash and a three-hour family day."},
     {"name": "Indoor", "slug": "indoor", "icon": "🏠",
+     "seo_title": "Indoor Splash Pads Near You — Year-Round Water Play",
      "description": "Year-round indoor water play areas",
      "intro": "Indoor splash pads and water play areas operate year-round regardless of weather or season. These climate-controlled facilities — often found inside recreation centers, resorts, and dedicated waterpark buildings — offer slides, spray features, and pools in a warm, enclosed environment. They're the answer for families in northern states who want water play in January, or for anyone looking to avoid sunburn and rain delays."},
     {"name": "Accessible", "slug": "accessible", "icon": "♿",
+     "seo_title": "Accessible Splash Pads Near You — ADA-Friendly Water Play",
      "description": "ADA accessible splash pads and water play areas",
      "intro": "Accessible splash pads are designed so children and adults of all abilities can enjoy water play. These facilities feature ADA-compliant surfaces, wheelchair-accessible spray areas, ground-level jets that don't require climbing or standing, and accessible paths to and from the water play area. Many also include accessible restrooms and parking. Every child deserves to play in the water — these facilities make that possible."},
     {"name": "Amusement Parks", "slug": "amusement-parks", "icon": "🎢",
+     "seo_title": "Splash Pads at Amusement Parks Near You",
      "description": "Theme and amusement parks with splash pad and water attractions",
      "intro": "Many of the country's most popular theme and amusement parks include splash pads, spray zones, and dedicated water areas alongside their rides and attractions. These facilities range from themed splash zones designed for younger visitors to full-scale water rides and play areas. They're a great way to cool off between coaster rides and add a water play dimension to a theme park visit."},
     {"name": "Water Parks", "slug": "water-parks", "icon": "🌊",
+     "seo_title": "Water Parks with Splash Pads Near You",
      "description": "Dedicated water parks and resort water parks with slides and attractions",
      "intro": "Dedicated water parks go well beyond a basic splash pad — they offer water slides, wave pools, lazy rivers, and multi-level splash structures alongside traditional spray features. These are full-day destinations with amenities like locker rooms, concessions, cabana rentals, and lifeguard coverage. Whether it's a community-operated aquatic park or a resort-scale waterpark, these facilities deliver the most complete water play experience available."},
 ]
@@ -177,8 +187,37 @@ MAILCHIMP_FORM_URL = os.getenv(
 )
 
 # SEO Settings
-DEFAULT_META_TITLE = f"{SITE_NAME} - Find Splash Pads Near You"
-DEFAULT_META_DESCRIPTION = SITE_DESCRIPTION
+DEFAULT_META_TITLE = "Best Splash Pads Near Me — Find Free & Family-Friendly Water Play"
+DEFAULT_META_DESCRIPTION = "Find the best splash pads near you — free, family-friendly water play for all ages. Search by city or state to discover spray parks, zero-depth pools, and interactive fountains."
+
+# Blog post metadata overrides (keyed by slug).
+# Use these to fix titles/descriptions for high-impression zero-click pages
+# without requiring an Airtable edit.
+BLOG_META_OVERRIDES = {
+    "best-swim-diapers-for-splash-pads": {
+        "page_title": "Best Swim Diapers for Splash Pads (2026) \u2014 Tested & Compared",
+        "meta_description": "We tested the top swim diapers for splash pads in 2026. Reusable and disposable picks ranked by leak protection, fit, and value \u2014 so you can skip the trial and error.",
+    },
+    "best-splash-pads-in-texas": {
+        "page_title": "Best Splash Pads in Texas: Top Water Play Spots for Families (2026) - Splash Pad Locator",
+        "meta_description": "Discover the best splash pads in Texas for families in 2026. Free options in Dallas, Houston, Austin, and San Antonio plus top water parks.",
+    },
+    "best-splash-pads-in-illinois": {
+        "page_title": "Best Splash Pads in Illinois: Top Picks for Families (2026) - Splash Pad Locator",
+        "meta_description": "Discover the best splash pads in Illinois for 2026 \u2014 from Chicago suburb water parks to neighborhood spray pads. Updated with hours, admission, and family tips.",
+    },
+    "how-to-find-free-splash-pads-near-you": {
+        "page_title": "How to Find Free Splash Pads Near You (2026 Guide) - Splash Pad Locator",
+        "meta_description": "Find free splash pads near you with our step-by-step guide. Covers city park searches, apps, and what to look for so the whole family can splash for free.",
+    },
+}
+
+# Pad pages to force noindex (misleading listings, off-topic venues, or pool-not-splash-pad).
+# Keyed by slug — value is a note explaining the reason.
+PAD_NOINDEX_SLUGS = {
+    "lenora-park-pool-snellville": "Traditional swimming pool, not a splash pad — misleading to searchers.",
+    "kings-island-mason": "Amusement park ticket booth listing, not a splash pad venue page — off-topic impressions.",
+}
 
 # Build Settings
 ITEMS_PER_PAGE = 24
