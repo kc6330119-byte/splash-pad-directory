@@ -38,11 +38,11 @@
     <!-- Content -->
     <div class="p-4 flex flex-col flex-grow">
         <h3 class="font-semibold text-gray-900 leading-tight mb-1">
-            <a href="/pad/{{ pad.slug }}.html" class="hover:text-cyan-600 transition-colors line-clamp-2">{{ pad.name }}</a>
+            <a href="/pad/{{ pad.slug }}" class="hover:text-cyan-600 transition-colors line-clamp-2">{{ pad.name }}</a>
         </h3>
 
         <p class="text-sm text-gray-500 mb-2">
-            📍 <a href="/state/{{ pad.state_slug }}.html" class="hover:text-cyan-600">{{ pad.city }}, {{ pad.state }}</a>
+            📍 <a href="/state/{{ pad.state_slug }}" class="hover:text-cyan-600">{{ pad.city }}, {{ pad.state }}</a>
         </p>
 
         {% if pad.rating %}
@@ -64,7 +64,7 @@
             <span class="inline-block text-xs bg-cyan-50 text-cyan-700 px-2 py-0.5 rounded-full border border-cyan-200 mb-3">{{ pad.type }}</span>
             {% endif %}
 
-            <a href="/pad/{{ pad.slug }}.html"
+            <a href="/pad/{{ pad.slug }}"
                class="block text-center text-sm font-semibold text-white bg-cyan-600 hover:bg-cyan-700 py-2 px-4 rounded-lg transition-colors">
                 View Details
             </a>

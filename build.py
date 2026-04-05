@@ -441,7 +441,7 @@ def build_category_pages(env, pads):
             category=category,
             pads=category_pads,
             state_list=state_list,
-            page_title=f"{category['name']} Splash Pads - {config.SITE_NAME}",
+            page_title=f"{category.get('seo_title') or category['name'] + ' Splash Pads'} - {config.SITE_NAME}",
             meta_description=category["intro"][:155],
             request_path=f"/category/{category['slug']}",
         )
@@ -514,7 +514,7 @@ def build_guide_page(env, pads):
                 "snack bars.\n\n"
                 "**When free makes sense:** Quick weekday outings, toddler play dates, budget-friendly summer fun.\n\n"
                 "**When paid is worth it:** Full-day excursions, birthday parties, older kids who want bigger thrills.\n\n"
-                "Use our [Free Admission](/category/free-admission.html) filter to browse all no-cost options near you."
+                "Use our [Free Admission](/category/free-admission) filter to browse all no-cost options near you."
             ),
         },
         {
@@ -527,7 +527,7 @@ def build_guide_page(env, pads):
                 "buckets designed for school-age kids.\n\n"
                 "**What to look for by age:**\n\n"
                 "- **Babies & Toddlers (0–3):** Look for zero-depth areas with low-pressure spray features and "
-                "soft, non-slip surfaces. Check our [Best for Toddlers](/category/toddlers.html) listings.\n"
+                "soft, non-slip surfaces. Check our [Best for Toddlers](/category/toddlers) listings.\n"
                 "- **Preschoolers (3–5):** Interactive features like spray tunnels, animal-shaped sprayers, and "
                 "small dump buckets keep this age group engaged.\n"
                 "- **School-Age Kids (6–12):** Water cannons, tipping buckets, and multi-level spray structures "
@@ -545,12 +545,12 @@ def build_guide_page(env, pads):
                 "The splash pad itself might be great — but the experience depends just as much on what's around it. "
                 "Before you go, check for these amenities:\n\n"
                 "- **Shade structures** — Essential for hot summer days. Without shade, surfaces heat up and young "
-                "skin burns fast. Browse our [Splash Pads with Shade](/category/with-shade.html) listings.\n"
+                "skin burns fast. Browse our [Splash Pads with Shade](/category/with-shade) listings.\n"
                 "- **Restrooms** — Especially important with young children. Check our "
-                "[With Restrooms](/category/with-restrooms.html) filter.\n"
+                "[With Restrooms](/category/with-restrooms) filter.\n"
                 "- **Parking** — Some urban splash pads rely on street parking; suburban ones usually have lots.\n"
                 "- **Picnic areas** — Pack a lunch and make it a full outing. Filter by "
-                "[Picnic Areas](/category/with-picnic-areas.html).\n"
+                "[Picnic Areas](/category/with-picnic-areas).\n"
                 "- **Nearby food** — Snack bars, food trucks, or restaurants within walking distance.\n"
                 "- **Adult seating** — Benches, chairs, or grassy areas where parents can sit while supervising.\n"
                 "- **Playground nearby** — Some parks combine splash pads with traditional playgrounds for dry play options."
@@ -592,7 +592,7 @@ def build_guide_page(env, pads):
                 "- Adjustable or gentle spray settings\n"
                 "- Quieter water flow features (bubblers, gentle arches)\n"
                 "- Off-peak hours with fewer crowds\n\n"
-                "Filter by [Accessible Splash Pads](/category/accessible.html) on our directory to find "
+                "Filter by [Accessible Splash Pads](/category/accessible) on our directory to find "
                 "options near you."
             ),
         },
@@ -602,14 +602,14 @@ def build_guide_page(env, pads):
             "title": "Seasonal Timing",
             "content": (
                 "Splash pad seasons vary dramatically by region:\n\n"
-                "- **Southern states** ([Texas](/state/texas.html), [Florida](/state/florida.html), "
-                "[Arizona](/state/arizona.html)): Many open as early as March and run through October — "
+                "- **Southern states** ([Texas](/state/texas), [Florida](/state/florida), "
+                "[Arizona](/state/arizona)): Many open as early as March and run through October — "
                 "some operate year-round.\n"
-                "- **Midwest & Mid-Atlantic** ([Illinois](/state/illinois.html), [Ohio](/state/ohio.html), "
-                "[Pennsylvania](/state/pennsylvania.html)): Typically Memorial Day through Labor Day "
+                "- **Midwest & Mid-Atlantic** ([Illinois](/state/illinois), [Ohio](/state/ohio), "
+                "[Pennsylvania](/state/pennsylvania)): Typically Memorial Day through Labor Day "
                 "(late May – early September).\n"
-                "- **Northern states** ([Minnesota](/state/minnesota.html), [Michigan](/state/michigan.html), "
-                "[New York](/state/new-york.html)): Shorter seasons, often mid-June through August.\n\n"
+                "- **Northern states** ([Minnesota](/state/minnesota), [Michigan](/state/michigan), "
+                "[New York](/state/new-york)): Shorter seasons, often mid-June through August.\n\n"
                 "**Best times to visit:**\n\n"
                 "- **Weekday mornings** are typically the least crowded.\n"
                 "- **Avoid 12–3pm** on the hottest days — surfaces are scorching and UV exposure peaks.\n"

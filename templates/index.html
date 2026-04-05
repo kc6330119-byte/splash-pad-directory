@@ -88,7 +88,7 @@
         <div class="mt-6 flex flex-wrap justify-center gap-2">
             <span class="text-cyan-200 text-sm self-center">Quick browse:</span>
             {% for cat in categories[:4] %}
-            <a href="/category/{{ cat.slug }}.html"
+            <a href="/category/{{ cat.slug }}"
                class="bg-white/20 hover:bg-white/30 text-white text-sm px-3 py-1 rounded-full transition-colors border border-white/20">
                 {{ cat.icon }} {{ cat.name }}
             </a>
@@ -151,7 +151,7 @@
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
             {% for state in us_states %}
             {% set count = state_counts.get(state.slug, 0) %}
-            <a href="/state/{{ state.slug }}.html"
+            <a href="/state/{{ state.slug }}"
                class="flex items-center justify-between bg-white border border-gray-200 hover:border-cyan-400 hover:shadow-sm rounded-lg px-3 py-2.5 transition-all group">
                 <span class="font-medium text-sm text-gray-800 group-hover:text-cyan-700">{{ state.name }}</span>
                 {% if count > 0 %}
@@ -175,7 +175,7 @@
 
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
             {% for cat in categories %}
-            <a href="/category/{{ cat.slug }}.html"
+            <a href="/category/{{ cat.slug }}"
                class="bg-cyan-50 hover:bg-cyan-100 border border-cyan-100 hover:border-cyan-300 rounded-xl p-5 text-center transition-all group">
                 <div class="text-3xl mb-2">{{ cat.icon }}</div>
                 <h3 class="font-semibold text-sm text-gray-900 group-hover:text-cyan-700 mb-1">{{ cat.name }}</h3>
@@ -218,12 +218,12 @@
                 <h2 class="text-2xl font-bold text-gray-900">From the Blog</h2>
                 <p class="text-gray-500 text-sm mt-1">Tips and guides for splash pad adventures</p>
             </div>
-            <a href="/blog.html" class="text-sm text-cyan-600 hover:text-cyan-700 font-medium hidden sm:block">View all posts →</a>
+            <a href="/blog" class="text-sm text-cyan-600 hover:text-cyan-700 font-medium hidden sm:block">View all posts →</a>
         </div>
 
         {% if featured_post %}
         <!-- Featured Post Hero Card -->
-        <a href="/blog/{{ featured_post.slug }}.html"
+        <a href="/blog/{{ featured_post.slug }}"
            class="group block bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-md transition-shadow mb-8">
             <div class="md:flex">
                 <div class="md:w-2/5 h-56 md:h-64 bg-cyan-50 overflow-hidden flex-shrink-0">
@@ -266,7 +266,7 @@
         {% if recent_posts %}
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             {% for post in recent_posts %}
-            <a href="/blog/{{ post.slug }}.html"
+            <a href="/blog/{{ post.slug }}"
                class="listing-card bg-white rounded-xl border border-gray-100 overflow-hidden flex flex-col group">
                 <div class="h-44 bg-cyan-50 overflow-hidden flex-shrink-0">
                     {% if post.featured_image %}
@@ -304,13 +304,13 @@
                 <h3 class="font-bold text-gray-900 text-sm mb-1">How to Choose a Splash Pad</h3>
                 <p class="text-xs text-gray-500">Free vs. paid, age suitability, amenities, safety, and a printable checklist for families.</p>
             </div>
-            <a href="/splash-pad-guide.html" class="px-5 py-2 bg-cyan-600 text-white text-sm font-semibold rounded-lg hover:bg-cyan-700 transition-colors whitespace-nowrap flex-shrink-0">
+            <a href="/splash-pad-guide" class="px-5 py-2 bg-cyan-600 text-white text-sm font-semibold rounded-lg hover:bg-cyan-700 transition-colors whitespace-nowrap flex-shrink-0">
                 Read the Guide &rarr;
             </a>
         </div>
 
         <div class="text-center mt-8 sm:hidden">
-            <a href="/blog.html" class="text-sm text-cyan-600 hover:text-cyan-700 font-medium">View all posts →</a>
+            <a href="/blog" class="text-sm text-cyan-600 hover:text-cyan-700 font-medium">View all posts →</a>
         </div>
     </div>
 </section>
@@ -348,7 +348,7 @@
                     </svg>
                 </button>
                 <div class="faq-answer hidden px-6 pb-5 text-gray-600 leading-relaxed text-sm">
-                    Many splash pads are completely free, especially those operated by city parks and recreation departments. Some privately operated splash pads or those inside water parks charge an admission fee. Use our <a href="/category/free-admission.html" class="text-cyan-600 hover:underline">Free Admission</a> filter to find splash pads near you with no cost to enter.
+                    Many splash pads are completely free, especially those operated by city parks and recreation departments. Some privately operated splash pads or those inside water parks charge an admission fee. Use our <a href="/category/free-admission" class="text-cyan-600 hover:underline">Free Admission</a> filter to find splash pads near you with no cost to enter.
                 </div>
             </div>
 
@@ -374,7 +374,7 @@
                     </svg>
                 </button>
                 <div class="faq-answer hidden px-6 pb-5 text-gray-600 leading-relaxed text-sm">
-                    Yes — splash pads are one of the safest water play options for toddlers and young children because there is no standing water to fall into or drown in. The ground-level water features are low-pressure and designed for kids of all ages. That said, adult supervision is always required. Swim diapers are recommended for infants. Browse our <a href="/category/toddlers.html" class="text-cyan-600 hover:underline">Best for Toddlers</a> listings for the most toddler-friendly options.
+                    Yes — splash pads are one of the safest water play options for toddlers and young children because there is no standing water to fall into or drown in. The ground-level water features are low-pressure and designed for kids of all ages. That said, adult supervision is always required. Swim diapers are recommended for infants. Browse our <a href="/category/toddlers" class="text-cyan-600 hover:underline">Best for Toddlers</a> listings for the most toddler-friendly options.
                 </div>
             </div>
 
@@ -411,7 +411,7 @@
 <script>
 function goToState() {
     const slug = document.getElementById('state-select').value;
-    if (slug) window.location.href = '/state/' + slug + '.html';
+    if (slug) window.location.href = '/state/' + slug;
 }
 // Also navigate on change for quick selection
 document.getElementById('state-select').addEventListener('change', function() {

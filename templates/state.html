@@ -113,7 +113,7 @@
             We're working on adding splash pads in {{ state.name }}. Know of one?
             Help us grow the directory!
         </p>
-        <a href="/contact.html#submit"
+        <a href="/contact#submit"
            class="inline-block px-6 py-3 bg-cyan-600 text-white font-semibold rounded-lg hover:bg-cyan-700 transition-colors">
             Submit a Splash Pad
         </a>
@@ -129,7 +129,7 @@
         <div class="flex flex-wrap gap-2">
             {% for s in us_states %}
             {% if s.slug != state.slug %}
-            <a href="/state/{{ s.slug }}.html"
+            <a href="/state/{{ s.slug }}"
                class="text-sm px-3 py-1.5 bg-white border border-gray-200 hover:border-cyan-400 hover:text-cyan-700 rounded-lg transition-colors text-gray-700 font-medium">
                 {{ s.name }}
             </a>

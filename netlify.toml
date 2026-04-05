@@ -27,6 +27,63 @@
   to = "/state/ohio"
   status = 301
 
+# --- 301 redirects: .html URLs → extensionless canonical URLs ---
+
+[[redirects]]
+  from = "/pad/*.html"
+  to = "/pad/:splat"
+  status = 301
+
+[[redirects]]
+  from = "/state/*.html"
+  to = "/state/:splat"
+  status = 301
+
+[[redirects]]
+  from = "/category/*.html"
+  to = "/category/:splat"
+  status = 301
+
+[[redirects]]
+  from = "/blog/*.html"
+  to = "/blog/:splat"
+  status = 301
+
+[[redirects]]
+  from = "/contact.html"
+  to = "/contact"
+  status = 301
+
+[[redirects]]
+  from = "/about.html"
+  to = "/about"
+  status = 301
+
+[[redirects]]
+  from = "/privacy.html"
+  to = "/privacy"
+  status = 301
+
+[[redirects]]
+  from = "/terms.html"
+  to = "/terms"
+  status = 301
+
+[[redirects]]
+  from = "/submit.html"
+  to = "/submit"
+  status = 301
+
+[[redirects]]
+  from = "/blog.html"
+  to = "/blog"
+  status = 301
+
+[[redirects]]
+  from = "/splash-pad-guide.html"
+  to = "/splash-pad-guide"
+  status = 301
+
 # --- Clean URL rewrites (serve .html files at extensionless paths) ---
 
 [[redirects]]
@@ -49,7 +106,7 @@
   to = "/blog/:splat.html"
   status = 200
 
-# --- Pretty URL redirects for static pages ---
+# --- Pretty URL rewrites for static pages ---
 
 [[redirects]]
   from = "/contact"
@@ -79,6 +136,11 @@
 [[redirects]]
   from = "/blog"
   to = "/blog.html"
+  status = 200
+
+[[redirects]]
+  from = "/splash-pad-guide"
+  to = "/splash-pad-guide.html"
   status = 200
 
 [[redirects]]

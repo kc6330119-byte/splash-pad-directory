@@ -1,7 +1,7 @@
 <!-- Compact pad list item — used on state pages with 50+ listings to reduce HTML size for crawl efficiency -->
 <div class="flex items-center justify-between py-2.5 border-b border-gray-100 hover:bg-gray-50 group" data-admission="{{ pad.admission }}" data-state="{{ pad.state }}">
     <div class="min-w-0 flex-1">
-        <a href="/pad/{{ pad.slug }}.html"
+        <a href="/pad/{{ pad.slug }}"
            class="font-medium text-gray-900 hover:text-cyan-600 transition-colors text-sm truncate block">
             {{ pad.name }}
         </a>
@@ -19,7 +19,7 @@
         {% if pad.rating %}
         <span class="text-xs text-gray-500">★ {{ pad.rating }}</span>
         {% endif %}
-        <a href="/pad/{{ pad.slug }}.html"
+        <a href="/pad/{{ pad.slug }}"
            class="text-xs text-cyan-600 hover:text-cyan-700 font-medium opacity-0 group-hover:opacity-100 transition-opacity">
             View →
         </a>
