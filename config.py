@@ -272,6 +272,122 @@ PAD_NOINDEX_SLUGS = {
 # City pages — keyed by state slug, each city entry drives a /city/<slug> page.
 # Add new states here as city-level content is created.
 CITY_PAGES = {
+    "arizona": [
+        {
+            "name": "Phoenix",
+            "slug": "phoenix-arizona",
+            "state": "Arizona",
+            "state_slug": "arizona",
+            "meta_description": "Find splash pads in Phoenix, AZ — free spray parks and water play areas across the Valley of the Sun. Family-friendly aquatic facilities updated for 2026.",
+            "description": (
+                "Phoenix operates one of the most extensive free splash pad networks in the country, "
+                "a direct response to a climate where summer highs routinely reach 110°F and outdoor "
+                "water play becomes a genuine necessity for families. The City of Phoenix Parks and "
+                "Recreation department maintains splash pads and spray features at neighborhood parks "
+                "across the metro, offering free, accessible water play without a reservation or "
+                "admission fee. Many locations are equipped with shade sails and covered seating — "
+                "a design standard in the Valley of the Sun that acknowledges sun exposure is as "
+                "much a concern as heat. The season in Phoenix is unusually long: many facilities "
+                "open as early as March and run through October, with the heaviest use concentrated "
+                "in the brutal stretch from June through August. Morning visits before 10 a.m. are "
+                "strongly recommended during peak summer — the heat index climbs quickly, and earlier "
+                "visits are significantly more comfortable. Phoenix's size means splash pads are "
+                "distributed across the city, from Central Phoenix neighborhoods to the far west and "
+                "south sides. Bring water, apply sunscreen before arriving, and check Phoenix Parks "
+                "and Recreation for current hours and any seasonal closures before your visit."
+            ),
+            "faq": [
+                {
+                    "q": "Are Phoenix splash pads free?",
+                    "a": "Yes, Phoenix city-operated splash pads are free and open to the public during park hours. No admission fee is required at most neighborhood splash pad locations across the metro.",
+                },
+                {
+                    "q": "When do Phoenix splash pads open for the season?",
+                    "a": "Many Phoenix splash pads open as early as March and operate through October, taking advantage of the city's extended warm season. Peak usage runs from May through September. Check Phoenix Parks and Recreation for specific location schedules.",
+                },
+                {
+                    "q": "What is the best time to visit a Phoenix splash pad in summer?",
+                    "a": "Morning visits before 10 a.m. are strongly recommended during June, July, and August when temperatures can exceed 110°F by midday. Bring water, sunscreen, and shade gear — many Phoenix splash pads include shade sails but the sun is intense year-round.",
+                },
+            ],
+        },
+        {
+            "name": "Scottsdale",
+            "slug": "scottsdale-arizona",
+            "state": "Arizona",
+            "state_slug": "arizona",
+            "meta_description": "Find splash pads in Scottsdale, AZ — free spray parks and water play in the East Valley. Family-friendly aquatic facilities updated for 2026.",
+            "description": (
+                "Scottsdale's parks system has invested in modern spray parks that reflect both the "
+                "city's design sensibility and the practical demands of desert living. Located in the "
+                "eastern Valley of the Sun, Scottsdale operates splash pad features at community "
+                "parks throughout the city — from South Scottsdale neighborhoods to the newer "
+                "developments in North Scottsdale near McDowell Mountain and Pinnacle Peak. Most "
+                "city-operated splash pads are free to use during regular park hours. Scottsdale's "
+                "facilities typically include shade structures, which are standard in the Arizona "
+                "desert and make a real difference on days when temperatures push past 105°F. The "
+                "extended desert season means Scottsdale splash pads can be active from spring "
+                "through fall — a longer window than nearly any other city in the country. The city's "
+                "proximity to tourist areas, Old Town, and the resort corridor makes it easy for "
+                "visitors and locals alike to combine a splash pad stop with other activities. "
+                "Morning hours are the most comfortable during peak summer. Check Scottsdale Parks "
+                "and Recreation for current locations, hours, and seasonal availability."
+            ),
+            "faq": [
+                {
+                    "q": "Are Scottsdale splash pads free?",
+                    "a": "Most Scottsdale city-operated splash pads are free and open to the public during regular park hours. No admission is required at neighborhood spray park locations.",
+                },
+                {
+                    "q": "When are Scottsdale splash pads open?",
+                    "a": "Scottsdale splash pads typically operate from spring through fall, with many locations active from March through October. Check Scottsdale Parks and Recreation for specific seasonal dates and hours by location.",
+                },
+                {
+                    "q": "Do Scottsdale splash pads have shade?",
+                    "a": "Yes, most Scottsdale splash pad facilities include shade sails or covered seating areas — a standard design feature in Arizona that helps manage the intense desert sun. Sunscreen and water are still strongly recommended regardless of available shade.",
+                },
+            ],
+        },
+        {
+            "name": "Tempe",
+            "slug": "tempe-arizona",
+            "state": "Arizona",
+            "state_slug": "arizona",
+            "meta_description": "Find splash pads in Tempe, AZ — free spray parks and water play near ASU and Tempe Town Lake. Family aquatic facilities updated for 2026.",
+            "description": (
+                "Tempe sits at the center of the Phoenix metro, bordered by Phoenix to the west, "
+                "Scottsdale to the north, and Chandler to the south — and its compact, walkable "
+                "layout makes splash pad access straightforward for the city's mix of families, "
+                "students, and residents. The City of Tempe Parks and Recreation operates splash "
+                "features at neighborhood parks throughout the city, providing free water play "
+                "during the long Arizona warm season. Tempe Town Lake, the city's landmark "
+                "reservoir along the Salt River, anchors a recreation corridor that includes "
+                "parks and green space where families spend time on the waterfront. The city's "
+                "urban density means splash pads are accessible from most Tempe neighborhoods "
+                "without a long drive. Tempe's summers match the broader Phoenix metro for "
+                "intensity — June through August temperatures regularly exceed 105°F — making "
+                "water play essential rather than optional. Most city-operated splash pads are "
+                "free and open to the public during park hours. Shade structures are typically "
+                "included at Arizona splash pad facilities. Morning visits are best during "
+                "peak summer. Check Tempe Parks and Recreation for current schedules, locations, "
+                "and any seasonal closures before visiting."
+            ),
+            "faq": [
+                {
+                    "q": "Are Tempe splash pads free?",
+                    "a": "Yes, Tempe city-operated splash pads are free and open to the public during regular park hours. No admission fee is required at most spray park locations.",
+                },
+                {
+                    "q": "When do Tempe splash pads open for the season?",
+                    "a": "Tempe splash pads typically operate through the extended Arizona warm season, often from spring into fall. Check Tempe Parks and Recreation for specific dates and hours at each location.",
+                },
+                {
+                    "q": "Are there splash pads near Tempe Town Lake?",
+                    "a": "Tempe Town Lake and the surrounding Salt River recreation corridor include parks and green spaces that serve as recreational destinations. Check with Tempe Parks and Recreation for current water play locations near the lake and throughout the city.",
+                },
+            ],
+        },
+    ],
     "tennessee": [
         {
             "name": "Nashville",
