@@ -116,6 +116,8 @@ def get_sample_data():
             "review_count": 128,
             "faq": [],
             "last_verified": "",
+            "latitude": 36.1627,
+            "longitude": -86.7816,
         },
         {
             "name": "Riverside Water Park",
@@ -144,6 +146,8 @@ def get_sample_data():
             "review_count": 89,
             "faq": [],
             "last_verified": "",
+            "latitude": 30.2672,
+            "longitude": -97.7431,
         },
         {
             "name": "Maple Grove Spray Park",
@@ -172,6 +176,8 @@ def get_sample_data():
             "review_count": 56,
             "faq": [],
             "last_verified": "",
+            "latitude": 41.8781,
+            "longitude": -87.6298,
         },
     ]
 
