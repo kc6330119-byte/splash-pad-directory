@@ -28,61 +28,80 @@
   status = 301
 
 # --- 301 redirects: .html URLs → extensionless canonical URLs ---
+# force = true is required because Netlify otherwise serves the .html file
+# directly (bypassing redirect rules) when the file physically exists in dist.
 
 [[redirects]]
   from = "/pad/*.html"
   to = "/pad/:splat"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/state/*.html"
   to = "/state/:splat"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/category/*.html"
   to = "/category/:splat"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/blog/*.html"
   to = "/blog/:splat"
   status = 301
+  force = true
+
+[[redirects]]
+  from = "/city/*.html"
+  to = "/city/:splat"
+  status = 301
+  force = true
 
 [[redirects]]
   from = "/contact.html"
   to = "/contact"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/about.html"
   to = "/about"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/privacy.html"
   to = "/privacy"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/terms.html"
   to = "/terms"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/submit.html"
   to = "/submit"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/blog.html"
   to = "/blog"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/splash-pad-guide.html"
   to = "/splash-pad-guide"
   status = 301
+  force = true
 
 # --- Clean URL rewrites (serve .html files at extensionless paths) ---
 
@@ -105,11 +124,6 @@
   from = "/blog/*"
   to = "/blog/:splat.html"
   status = 200
-
-[[redirects]]
-  from = "/city/*.html"
-  to = "/city/:splat"
-  status = 301
 
 [[redirects]]
   from = "/city/*"
