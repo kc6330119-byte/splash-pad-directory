@@ -238,7 +238,7 @@ MAILCHIMP_FORM_URL = os.getenv(
 
 # SEO Settings
 DEFAULT_META_TITLE = "Best Splash Pads Near Me — Find Free & Family-Friendly Water Play"
-DEFAULT_META_DESCRIPTION = "Find the best splash pads near you — free, family-friendly water play for all ages. Search by city or state to discover spray parks, zero-depth pools, and interactive fountains."
+DEFAULT_META_DESCRIPTION = "Find the best splash pads near you — free, family-friendly water play for all ages. Search by city or state to discover spray parks and water play areas."
 
 # Blog post metadata overrides (keyed by slug).
 # Use these to fix titles/descriptions for high-impression zero-click pages

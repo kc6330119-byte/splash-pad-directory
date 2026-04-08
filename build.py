@@ -543,7 +543,7 @@ def build_pad_pages(env, pads):
             pad=pad,
             faq=faq,
             related_pads=related,
-            page_title=f"{pad['name']} - {pad['city']}, {pad['state']} - {config.SITE_NAME}",
+            page_title=f"{pad['name']} - {pad['city']}, {pad['state']}",
             meta_description=pad.get("description", "")[:160],
             request_path=f"/pad/{pad['slug']}",
             noindex=thin,
@@ -810,7 +810,7 @@ def build_guide_page(env, pads):
         guide_checklist=guide_checklist,
         total_count=len(pads),
         page_title=f"{guide_title} - {config.SITE_NAME}",
-        meta_description="A parent's guide to choosing the right splash pad. Covers free vs. paid, age suitability, amenities, safety, accessibility, seasonal timing, and a printable decision checklist.",
+        meta_description="A parent's guide to choosing the right splash pad. Covers free vs. paid, age suitability, amenities, safety, and what to pack.",
         request_path="/splash-pad-guide",
     )
 
