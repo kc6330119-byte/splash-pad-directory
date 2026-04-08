@@ -890,6 +890,59 @@ Sitemap: {config.SITE_URL}/sitemap.xml
     print("Built: robots.txt")
 
 
+def build_redirects(pads, posts):
+    """Generate _redirects file with explicit 301 rules for .html → extensionless URLs.
+
+    Netlify's force=true does not reliably fire on wildcard/splat redirect patterns
+    when the .html file physically exists in dist/. Explicit per-page rules in a
+    _redirects file work consistently and resolve Google Search Console
+    'Duplicate, Google chose different canonical than user' errors.
+    """
+    rules = []
+
+    # State pages
+    grouped = group_pads_by_state(pads)
+    for state in config.US_STATES:
+        state_pads = grouped.get(state["slug"], [])
+        if state_pads:
+            rules.append(f"/state/{state['slug']}.html  /state/{state['slug']}  301!")
+
+    # City pages
+    for state_slug, cities in config.CITY_PAGES.items():
+        for city in cities:
+            rules.append(f"/city/{city['slug']}.html  /city/{city['slug']}  301!")
+
+    # Pad pages
+    for pad in pads:
+        rules.append(f"/pad/{pad['slug']}.html  /pad/{pad['slug']}  301!")
+
+    # Category pages
+    for category in config.CATEGORIES:
+        rules.append(f"/category/{category['slug']}.html  /category/{category['slug']}  301!")
+
+    # Blog post pages
+    for post in posts:
+        if post.get("slug"):
+            rules.append(f"/blog/{post['slug']}.html  /blog/{post['slug']}  301!")
+
+    # Blog listing page
+    rules.append("/blog.html  /blog  301!")
+
+    # Guide page
+    rules.append("/splash-pad-guide.html  /splash-pad-guide  301!")
+
+    # Static pages (about, contact, etc.) — already work via exact-match in
+    # netlify.toml, but include here for completeness and as a safety net
+    for page in STATIC_PAGES:
+        if page["output"].endswith(".html") and page["output"] != "success/index.html":
+            clean = page["output"].replace(".html", "")
+            rules.append(f"/{clean}.html  /{clean}  301!")
+
+    output_path = config.OUTPUT_DIR / "_redirects"
+    output_path.write_text("\n".join(rules) + "\n")
+    print(f"Built: _redirects ({len(rules)} explicit 301 rules)")
+
+
 def copy_ads_txt():
     """Copy ads.txt to output directory."""
     ads_txt_path = Path("ads.txt")
@@ -1068,6 +1121,7 @@ def main():
     print("\nBuilding SEO files...")
     build_sitemap(pads, posts)
     build_robots()
+    build_redirects(pads, posts)
     copy_ads_txt()
     build_search_index(pads)
 
