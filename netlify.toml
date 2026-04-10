@@ -5,6 +5,11 @@
 [build.environment]
   PYTHON_VERSION = "3.9"
 
+# Geo-blocking: block non-target countries while allowing search engine crawlers
+[[edge_functions]]
+  function = "geo-block"
+  path = "/*"
+
 # --- 301 Redirects for broken/removed pages ---
 
 [[redirects]]
