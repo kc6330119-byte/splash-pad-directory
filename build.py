@@ -542,43 +542,135 @@ def build_city_pages(env, pads):
             print(f"Built: city/{city['slug']}.html ({len(city_pads)} pads)")
 
 
-def is_thin_pad(pad):
-    """Check if a pad page has too little content to be indexed.
+_ARTIFACT_RE = re.compile("|".join(config.PAD_ARTIFACT_PATTERNS), re.I)
 
-    A pad is thin only if it lacks a meaningful description AND has fewer than
-    2 other content signals.  A good description (>=100 chars) on its own is
-    enough to merit indexing.
+
+def _load_protected_pad_slugs():
+    """Read pad slugs that earned GSC traffic in the prior 28-day window.
+
+    These slugs are excluded from auto-noindex actions; instead, candidate
+    matches are written to dist/REVIEW_QUEUE.txt for manual triage. Re-derive
+    the JSON when the next AdSense decision lands (event-based trigger, not
+    calendar). Returns an empty set if the manifest is missing — fail-safe so
+    a missing file never silently expands the noindex set.
     """
+    path = config.BASE_DIR / "protected_urls.json"
+    if not path.exists():
+        print("WARNING: protected_urls.json missing — proceeding with empty protected set")
+        return set()
+    try:
+        data = json.loads(path.read_text())
+        return set(data.get("pad_slugs", []))
+    except (json.JSONDecodeError, OSError) as e:
+        print(f"WARNING: could not load protected_urls.json ({e}) — empty protected set")
+        return set()
+
+
+def evaluate_pad(pad, protected_slugs):
+    """Decide whether a pad should be indexed and surface the reason.
+
+    Returns one of:
+      ("ok", None)                    — ship indexable
+      ("noindex_phrase", phrase)      — AI artifact in description; auto-noindex
+      ("noindex_type", type_val)      — venue type not in whitelist; auto-noindex
+      ("noindex_thin", reason)        — description too short / placeholder
+      ("noindex_manual", reason)      — listed in PAD_NOINDEX_SLUGS
+      ("queued_phrase", phrase)       — would noindex by phrase, but slug is on
+                                        the protected list; route to review queue
+      ("queued_type", type_val)       — same, for type-whitelist failure
+
+    The protected guardrail intentionally only catches *new* noindex actions
+    (phrase / type / thin). Manual entries in PAD_NOINDEX_SLUGS bypass the
+    guardrail because they were chosen with traffic data already in mind.
+    """
+    slug = pad.get("slug", "")
+
+    if slug in config.PAD_NOINDEX_SLUGS:
+        return ("noindex_manual", config.PAD_NOINDEX_SLUGS[slug])
+
     desc = str(pad.get("description", "")).strip()
-    desc_ok = len(desc) >= 100 and desc.lower() != "nan"
-    hours_ok = bool(str(pad.get("hours", "")).strip()) and str(pad.get("hours", "")).strip().lower() != "nan"
-    features = pad.get("features", [])
-    features_ok = isinstance(features, list) and len(features) > 0
+    desc_lc = desc.lower()
+    is_protected = slug in protected_slugs
+
+    # 1. Artifact phrases — strongest signal, cannot ship even if "protected".
+    #    But per Kevin's rule: branded-traffic pages with bad text get queued
+    #    for content-fix in Airtable rather than blanket auto-noindexed here.
+    artifact_match = _ARTIFACT_RE.search(desc)
+    if artifact_match:
+        return ("queued_phrase" if is_protected else "noindex_phrase", artifact_match.group(0))
+
+    # 2. Description too thin or placeholder.
+    if not desc or desc_lc in ("nan", ""):
+        if is_protected:
+            return ("queued_type", "(empty/nan description)")
+        return ("noindex_thin", "(empty/nan description)")
+    if len(desc) < config.MIN_DESCRIPTION_LENGTH:
+        if is_protected:
+            return ("queued_type", f"description {len(desc)} chars (< {config.MIN_DESCRIPTION_LENGTH})")
+        return ("noindex_thin", f"description {len(desc)} chars (< {config.MIN_DESCRIPTION_LENGTH})")
+
+    # 3. Venue-type whitelist.
     type_val = str(pad.get("type", "")).strip()
-    type_ok = bool(type_val) and type_val.lower() not in ("nan", "splash pad")
+    if type_val not in config.PAD_TYPE_WHITELIST:
+        return ("queued_type" if is_protected else "noindex_type", type_val or "(empty type)")
 
-    # A substantive description alone is enough to index
-    if desc_ok:
-        return False
+    return ("ok", None)
 
-    content_signals = sum([hours_ok, features_ok, type_ok])
-    return content_signals <= 1
+
+def is_thin_pad(pad, protected_slugs=None):
+    """Backwards-compatible wrapper kept for any external callers.
+
+    Returns True if the pad should NOT be indexed. New code should call
+    evaluate_pad() directly to access the reason.
+    """
+    if protected_slugs is None:
+        protected_slugs = _load_protected_pad_slugs()
+    status, _ = evaluate_pad(pad, protected_slugs)
+    return status.startswith("noindex_")
 
 
 def build_pad_pages(env, pads):
-    """Build individual splash pad detail pages."""
+    """Build individual splash pad detail pages.
+
+    Each pad is evaluated against the AdSense-remediation gate:
+      - manual override (PAD_NOINDEX_SLUGS) — auto-noindex
+      - AI-artifact phrase in description — auto-noindex (or queue if protected)
+      - description too short / empty — auto-noindex (or queue if protected)
+      - venue type not in PAD_TYPE_WHITELIST — auto-noindex (or queue if protected)
+
+    Pages on the protected URL list (clicks > 0 OR impressions > 5 in the most
+    recent 28-day GSC window) are NEVER auto-noindexed by this gate; instead
+    they are written to dist/REVIEW_QUEUE.txt for manual review.
+    """
     template = env.get_template("pad.html")
-    noindex_count = 0
+    protected_slugs = _load_protected_pad_slugs()
+
+    counts = {
+        "ok": 0,
+        "noindex_manual": 0,
+        "noindex_phrase": 0,
+        "noindex_thin": 0,
+        "noindex_type": 0,
+        "queued_phrase": 0,
+        "queued_type": 0,
+    }
+    review_queue = []  # rows for REVIEW_QUEUE.txt
 
     for pad in pads:
-        # Related pads: same state, different pad
         related = [p for p in pads if p["slug"] != pad["slug"] and p.get("state_slug") == pad.get("state_slug")][:4]
 
-        thin = is_thin_pad(pad) or pad["slug"] in config.PAD_NOINDEX_SLUGS
-        if thin:
-            noindex_count += 1
+        status, reason = evaluate_pad(pad, protected_slugs)
+        counts[status] = counts.get(status, 0) + 1
+        is_noindex = status.startswith("noindex_")
+        if status.startswith("queued_"):
+            review_queue.append({
+                "slug": pad["slug"],
+                "name": pad.get("name", ""),
+                "type": pad.get("type", ""),
+                "status": status,
+                "reason": reason,
+            })
 
-        # Use custom FAQ from Airtable if present, otherwise auto-generate from pad data
         faq = pad.get("faq") or generate_pad_faq(pad)
 
         html = template.render(
@@ -588,13 +680,40 @@ def build_pad_pages(env, pads):
             page_title=f"{pad['name']} - {pad['city']}, {pad['state']}",
             meta_description=pad.get("description", "")[:160],
             request_path=f"/pad/{pad['slug']}",
-            noindex=thin,
+            noindex=is_noindex,
         )
 
         output_path = config.OUTPUT_DIR / "pad" / f"{pad['slug']}.html"
         output_path.write_text(html)
 
-    print(f"Built: {len(pads)} pad pages ({noindex_count} noindexed as thin content)")
+    total_noindex = sum(v for k, v in counts.items() if k.startswith("noindex_"))
+    print(
+        f"Built: {len(pads)} pad pages — "
+        f"{counts['ok']} indexable, "
+        f"{total_noindex} noindexed "
+        f"(manual={counts['noindex_manual']}, phrase={counts['noindex_phrase']}, "
+        f"thin={counts['noindex_thin']}, type={counts['noindex_type']}), "
+        f"{counts['queued_phrase'] + counts['queued_type']} queued for review"
+    )
+
+    # Persist review queue so Kevin can read it after each build.
+    queue_path = config.OUTPUT_DIR / "REVIEW_QUEUE.txt"
+    with queue_path.open("w") as f:
+        f.write("# Pages flagged by AdSense remediation Batch 2 gate\n")
+        f.write(f"# Generated: {datetime.now().isoformat(timespec='seconds')}\n")
+        f.write("# These pads matched the artifact-phrase or venue-type filter,\n")
+        f.write("# but their slug is on the protected URL list (clicks > 0 OR\n")
+        f.write("# impressions > 5 in the prior 28 days). They were NOT auto-\n")
+        f.write("# noindexed; they remain indexable until you triage them.\n\n")
+        f.write(f"Total queued: {len(review_queue)}\n\n")
+        for row in sorted(review_queue, key=lambda r: (r["status"], r["slug"])):
+            f.write(
+                f"  [{row['status']}] /pad/{row['slug']}\n"
+                f"    name: {row['name']}\n"
+                f"    type: {row['type']}\n"
+                f"    reason: {row['reason']}\n\n"
+            )
+    print(f"Built: REVIEW_QUEUE.txt ({len(review_queue)} pads to triage)")
 
 
 def build_category_pages(env, pads):
@@ -901,8 +1020,13 @@ def build_sitemap(pads, posts):
         for city in cities:
             entries.append((f"{config.SITE_URL}/city/{city['slug']}", "0.8", today))
 
+    # Pad pages: include only pads that pass the indexability gate. Queued
+    # pages (matched the gate but on the protected URL list) stay in the
+    # sitemap because they are still indexable until manually triaged.
+    protected_slugs = _load_protected_pad_slugs()
     for pad in pads:
-        if not is_thin_pad(pad) and pad["slug"] not in config.PAD_NOINDEX_SLUGS:
+        status, _ = evaluate_pad(pad, protected_slugs)
+        if status == "ok" or status.startswith("queued_"):
             entries.append((f"{config.SITE_URL}/pad/{pad['slug']}", "0.6", today))
 
     for post in posts:

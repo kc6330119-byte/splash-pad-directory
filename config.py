@@ -225,6 +225,46 @@ CATEGORIES = [
      "intro": "Dedicated water parks go well beyond a basic splash pad — they offer water slides, wave pools, lazy rivers, and multi-level splash structures alongside traditional spray features. These are full-day destinations with amenities like locker rooms, concessions, cabana rentals, and lifeguard coverage. Whether it's a community-operated aquatic park or a resort-scale waterpark, these facilities deliver the most complete water play experience available."},
 ]
 
+# Pad-page indexability gate (AdSense remediation 2026-05-06).
+# A pad ships indexable only if its Type is in the whitelist AND its description
+# is free of AI-artifact phrases. Pages that fail are noindexed and excluded from
+# the sitemap. A protected-URL guardrail (loaded from protected_urls.json) routes
+# any GSC-trafficked URL to dist/REVIEW_QUEUE.txt instead of auto-noindexing.
+PAD_TYPE_WHITELIST = {
+    "Splash Pad",
+    "Water Park",
+    "Aquatic Center",
+    "Campground Water Park",
+    "Resort Water Park",
+    "Indoor Water Play",
+}
+
+# Phrases that, when present in a description, signal AI-refusal or "I don't have
+# the data" boilerplate that leaked through enrichment. Case-insensitive.
+PAD_ARTIFACT_PATTERNS = [
+    r"\bI can'?t write\b",
+    r"\bI cannot (?:write|create|generate|provide|describe|offer)\b",
+    r"\bI'?m unable\b",
+    r"\bI don'?t have specific\b",
+    r"\bI appreciate you providing\b",
+    r"\bfacility data appears incomplete\b",
+    r"\bcannot verify\b",
+    r"\bunable to verify\b",
+    r"\bdoes(?:n'?t| not) indicate\b",
+    r"\bas an AI\b",
+    r"\bI'?m sorry\b",
+    r"\bthe (?:provided|given) (?:information|data)\b",
+    r"\bbased on the limited\b",
+    r"\bthe listing information (?:is|provided is)\b",
+    r"\binformation provided is incomplete\b",
+    r"\bcan(?:not| ?n'?t) (?:provide|offer|describe)\b",
+]
+
+# Minimum description length, post-cleaning. Raised from 100 to 150 chars; pads
+# whose descriptions were mostly rating boilerplate are correctly thinner now.
+MIN_DESCRIPTION_LENGTH = 150
+
+
 # Google Analytics
 GA_MEASUREMENT_ID = os.getenv("GA_MEASUREMENT_ID", "")
 
