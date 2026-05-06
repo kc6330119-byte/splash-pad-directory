@@ -18,6 +18,10 @@ data/
 
 # AdSense planning docs (internal only)
 ADSENSE_RESUBMISSION_PLAN.md
+ADSENSE_REMEDIATION_*.md
+
+# Claude Code working tree
+.claude/
 
 # macOS
 .DS_Store

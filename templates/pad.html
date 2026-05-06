@@ -116,19 +116,6 @@
                     {% if pad.zip %} {{ pad.zip }}{% endif %}
                 </p>
 
-                {% if pad.rating %}
-                <div class="flex items-center gap-2 mt-3">
-                    <div class="flex text-yellow-400 text-lg">
-                        {% for i in range(5) %}
-                        {% if i < pad.rating|int %}★{% else %}☆{% endif %}
-                        {% endfor %}
-                    </div>
-                    <span class="font-semibold text-gray-700">{{ pad.rating }}</span>
-                    {% if pad.review_count %}
-                    <span class="text-gray-500 text-sm">({{ pad.review_count }} reviews)</span>
-                    {% endif %}
-                </div>
-                {% endif %}
             </div>
 
             <!-- Description -->
@@ -424,13 +411,6 @@
     {% endif %}
     {% if pad.google_maps_url %}
     "hasMap": {{ pad.google_maps_url | tojson }},
-    {% endif %}
-    {% if pad.rating and pad.review_count %}
-    "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": {{ pad.rating }},
-        "reviewCount": {{ pad.review_count }}
-    },
     {% endif %}
     {% if pad.hours %}
     "openingHours": {{ pad.hours | tojson }},

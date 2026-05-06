@@ -7,6 +7,7 @@ Falls back to sample data if Airtable is not configured.
 """
 import json
 import os
+import re
 import shutil
 from datetime import datetime
 from pathlib import Path
@@ -18,6 +19,42 @@ from markupsafe import Markup
 from slugify import slugify
 
 import config
+
+
+# Sentence patterns that present third-party (Google) ratings as first-party signal,
+# or that read as AI boilerplate. Stripped from descriptions at fetch time so the
+# rating claim never reaches the rendered page or the JSON-LD body.
+RATING_CLAIM_PATTERNS = [
+    re.compile(r"[^.]*?\bvisitors?\b[^.]*?\b\d+\.?\d*\s*stars?\b[^.]*\.", re.I),
+    re.compile(r"[^.]*?\b\d+\.?\d*\b[^.]*?\bGoogle\s+(?:rating|reviews?)\b[^.]*\.", re.I),
+    re.compile(r"[^.]*?\bGoogle\s+(?:rating|reviews?)\b[^.]*?\b\d+\.?\d*\b[^.]*\.", re.I),
+    re.compile(r"[^.]*?\bearned\s+(?:a|an)?\s*\d+\.?\d*[\s\-]?star\s+rating[^.]*\.", re.I),
+    re.compile(r"[^.]*?(?:with|holds?|carries|achieved)\s+(?:a|an)?\s*\d+\.?\d*[\s\-]?star\b[^.]*\.", re.I),
+    re.compile(r"[^.]*?\bstars?\s+based\s+on\s+\d[\d,]*\s+reviews?\b[^.]*\.", re.I),
+    re.compile(r"[^.]*?\b(?:reflecting|reflects)\s+the\s+positive\s+experiences[^.]*\.", re.I),
+    re.compile(r"[^.]*?\bconsistently\s+rate(?:d|s)?\b[^.]*\.", re.I),
+    re.compile(r"[^.]*?\bwell\s+regarded\s+by\s+the\s+local\s+community\b[^.]*\.", re.I),
+    re.compile(r"[^.]*?\bsuggest\s+families\s+consistently\s+enjoy[^.]*\.", re.I),
+]
+
+
+def clean_description(text):
+    """Strip rating-claim sentences and AI-boilerplate from a description.
+
+    The rating values themselves come from Google Places and were embedded in
+    descriptions during enrichment. Presenting them in body copy alongside
+    structured-data is a Google rating-snippet policy violation when no on-site
+    reviews exist. We strip whole sentences rather than substitute, so the
+    surrounding prose stays grammatical.
+    """
+    if not text:
+        return text
+    cleaned = text
+    for pattern in RATING_CLAIM_PATTERNS:
+        cleaned = pattern.sub("", cleaned)
+    # Collapse the double-spaces and orphaned spaces that strip-by-sentence leaves behind.
+    cleaned = re.sub(r"\s{2,}", " ", cleaned).strip()
+    return cleaned
 
 
 def generate_pad_faq(pad):
@@ -234,7 +271,7 @@ def fetch_from_airtable():
                 "_airtable_id": record.get("id", ""),
                 "name": fields.get("Name", ""),
                 "slug": slugify(fields.get("Name", "") + "-" + fields.get("City", "")),
-                "description": fields.get("Description", ""),
+                "description": clean_description(fields.get("Description", "")),
                 "address": fields.get("Address", ""),
                 "city": fields.get("City", ""),
                 "state": state_name,
@@ -355,6 +392,12 @@ def setup_output_directory():
     if config.STATIC_DIR.exists():
         shutil.copytree(config.STATIC_DIR, config.OUTPUT_DIR / "static")
 
+    # Serve /favicon.ico at the site root (browsers and crawlers request that
+    # path independently of any <link rel="icon"> tag).
+    favicon_src = config.STATIC_DIR / "favicon.ico"
+    if favicon_src.exists():
+        shutil.copy2(favicon_src, config.OUTPUT_DIR / "favicon.ico")
+
 
 def create_jinja_env():
     """Create Jinja2 environment with custom filters."""
@@ -384,7 +427,6 @@ def create_jinja_env():
     env.globals["us_states"] = config.US_STATES
     env.globals["current_year"] = datetime.now().year
     env.globals["ga_measurement_id"] = config.GA_MEASUREMENT_ID
-    env.globals["mailchimp_form_url"] = config.MAILCHIMP_FORM_URL
 
     return env
 
@@ -860,7 +902,7 @@ def build_sitemap(pads, posts):
             entries.append((f"{config.SITE_URL}/city/{city['slug']}", "0.8", today))
 
     for pad in pads:
-        if not is_thin_pad(pad):
+        if not is_thin_pad(pad) and pad["slug"] not in config.PAD_NOINDEX_SLUGS:
             entries.append((f"{config.SITE_URL}/pad/{pad['slug']}", "0.6", today))
 
     for post in posts:

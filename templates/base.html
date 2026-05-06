@@ -72,6 +72,7 @@
     <link rel="stylesheet" href="/static/css/custom.css">
 
     <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💧</text></svg>">
 
     <style>
@@ -196,86 +197,6 @@
             <p class="text-gray-400 text-xs">Advertisement</p>
         </div>
     </div>
-
-    <!-- Newsletter Signup -->
-    <section class="bg-gradient-to-r from-cyan-600 to-sky-700 text-white py-10">
-        <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="text-xl md:text-2xl font-bold mb-2">Stay in the Loop</h2>
-            <p class="text-cyan-100 mb-6 text-sm">Get splash pad tips, new listings, and seasonal guides delivered to your inbox.</p>
-            {% if mailchimp_form_url %}
-            <!-- MailChimp AJAX signup (JSONP, no page redirect) -->
-            <form id="mc-embedded-subscribe-form"
-                  data-mc-action="{{ mailchimp_form_url }}"
-                  class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto" novalidate>
-                <!-- MailChimp anti-bot honeypot (must stay hidden) -->
-                <div style="position:absolute;left:-5000px;" aria-hidden="true">
-                    <input type="text" name="b_21343a587fbb950d8b649ee6d_d901746875" tabindex="-1" value="">
-                </div>
-                <div id="nl-form-fields" class="flex flex-col sm:flex-row gap-3 w-full">
-                    <input type="email" id="mce-EMAIL" name="EMAIL" required placeholder="Your email address"
-                           class="flex-1 px-4 py-2.5 rounded-lg text-gray-900 text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-300">
-                    <button type="submit" id="mc-embedded-subscribe"
-                            class="px-6 py-2.5 bg-white text-cyan-700 font-semibold text-sm rounded-lg hover:bg-cyan-50 transition-colors whitespace-nowrap">
-                        Subscribe
-                    </button>
-                </div>
-                <p id="nl-success" class="hidden text-white font-medium mt-2"></p>
-                <p id="nl-error" class="hidden text-red-200 font-medium mt-2"></p>
-            </form>
-            <script>
-            (function () {
-                var form = document.getElementById('mc-embedded-subscribe-form');
-                if (!form) return;
-                form.addEventListener('submit', function (e) {
-                    e.preventDefault();
-                    var emailInput = document.getElementById('mce-EMAIL');
-                    var email = emailInput ? emailInput.value.trim() : '';
-                    if (!email) return;
-                    var actionUrl = form.dataset.mcAction;
-                    var jsonpUrl = actionUrl.replace('/post?', '/post-json?') +
-                        '&EMAIL=' + encodeURIComponent(email) +
-                        '&c=mcSubCallback_splashpad';
-                    window.mcSubCallback_splashpad = function (resp) {
-                        var fields = document.getElementById('nl-form-fields');
-                        var sucEl = document.getElementById('nl-success');
-                        var errEl = document.getElementById('nl-error');
-                        if (resp.result === 'success') {
-                            fields.classList.add('hidden');
-                            sucEl.textContent = "You\u2019re subscribed! We\u2019ll be in touch.";
-                            sucEl.classList.remove('hidden');
-                        } else {
-                            var msg = (resp.msg || 'Something went wrong. Please try again.').replace(/^\d+ - /, '');
-                            errEl.textContent = msg;
-                            errEl.classList.remove('hidden');
-                        }
-                        delete window.mcSubCallback_splashpad;
-                    };
-                    var script = document.createElement('script');
-                    script.src = jsonpUrl;
-                    document.body.appendChild(script);
-                });
-            })();
-            </script>
-            {% else %}
-            <!-- Fallback: Netlify form (active until MAILCHIMP_FORM_URL is configured) -->
-            <form name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto"
-                  onsubmit="event.preventDefault(); fetch('/', {method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'}, body:new URLSearchParams(new FormData(this)).toString()}).then(function(){document.getElementById('nl-success').classList.remove('hidden'); document.getElementById('nl-form-fields').classList.add('hidden');}).catch(function(){alert('Something went wrong. Please try again.')});">
-                <input type="hidden" name="form-name" value="newsletter">
-                <p class="hidden"><input name="bot-field"></p>
-                <div id="nl-form-fields" class="flex flex-col sm:flex-row gap-3 w-full">
-                    <input type="email" name="email" required placeholder="Your email address"
-                           class="flex-1 px-4 py-2.5 rounded-lg text-gray-900 text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-300">
-                    <button type="submit"
-                            class="px-6 py-2.5 bg-white text-cyan-700 font-semibold text-sm rounded-lg hover:bg-cyan-50 transition-colors whitespace-nowrap">
-                        Subscribe
-                    </button>
-                </div>
-                <p id="nl-success" class="hidden text-white font-medium">You're subscribed! We'll be in touch.</p>
-            </form>
-            {% endif %}
-            <p class="text-cyan-200 text-xs mt-4">No spam, ever. Unsubscribe anytime.</p>
-        </div>
-    </section>
 
     <!-- Footer -->
     <footer class="bg-gray-900 text-white">

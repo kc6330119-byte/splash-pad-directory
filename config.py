@@ -228,14 +228,6 @@ CATEGORIES = [
 # Google Analytics
 GA_MEASUREMENT_ID = os.getenv("GA_MEASUREMENT_ID", "")
 
-# MailChimp
-# Set to the MailChimp embedded form action URL, e.g.:
-#   https://xxxxxx.us1.list-manage.com/subscribe/post?u=XXXXXXXX&id=XXXXXXXX
-MAILCHIMP_FORM_URL = os.getenv(
-    "MAILCHIMP_FORM_URL",
-    "https://doggroomerlocator.us12.list-manage.com/subscribe/post?u=21343a587fbb950d8b649ee6d&id=d901746875&f_id=0017dde3f0"
-)
-
 # SEO Settings
 DEFAULT_META_TITLE = "Best Splash Pads Near Me — Find Free & Family-Friendly Water Play"
 DEFAULT_META_DESCRIPTION = "Find the best splash pads near you — free, family-friendly water play for all ages. Search by city or state to discover spray parks and water play areas."
@@ -267,6 +259,21 @@ BLOG_META_OVERRIDES = {
 PAD_NOINDEX_SLUGS = {
     "lenora-park-pool-snellville": "Traditional swimming pool, not a splash pad — misleading to searchers.",
     "kings-island-mason": "Amusement park ticket booth listing, not a splash pad venue page — off-topic impressions.",
+    # AdSense remediation 2026-05-06: AI-refusal text in description
+    "parking-new-york": "AI-refusal text in description; venue is a parking lot.",
+    "walmart-supercenter-punxsutawney": "AI-refusal text; venue is a Walmart store, not a splash pad.",
+    "port-clinton-peanut-shop-port-clinton": "AI-refusal text; venue is a peanut shop.",
+    "gettysburg-national-military-park-museum-visitor-center-gettysburg": "AI-refusal text; venue is a Civil War history museum.",
+    # AdSense remediation 2026-05-06: off-topic venues described as splash pads
+    "secret-caverns-howes-cave": "Off-topic — underground cavern attraction, not a splash pad.",
+    "jane-s-carousel-brooklyn": "Off-topic — historic carousel, not a splash pad.",
+    "manhattan-community-boathouse-pier-96-new-york": "Off-topic — kayak boathouse, not a splash pad.",
+    "city-of-princeton-public-works-princeton": "Off-topic — municipal public works office.",
+    "galaxy-theatres-riverbank-imax-riverbank": "Off-topic — IMAX movie theater.",
+    "slick-city-action-park-columbus": "Off-topic — waterless indoor slide park.",
+    "living-waters-watsu-coopersburg": "Off-topic — adult water-shiatsu therapy spa.",
+    "salmoondion-tucson": "Off-topic — venue type unverifiable; AI-style fabricated copy.",
+    "blackbeard-s-family-entertainment-fresno": "Off-topic — mini-golf / arcade family entertainment center.",
 }
 
 # City pages — keyed by state slug, each city entry drives a /city/<slug> page.
