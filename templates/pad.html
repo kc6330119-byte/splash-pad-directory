@@ -27,7 +27,7 @@
     ]
 }
 </script>
-{% if faq %}
+{% if faq and not noindex %}
 <script type="application/ld+json">
 {
     "@context": "https://schema.org",
@@ -384,6 +384,7 @@
 
 </div>
 
+{% if not noindex %}
 <!-- Structured Data: LocalBusiness -->
 {% autoescape false %}
 <script type="application/ld+json">
@@ -422,6 +423,7 @@
 }
 </script>
 {% endautoescape %}
+{% endif %}
 
 <script>
 // FAQ accordion for pad pages

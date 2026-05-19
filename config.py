@@ -258,6 +258,12 @@ PAD_ARTIFACT_PATTERNS = [
     r"\bthe listing information (?:is|provided is)\b",
     r"\binformation provided is incomplete\b",
     r"\bcan(?:not| ?n'?t) (?:provide|offer|describe)\b",
+    r"\bgoogle\.com/travel/clk\b",
+    r"\bprice_total\b",
+    r"\bBluehost\b",
+    r"\bweb hosting provider\b",
+    r"\bfree 1 click installs\b",
+    r"\bBorn and raised\b",
 ]
 
 # Minimum description length, post-cleaning. Raised from 100 to 150 chars; pads
@@ -315,6 +321,84 @@ PAD_NOINDEX_SLUGS = {
     "salmoondion-tucson": "Off-topic — venue type unverifiable; AI-style fabricated copy.",
     "blackbeard-s-family-entertainment-fresno": "Off-topic — mini-golf / arcade family entertainment center.",
 }
+
+# Listings to remove from the generated public site entirely. These are not
+# merely thin pages; they are clear false positives for a splash-pad directory.
+# They get redirected to their state page when the build has enough state data.
+PAD_EXCLUDE_SLUGS = {
+    **PAD_NOINDEX_SLUGS,
+    "airgarage-public-parking-first-water-charlottesville-charlottesville": "Off-topic — parking garage.",
+    "annapolis-maritime-museum-park-annapolis": "Off-topic — maritime museum / park.",
+    "bathhouse-williamsburg-brooklyn": "Off-topic — bathhouse/spa.",
+    "bricktown-water-taxi-oklahoma-city": "Off-topic — water taxi.",
+    "culligan-of-syracuse-ny-east-syracuse": "Off-topic — water-treatment business.",
+    "hoboken-cove-community-boathouse-hoboken": "Off-topic — boathouse.",
+    "james-f-holland-memorial-park-palm-coast": "Off-topic false positive from memorial/park data.",
+    "jamestown-newport-ferry-jamestown": "Off-topic — ferry service.",
+    "new-york-water-taxi-brooklyn": "Off-topic — water taxi.",
+    "pier-6-dog-run-brooklyn": "Off-topic — dog run.",
+    "pirate-s-cove-adventure-golf-prudenville": "Off-topic — mini golf.",
+    "point-fermin-lighthouse-san-pedro": "Off-topic — lighthouse.",
+    "pool-lounge-at-grand-falls-casino-golf-resort-r-larchwood": "Off-topic — casino/hotel lounge.",
+    "rockland-breakwater-lighthouse-rockland": "Off-topic — lighthouse.",
+    "sea-the-city-jet-ski-jersey-city": "Off-topic — jet ski tour operator.",
+    "smith-haven-mall-lake-grove": "Off-topic — shopping mall.",
+    "spa-castle-new-york-college-point": "Off-topic — adult spa.",
+    "st-james-theatre-new-york": "Off-topic — theater.",
+    "the-pier-62-carousel-new-york": "Off-topic — carousel.",
+    "the-riverstar-casino-terral": "Off-topic — casino.",
+    "the-whaling-museum-education-center-of-cold-spring-harbor-cold-spring-harbor": "Off-topic — museum.",
+    "viking-golf-go-karts-fenwick-island": "Off-topic — mini golf / go-karts.",
+}
+
+# Name-level hard-drop guard for obvious false-positive venue classes. The
+# water-name allowlist keeps legitimate "Splash Pad", "Waterpark", "Pool",
+# etc. listings from being removed just because they are attached to a park.
+PAD_OFF_TOPIC_NAME_PATTERNS = [
+    r"\bparking\b",
+    r"\bwalmart\b",
+    r"\bpeanut shop\b",
+    r"\bpublic works\b",
+    r"\bcarousel\b",
+    r"\bboathouse\b",
+    r"\bwater taxi\b",
+    r"\bjet ski\b",
+    r"\bferry\b",
+    r"\bdog run\b",
+    r"\bpickleball\b",
+    r"\bculligan\b",
+    r"\bmuseum\b",
+    r"\baquarium\b",
+    r"\bhatchery\b",
+    r"\blighthouse\b",
+    r"\btheatre\b",
+    r"\btheater\b",
+    r"\bcasino\b",
+    r"\bspa\b",
+    r"\bwatsu\b",
+    r"\bbathhouse\b",
+    r"\bcave\b",
+    r"\bgolf\b",
+    r"\bgo-?karts?\b",
+    r"\bmall\b",
+]
+
+PAD_WATER_NAME_PATTERNS = [
+    r"\bsplash\b",
+    r"\bsplashpad\b",
+    r"\bspray\b",
+    r"\bsprayground\b",
+    r"\bwater\s*park\b",
+    r"\bwaterpark\b",
+    r"\baquatic\b",
+    r"\bpool\b",
+    r"\bswim(?:ming)?\b",
+    r"\bbeach\b",
+    r"\blagoon\b",
+    r"\bsoak\b",
+    r"\bwet\b",
+    r"\bwater play\b",
+]
 
 # City pages — keyed by state slug, each city entry drives a /city/<slug> page.
 # Add new states here as city-level content is created.

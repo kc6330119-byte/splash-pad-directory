@@ -1,12 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+{% set page_noindex = noindex | default(false) %}
+{% if ads_allowed is defined %}
+{% set show_ads = ads_allowed %}
+{% else %}
+{% set show_ads = not page_noindex %}
+{% endif %}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ page_title }}</title>
     <meta name="description" content="{{ meta_description }}">
 
-    {% if noindex %}<meta name="robots" content="noindex, follow">{% else %}<meta name="robots" content="index, follow">{% endif %}
+    {% if page_noindex %}<meta name="robots" content="noindex, follow">{% else %}<meta name="robots" content="index, follow">{% endif %}
 
     <!-- Canonical URL -->
     <link rel="canonical" href="{{ site_url }}{{ request_path | default('/') }}">
@@ -61,9 +67,11 @@
     </script>
     {% endif %}
 
+    {% if show_ads %}
     <!-- Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9265762311868507"
      crossorigin="anonymous"></script>
+    {% endif %}
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -191,12 +199,14 @@
         {% block content %}{% endblock %}
     </main>
 
+    {% if show_ads %}
     <!-- Ad Slot: Footer Banner -->
     <div class="ad-container my-8 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full">
         <div class="bg-gray-100 border border-dashed border-gray-300 p-4 rounded text-center">
             <p class="text-gray-400 text-xs">Advertisement</p>
         </div>
     </div>
+    {% endif %}
 
     <!-- Footer -->
     <footer class="bg-gray-900 text-white">
