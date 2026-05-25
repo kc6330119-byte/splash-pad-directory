@@ -332,6 +332,7 @@ PAD_EXCLUDE_SLUGS = {
     "bathhouse-williamsburg-brooklyn": "Off-topic — bathhouse/spa.",
     "bricktown-water-taxi-oklahoma-city": "Off-topic — water taxi.",
     "culligan-of-syracuse-ny-east-syracuse": "Off-topic — water-treatment business.",
+    "dandy-pizza-cafe-deli-towanda": "Off-topic — restaurant/convenience listing, not a splash pad.",
     "hoboken-cove-community-boathouse-hoboken": "Off-topic — boathouse.",
     "james-f-holland-memorial-park-palm-coast": "Off-topic false positive from memorial/park data.",
     "jamestown-newport-ferry-jamestown": "Off-topic — ferry service.",
