@@ -237,6 +237,9 @@ PAD_TYPE_WHITELIST = {
     "Campground Water Park",
     "Resort Water Park",
     "Indoor Water Play",
+    # Amusement parks in this directory are curated for their water attractions
+    # (splash pads, water slides, bumper boats); their descriptions are water-grounded.
+    "Amusement Park",
 }
 
 # Phrases that, when present in a description, signal AI-refusal or "I don't have
