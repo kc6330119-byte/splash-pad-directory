@@ -7,6 +7,67 @@
 
 # --- 301 Redirects for broken/removed pages ---
 
+# Removed via REVIEW_QUEUE triage 2026-05-29 (deleted in Airtable -> redirect to state)
+[[redirects]]
+  from = "/pad/galena-park-swimming-pool-galena-park.html"
+  to = "/state/texas"
+  status = 301
+
+[[redirects]]
+  from = "/pad/galena-park-swimming-pool-galena-park"
+  to = "/state/texas"
+  status = 301
+
+[[redirects]]
+  from = "/pad/otter-pond-beach-new-london.html"
+  to = "/state/new-hampshire"
+  status = 301
+
+[[redirects]]
+  from = "/pad/otter-pond-beach-new-london"
+  to = "/state/new-hampshire"
+  status = 301
+
+[[redirects]]
+  from = "/pad/phunky-town-monroeville.html"
+  to = "/state/pennsylvania"
+  status = 301
+
+[[redirects]]
+  from = "/pad/phunky-town-monroeville"
+  to = "/state/pennsylvania"
+  status = 301
+
+[[redirects]]
+  from = "/pad/storybook-land-aberdeen.html"
+  to = "/state/south-dakota"
+  status = 301
+
+[[redirects]]
+  from = "/pad/storybook-land-aberdeen"
+  to = "/state/south-dakota"
+  status = 301
+
+[[redirects]]
+  from = "/pad/water-zone-oceanside.html"
+  to = "/state/california"
+  status = 301
+
+[[redirects]]
+  from = "/pad/water-zone-oceanside"
+  to = "/state/california"
+  status = 301
+
+[[redirects]]
+  from = "/pad/wendy-collini-park-mansfield.html"
+  to = "/state/texas"
+  status = 301
+
+[[redirects]]
+  from = "/pad/wendy-collini-park-mansfield"
+  to = "/state/texas"
+  status = 301
+
 [[redirects]]
   from = "/pad/hathaway-park-winston-salem.html"
   to = "/state/north-carolina"
