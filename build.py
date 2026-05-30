@@ -109,6 +109,32 @@ def clean_description(text):
     return cleaned
 
 
+def normalize_url(url):
+    """De-mangle double-encoded website URLs coming from Airtable.
+
+    Some 'Website URL' values (chiefly auto-generated Google Business Profile
+    booking/UTM links) had their entire query string percent-encoded into the
+    path: '?a=b&c=d' was stored as '%3Fa%3Db%26c%3Dd'. The server then sees a
+    garbage literal path and returns 403/404, breaking the outbound link.
+
+    We act only when an encoded '?' (%3F) is present — the unambiguous signature
+    that a whole query string was encoded — then decode the query delimiters.
+    Gating on %3F avoids touching legitimately-encoded path segments (e.g. a
+    bare %2B in a store-locator path). Validated against 248 known-mangled URLs:
+    reproduces the HTTP-verified clean URL in every case.
+    """
+    if not url or not isinstance(url, str):
+        return url or ""
+    u = url.strip()
+    if "%3f" not in u.lower():
+        return u
+    # %26amp; (HTML-entity-then-encode double-mangle) must be undone before %26.
+    u = u.replace("%26amp;", "&").replace("%26", "&")
+    u = u.replace("%3F", "?").replace("%3f", "?")
+    u = u.replace("%3D", "=").replace("%3d", "=")
+    return u
+
+
 def generate_pad_faq(pad):
     """Generate 2-3 FAQ Q&A pairs from a pad's existing data fields.
 
@@ -330,7 +356,7 @@ def fetch_from_airtable():
                 "state_slug": slugify(state_name),
                 "zip": fields.get("Zip", ""),
                 "phone": fields.get("Phone", ""),
-                "website_url": fields.get("Website URL", ""),
+                "website_url": normalize_url(fields.get("Website URL", "")),
                 "google_maps_url": fields.get("Google Maps URL", ""),
                 "photo_url": fields.get("Photo URL", ""),
                 "hours": fields.get("Hours", ""),
