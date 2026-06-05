@@ -47,6 +47,7 @@ import config
 import build
 import generate_fact_descriptions as gfd
 import website_descriptions as wd   # crawl_site, is_crawlable, caches, pricing, _client
+from auto_features import features_to_add
 
 BASE_DIR = Path(__file__).parent
 HAIKU_MODEL = wd.HAIKU_MODEL
@@ -61,6 +62,8 @@ SAFE_COLS = {
     "name", "city", "state", "us_state", "postal_code", "full_address", "address",
     "type", "subtypes", "category", "description", "about",
     "website", "site", "place_id", "google_id", "latitude", "longitude",
+    # non-PII enrichment columns: photo, maps link, Google rating, reviews, hours
+    "photo", "location_link", "rating", "reviews", "working_hours",
 }
 
 WATER_HINT = re.compile(
@@ -86,6 +89,84 @@ def load_extract(path):
 
 def g(rec, k):
     return (rec.get(k) or "") if rec else ""
+
+
+def _num(x, cast):
+    try:
+        return cast(float(str(x).strip()))
+    except (TypeError, ValueError):
+        return None
+
+
+def _fmt_hours(raw):
+    """Compress Google working_hours JSON to a readable string (consecutive
+    identical days grouped). Returns None when unparseable or fully closed."""
+    if not raw:
+        return None
+    try:
+        d = json.loads(raw) if isinstance(raw, str) else raw
+    except Exception:
+        return None
+    if not isinstance(d, dict):
+        return None
+    days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+    abbr = {"Monday": "Mon", "Tuesday": "Tue", "Wednesday": "Wed", "Thursday": "Thu",
+            "Friday": "Fri", "Saturday": "Sat", "Sunday": "Sun"}
+    vals = {}
+    for day in days:
+        v = d.get(day)
+        if isinstance(v, list):
+            v = ", ".join(str(x) for x in v)
+        vals[day] = v if v else "Closed"
+    if len(set(vals.values())) == 1:
+        h = vals["Monday"]
+        return None if h == "Closed" else f"Daily: {h}"
+    parts, i = [], 0
+    while i < 7:
+        j = i
+        while j + 1 < 7 and vals[days[j + 1]] == vals[days[i]]:
+            j += 1
+        label = abbr[days[i]] if i == j else f"{abbr[days[i]]}-{abbr[days[j]]}"
+        parts.append(f"{label}: {vals[days[i]]}")
+        i = j + 1
+    return "; ".join(parts)
+
+
+def _about_to_features(raw):
+    """Map Google 'about' amenity flags (true-valued keys) to directory Feature tags."""
+    if not raw:
+        return []
+    try:
+        d = json.loads(raw) if isinstance(raw, str) else raw
+    except Exception:
+        return []
+    true_keys = []
+
+    def walk(o):
+        if isinstance(o, dict):
+            for k, v in o.items():
+                if v is True:
+                    true_keys.append(str(k).lower())
+                else:
+                    walk(v)
+        elif isinstance(o, list):
+            for v in o:
+                walk(v)
+
+    walk(d)
+    text = " | ".join(true_keys)
+    feats = set()
+    if "wheelchair" in text or "accessible" in text:
+        feats.add("Accessibility")
+    if "parking" in text:
+        feats.add("Parking")
+    if "restroom" in text or "toilet" in text:
+        feats.add("Restrooms")
+    if "picnic" in text:
+        feats.add("Picnic Area")
+    if "playground" in text:
+        feats.add("Playground")
+    return sorted(feats)
 
 
 def dedup_place(records):
@@ -401,6 +482,29 @@ def main():
                 fields[fld] = float(str(g(rec, col)).strip())
             except (TypeError, ValueError):
                 pass
+        # ── enrichment: non-PII extract data + sensible defaults ──
+        photo = str(g(rec, "photo")).strip()
+        if photo:
+            fields["Photo URL"] = photo
+        maps = str(g(rec, "location_link")).strip()
+        if maps:
+            fields["Google Maps URL"] = maps
+        rt = _num(g(rec, "rating"), float)
+        if rt is not None:
+            fields["Rating"] = round(rt, 1)
+        rv = _num(g(rec, "reviews"), int)
+        if rv is not None:
+            fields["Review Count"] = rv
+        hrs = _fmt_hours(g(rec, "working_hours"))
+        if hrs:
+            fields["Hours"] = hrs
+        feats = sorted(set(_about_to_features(g(rec, "about"))) |
+                       set(features_to_add(r["name"], ty, [])))
+        if feats:
+            fields["Features"] = feats
+        if ty == PUBLISH_TYPE:   # Free for splash pads; blank for paid types (Aquatic Center / Water Park)
+            fields["Admission"] = "Free"
+        fields["Age Range"] = ["Toddlers", "Kids", "Families"]
         slug = gfd.pad_shape(fields, desc)["slug"]
         reason = None
         if k in existing:
@@ -436,6 +540,23 @@ def main():
         if loc:
             print(f"    Geo     : {'  '.join(loc)}")
         print(f"    Website : {fields['Website URL']}")
+        if fields.get("Photo URL"):
+            print(f"    Photo   : {str(fields['Photo URL'])[:58]}")
+        if fields.get("Google Maps URL"):
+            print(f"    Maps    : {str(fields['Google Maps URL'])[:58]}")
+        meta = []
+        if fields.get("Rating") is not None:
+            meta.append(f"{fields['Rating']}★ ({fields.get('Review Count', 0)} reviews)")
+        if fields.get("Admission"):
+            meta.append(f"Admission: {fields['Admission']}")
+        if meta:
+            print(f"    Meta    : {' · '.join(meta)}")
+        if fields.get("Hours"):
+            print(f"    Hours   : {fields['Hours']}")
+        if fields.get("Features"):
+            print(f"    Features: {', '.join(fields['Features'])}")
+        if fields.get("Age Range"):
+            print(f"    Age     : {', '.join(fields['Age Range'])}")
         print(f"    Desc    : {fields['Description']}")
     for fields, slug, reason in blocked:
         print(f"\n  BLOCKED  {fields['Name']} — {fields['City']}, {fields['State']}: {reason}")
@@ -458,7 +579,7 @@ def main():
     backup_path.write_text(json.dumps(pre, ensure_ascii=False, indent=2))
     print(f"\nBacked up {len(pre)} existing records -> {backup_path.relative_to(BASE_DIR)}")
 
-    created = table.batch_create([fields for fields, _, _ in payloads])
+    created = table.batch_create([fields for fields, _, _ in payloads], typecast=True)
     new_ids = [c["id"] for c in created]
     applied = BASE_DIR / "data" / f"INGEST_APPLIED_{ts}.md"
     with open(applied, "w", encoding="utf-8") as fh:
