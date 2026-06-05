@@ -1380,6 +1380,30 @@ CITY_PAGES = {
             ]
         },
     ],
+    "illinois": [
+        {
+            "name": "Chicago",
+            "slug": "chicago-illinois",
+            "state": "Illinois",
+            "state_slug": "illinois",
+            "meta_description": "Find splash pads in Chicago, IL — free Chicago Park District spray features and water playgrounds across the city. Family water play updated for 2026.",
+            "description": "Chicago's park system is one of the oldest and largest in the country, and the Chicago Park District threads free water play through neighborhoods from the North Side to the South Side. The district operates spray features and water playgrounds at parks across the city — zero-depth splash areas with sprayers and interactive jets that give families a free place to cool off during the city's hot, humid summers. Set along Lake Michigan in Cook County, Chicago pairs these neighborhood spray features with a long lakefront of public beaches, but the splash pads offer a closer, supervised option for younger children. The season is concentrated: water features typically run from late June through late August, the heart of a summer when temperatures climb into the upper 80s and lake humidity makes the heat feel heavier. Because the Park District is so large, spray features are spread widely — parks like McKinley Park and Fosco Park combine splash pads with pools and playgrounds, while harbor and lakefront sites add water-feature play near the water. Most Chicago Park District spray features and water playgrounds are free and open during park hours through the season, though start dates and hours vary by location and weather. Weekday mornings are the least crowded. Bring sunscreen, water, and a change of clothes, and check the Chicago Park District for current spray-feature locations, hours, and seasonal dates before you visit.",
+            "faq": [
+                {
+                    "q": "Are Chicago splash pads free?",
+                    "a": "Yes. Chicago Park District spray features and water playgrounds are free and open to the public during regular park hours. No admission or reservation is required at neighborhood spray locations, though some facilities with pools may charge separately."
+                },
+                {
+                    "q": "When do Chicago splash pads open for the season?",
+                    "a": "Chicago's water features typically run for a concentrated summer season, often from late June through late August. Exact start and end dates vary by location and weather each year. Check the Chicago Park District for the current schedule."
+                },
+                {
+                    "q": "What does the Chicago Park District call splash pads?",
+                    "a": "Chicago Park District facilities are usually listed as 'spray features' or 'water playgrounds' — zero-depth areas with sprayers and interactive jets and no standing water. They're spread across parks citywide, from the North Side to the South Side, and many sit alongside playgrounds and pools."
+                }
+            ]
+        },
+    ],
 }
 
 # Build Settings
