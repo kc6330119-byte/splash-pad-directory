@@ -64,6 +64,9 @@ SAFE_COLS = {
     "website", "site", "place_id", "google_id", "latitude", "longitude",
     # non-PII enrichment columns: photo, maps link, Google rating, reviews, hours
     "photo", "location_link", "rating", "reviews", "working_hours",
+    # base business phone ONLY — the venue's Google-listed public line. Exact-match
+    # means the personal phone.whitepages_phones.* / company_phone columns stay out.
+    "phone",
 }
 
 WATER_HINT = re.compile(
@@ -489,6 +492,9 @@ def main():
         maps = str(g(rec, "location_link")).strip()
         if maps:
             fields["Google Maps URL"] = maps
+        ph = str(g(rec, "phone")).strip()
+        if ph:
+            fields["Phone"] = ph
         rt = _num(g(rec, "rating"), float)
         if rt is not None:
             fields["Rating"] = round(rt, 1)
