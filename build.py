@@ -539,10 +539,32 @@ def build_homepage(env, pads, posts):
     featured_post = next((p for p in posts if p.get("featured")), None)
     recent_posts = [p for p in posts if p is not featured_post][:3]
 
+    # Popular Cities — homepage internal links down to /city/ landing pages.
+    # Mirror build_city_pages' indexable filter; only link non-thin (>=3 pad) cities.
+    abbr_by_slug = {s["slug"]: s["abbr"] for s in config.US_STATES}
+    popular_cities = []
+    for state_slug, cities in config.CITY_PAGES.items():
+        for city in cities:
+            cname = city["name"].strip().lower()
+            n = sum(
+                1 for p in indexable_pads
+                if p.get("state_slug") == state_slug
+                and p.get("city", "").strip().lower() == cname
+            )
+            if n >= 3:
+                popular_cities.append({
+                    "name": city["name"],
+                    "slug": city["slug"],
+                    "abbr": abbr_by_slug.get(state_slug, ""),
+                    "count": n,
+                })
+    popular_cities.sort(key=lambda c: (-c["count"], c["name"]))
+
     html = template.render(
         featured_pads=featured,
         recent_pads=recent,
         all_pads=indexable_pads,
+        popular_cities=popular_cities,
         state_counts=state_counts,
         total_count=len(indexable_pads),
         posts=posts,

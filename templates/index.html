@@ -165,8 +165,30 @@
     </div>
 </section>
 
+<!-- Popular Cities -->
+{% if popular_cities %}
+<section class="py-12 bg-white border-t border-gray-100" id="browse-cities">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-10">
+            <h2 class="text-2xl font-bold text-gray-900 mb-2">Popular Cities</h2>
+            <p class="text-gray-500">Explore splash pads in top metro areas</p>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
+            {% for city in popular_cities %}
+            <a href="/city/{{ city.slug }}"
+               class="flex items-center justify-between bg-white border border-gray-200 hover:border-cyan-400 hover:shadow-sm rounded-lg px-3 py-2.5 transition-all group">
+                <span class="font-medium text-sm text-gray-800 group-hover:text-cyan-700">{{ city.name }}<span class="text-gray-400 font-normal">, {{ city.abbr }}</span></span>
+                <span class="text-xs bg-cyan-100 text-cyan-700 font-semibold px-2 py-0.5 rounded-full">{{ city.count }}</span>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
 <!-- Browse by Category -->
-<section class="py-12 bg-white">
+<section class="py-12 bg-gray-50" id="browse-types">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-10">
             <h2 class="text-2xl font-bold text-gray-900 mb-2">Browse by Type</h2>

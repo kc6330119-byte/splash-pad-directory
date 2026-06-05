@@ -1216,6 +1216,170 @@ CITY_PAGES = {
             ],
         },
     ],
+    "texas": [
+        {
+            "name": "Dallas",
+            "slug": "dallas-texas",
+            "state": "Texas",
+            "state_slug": "texas",
+            "meta_description": "Find splash pads in Dallas, TX — free spray grounds and water play across Dallas County and the DFW metroplex. Family water play updated for 2026.",
+            "description": "Dallas sits at the heart of North Texas and the sprawling Dallas–Fort Worth metroplex, where long, punishing summers make free water play a core part of family life from late spring through early fall. The Dallas Park and Recreation Department operates spray grounds and splash features at neighborhood parks across the city, offering free, no-reservation water play that runs through one of the longest warm seasons in the country. Dallas summers are hot and humid, with highs routinely in the upper 90s and frequent stretches above 100°F from June through September, so most spray grounds run on an extended schedule rather than the short Memorial-Day-to-Labor-Day window common farther north. Downtown, Klyde Warren Park's children's area draws families with an interactive fountain, while the broader park system spreads water play across neighborhoods from Oak Cliff to North Dallas. Because the metroplex is so large, families in surrounding cities — Plano, Arlington, Irving, and Garland among them — often have their own municipal spray grounds a short drive away. Most City of Dallas spray grounds are free and open during regular park hours, though hours and seasonal start dates vary by location. Morning visits before the midday heat peaks are the most comfortable during July and August. Bring water, apply sunscreen before you arrive, and check Dallas Park and Recreation for current locations, hours, and any seasonal closures before planning your visit.",
+            "faq": [
+                {
+                    "q": "Are Dallas splash pads free?",
+                    "a": "Most City of Dallas spray grounds and splash features are free and open to the public during regular park hours. Some aquatic centers with larger water-play areas may charge admission — check the specific location before visiting."
+                },
+                {
+                    "q": "When does the Dallas splash pad season run?",
+                    "a": "Thanks to North Texas's long, hot summers, many Dallas spray grounds operate on an extended season — often from spring into early fall — rather than the shorter Memorial Day to Labor Day window. Check Dallas Park and Recreation for current dates by location."
+                },
+                {
+                    "q": "What's the best time to visit a Dallas splash pad in summer?",
+                    "a": "Mornings before midday are the most comfortable during July and August, when temperatures regularly top 100°F. Bring water and sunscreen, and arrive early on weekends when popular locations fill up fast."
+                }
+            ]
+        },
+        {
+            "name": "Houston",
+            "slug": "houston-texas",
+            "state": "Texas",
+            "state_slug": "texas",
+            "meta_description": "Find splash pads in Houston, TX — free spray pads and water play across Harris County and the Gulf Coast. Family aquatic facilities updated for 2026.",
+            "description": "Houston, the largest city in Texas, sits on the humid Gulf Coast plain of Harris County, where a long subtropical summer makes water play less a seasonal treat than a near-necessity. The Houston Parks and Recreation Department operates splash pads and spray features at parks across the city, providing free water play that runs deep into the fall thanks to the region's warm, extended season. Houston's summers are defined as much by humidity as by heat — daytime highs in the 90s combine with Gulf moisture to push the heat index up quickly, so shaded splash areas and early-morning visits are especially valuable here. Downtown, Discovery Green's Gateway Fountain is one of the city's best-known interactive water features, drawing families into its programmed jets, while Hermann Park and neighborhood parks across the metro round out the options. Houston's enormous footprint means water play is spread widely, and surrounding communities in Harris and Fort Bend counties — Katy, Sugar Land, and Pearland among them — operate their own municipal splash pads. Afternoon thunderstorms are common during the summer wet season, so it's worth checking the forecast before heading out. Most city-operated splash pads are free and open during regular park hours, though schedules vary by location. Bring water, apply sunscreen, and check Houston Parks and Recreation for current locations, hours, and seasonal availability before your visit.",
+            "faq": [
+                {
+                    "q": "Are Houston splash pads free?",
+                    "a": "Most Houston Parks and Recreation splash pads and spray features are free and open to the public during regular park hours. Larger aquatic facilities may charge admission, so check the specific location before you go."
+                },
+                {
+                    "q": "When do Houston splash pads open for the season?",
+                    "a": "Houston's subtropical climate supports a long water-play season that often stretches from spring into the fall, with many splash pads operating well beyond the traditional summer window. Check Houston Parks and Recreation for current seasonal dates by location."
+                },
+                {
+                    "q": "Where can I find interactive water features in downtown Houston?",
+                    "a": "Discovery Green's Gateway Fountain is a popular downtown interactive water feature where children play among programmed jets. Hermann Park and parks throughout the city also offer water play. Confirm current operating status with the venue or Houston Parks and Recreation."
+                }
+            ]
+        },
+    ],
+    "indiana": [
+        {
+            "name": "Indianapolis",
+            "slug": "indianapolis-indiana",
+            "state": "Indiana",
+            "state_slug": "indiana",
+            "meta_description": "Find splash pads in Indianapolis, IN — free spray grounds and water play across Marion County. Family-friendly aquatic facilities updated for 2026.",
+            "description": "Indianapolis anchors central Indiana and Marion County, and its parks system gives families a strong network of free spray grounds to cool off during the Midwest's hot, humid summers. Indy Parks and Recreation operates spray grounds at neighborhood and regional parks across the city — free, walk-up water play that needs no reservation and typically runs from late spring through the end of summer. Indianapolis summers are warm and humid, with July and August highs commonly in the upper 80s and lower 90s, driving steady demand for water play from Memorial Day through Labor Day. The city's spray grounds are distributed across its neighborhoods, from the near-downtown parks to the suburban edges of Marion County, and many sit alongside playgrounds, trails, and sports fields that make for an easy half-day outing. Surrounding Hamilton County suburbs — Carmel, Fishers, and Noblesville among them — have invested heavily in their own parks and water-play amenities as the metro has grown. Most Indy Parks spray grounds are free and operate during regular park hours through the summer season, though start and end dates shift with the weather and staffing each year. Weekday mornings are the least crowded and most comfortable. Bring a change of clothes, apply sunscreen before arriving, and check Indy Parks and Recreation for current spray ground locations, hours, and seasonal dates before you head out.",
+            "faq": [
+                {
+                    "q": "Are Indianapolis splash pads free?",
+                    "a": "Yes, Indy Parks and Recreation spray grounds are free and open to the public during regular park hours. No admission or reservation is required at most neighborhood locations."
+                },
+                {
+                    "q": "When do Indianapolis spray grounds open?",
+                    "a": "Indianapolis spray grounds typically operate from late May (around Memorial Day) through Labor Day, following the Midwest's summer season. Exact opening dates vary year to year with the weather. Check Indy Parks and Recreation for the current schedule."
+                },
+                {
+                    "q": "What are spray grounds in Indianapolis?",
+                    "a": "Spray grounds are the city's term for splash pads — flat, zero-depth water-play areas with sprayers and jets and no standing water. Indy Parks operates them free of charge at parks across Marion County, and many sit next to playgrounds and trails."
+                }
+            ]
+        },
+    ],
+    "new-york": [
+        {
+            "name": "New York",
+            "slug": "new-york-new-york",
+            "state": "New York",
+            "state_slug": "new-york",
+            "meta_description": "Find splash pads in New York, NY — free spray showers and water play in playgrounds across all five boroughs. NYC Parks features updated for 2026.",
+            "description": "New York City operates one of the largest free water-play networks in the country, woven into the playgrounds of all five boroughs. Rather than a handful of destination splash pads, NYC Parks maintains hundreds of spray showers and water features in neighborhood playgrounds from Manhattan to the Bronx, Queens, Brooklyn, and Staten Island — free, walk-up cooling that's a defining part of a city summer. The spray showers are typically switched on for the season in late spring and run through the warm months, giving families in even the most densely built neighborhoods a place to cool off within walking distance. Because the system is built into playgrounds rather than standalone parks, water play in New York is unusually accessible by subway, bus, or on foot — no car required. Large parks add bigger draws: the city's flagship green spaces host popular water-play areas alongside their playgrounds, and waterfront parks have expanded family amenities in recent years. New York summers are hot and humid, with July and August highs in the upper 80s that feel warmer amid the concrete, so the spray showers see heavy use on peak afternoons. Most NYC Parks spray showers and water features are free and open during park hours through the season. Bring a towel and sunscreen, and check NYC Parks for current locations, seasonal on-dates, and any playground closures before your visit.",
+            "faq": [
+                {
+                    "q": "Are New York City splash pads free?",
+                    "a": "Yes. NYC Parks operates hundreds of free spray showers and water features in playgrounds across all five boroughs, open to the public during park hours. No admission or reservation is required."
+                },
+                {
+                    "q": "When does NYC turn on the spray showers?",
+                    "a": "New York City's playground spray showers are typically activated for the season in late spring and run through the warm summer months, with timing dependent on the weather each year. Check NYC Parks for current seasonal on-dates."
+                },
+                {
+                    "q": "Where are splash pads in New York City?",
+                    "a": "Water play in NYC is built into playgrounds throughout Manhattan, Brooklyn, Queens, the Bronx, and Staten Island, making it easy to reach on foot or by transit. Use NYC Parks' facility listings or this directory to find spray showers and water features near a specific neighborhood."
+                }
+            ]
+        },
+        {
+            "name": "Brooklyn",
+            "slug": "brooklyn-new-york",
+            "state": "New York",
+            "state_slug": "new-york",
+            "meta_description": "Find splash pads in Brooklyn, NY — free spray showers and water play across Kings County, from Prospect Park to the Coney Island waterfront. Updated 2026.",
+            "description": "Brooklyn, the most populous of New York City's five boroughs, has free water play threaded through its dense patchwork of neighborhoods — from brownstone Brooklyn and Bedford-Stuyvesant to Bay Ridge, Flatbush, and the Coney Island waterfront. NYC Parks operates spray showers and water features in playgrounds across the borough, switched on for the warm season and free to use during park hours, giving families a place to cool off without leaving their block. Prospect Park, Brooklyn's signature 500-plus-acre green space, anchors the borough's recreation alongside dozens of smaller neighborhood playgrounds that include sprayers and water features. The Coney Island and Brighton Beach waterfront adds beach and boardwalk play to the mix, making southern Brooklyn a summer destination in its own right. Because Brooklyn is so well served by the subway, most of its spray showers are reachable without a car — a real advantage on a hot afternoon. Brooklyn summers are warm and humid, with July and August highs in the upper 80s that feel hotter amid the borough's density, so playground spray showers see heavy use through the peak months. Most NYC Parks water features in Brooklyn are free and open during park hours for the season. Bring a towel and sunscreen, and check NYC Parks for current spray-shower locations, seasonal on-dates, and any playground closures before heading out.",
+            "faq": [
+                {
+                    "q": "Are Brooklyn splash pads free?",
+                    "a": "Yes. NYC Parks operates free spray showers and water features in playgrounds throughout Brooklyn, open during regular park hours. No admission or reservation is required."
+                },
+                {
+                    "q": "When do Brooklyn spray showers open for the summer?",
+                    "a": "Brooklyn's playground spray showers are typically turned on in late spring and run through the warm summer months, with exact timing set by NYC Parks based on the weather. Check NYC Parks for current seasonal dates."
+                },
+                {
+                    "q": "Are there splash pads near Prospect Park or Coney Island?",
+                    "a": "Prospect Park and the surrounding neighborhoods include playgrounds with water features, and the Coney Island–Brighton Beach waterfront adds beach and boardwalk play. Use this directory or NYC Parks listings to find specific spray-shower locations across the borough."
+                }
+            ]
+        },
+    ],
+    "florida": [
+        {
+            "name": "Miami",
+            "slug": "miami-florida",
+            "state": "Florida",
+            "state_slug": "florida",
+            "meta_description": "Find splash pads in Miami, FL — free water playgrounds across Miami-Dade County, usable nearly year-round in the subtropical climate. Updated for 2026.",
+            "description": "Miami's subtropical climate sets its splash pads apart from almost anywhere else in the country: with warm temperatures nearly year-round, water play in Miami-Dade County isn't confined to a summer season — it's a near-constant. The City of Miami and Miami-Dade County parks systems operate splash pads and water playgrounds across the metro, from the urban core to the suburban reaches of the county, offering free and low-cost cooling that families use far beyond the traditional summer window. Where most American cities open spray features around Memorial Day and close them by Labor Day, Miami's warm winters mean many water-play areas stay active through much of the year. The trade-off is the summer wet season, roughly May through October, when intense midday sun gives way to fast-moving afternoon thunderstorms — so morning visits are doubly wise, beating both the strongest UV and the typical afternoon downpour. Waterfront and downtown parks have added family water-play amenities as Miami-Dade has invested in its public spaces, and the county's sprawl means options are distributed widely from Miami Beach across to the western suburbs. Most city splash pads are free during park hours, while some county water playgrounds within larger parks may charge a small fee. Sun protection matters year-round at this latitude. Check the City of Miami and Miami-Dade County parks departments for current locations, hours, and seasonal details before your visit.",
+            "faq": [
+                {
+                    "q": "Are Miami splash pads free?",
+                    "a": "Most City of Miami splash pads are free and open during regular park hours. Some Miami-Dade County water playgrounds within larger parks may charge a small admission fee — check the specific location before visiting."
+                },
+                {
+                    "q": "Can you use Miami splash pads year-round?",
+                    "a": "Largely, yes. Miami's subtropical climate keeps temperatures warm through much of the year, so many water-play areas stay active well beyond the typical summer season. Check the City of Miami or Miami-Dade County parks for current hours, which vary by location and season."
+                },
+                {
+                    "q": "What's the best time to visit a Miami splash pad in summer?",
+                    "a": "Mornings are best during the May-to-October wet season, when intense midday sun is often followed by afternoon thunderstorms. Apply sunscreen before you arrive — UV is strong year-round at Miami's latitude — and check the forecast before heading out."
+                }
+            ]
+        },
+    ],
+    "washington": [
+        {
+            "name": "Seattle",
+            "slug": "seattle-washington",
+            "state": "Washington",
+            "state_slug": "washington",
+            "meta_description": "Find splash pads in Seattle, WA — free spray parks and wading pools across King County, open during the Pacific Northwest's mild summer. Updated 2026.",
+            "description": "Seattle's approach to summer water play is distinct from the rest of the country, shaped by the Pacific Northwest's short but reliable warm season. Rather than the months-long spray-pad schedules of the Sun Belt, Seattle Parks and Recreation runs a beloved network of free spray parks and seasonal wading pools that open for a concentrated summer window — generally from around late June through Labor Day. The payoff is a mild, comfortable climate: Seattle summers are dry and pleasant, with highs often in the 70s and low 80s rather than the punishing heat of southern cities, so a spray park here is about play and sunshine more than survival. Spray parks across King County offer free, walk-up water play with no standing water, while the city's classic wading pools — a Seattle institution — fill on warm days at parks throughout the neighborhoods. Because the warm season is short, locals make the most of it, and spray parks see enthusiastic crowds on the city's hottest July and August afternoons. The system is spread across Seattle's neighborhoods, from north-end parks to West Seattle, often paired with playgrounds and green space along Puget Sound. Most spray parks are free and open daily in season, while wading-pool schedules rotate by location and depend on weather and temperature thresholds. Check Seattle Parks and Recreation for current spray-park locations, wading-pool schedules, and seasonal opening dates before you go.",
+            "faq": [
+                {
+                    "q": "Are Seattle spray parks free?",
+                    "a": "Yes. Seattle Parks and Recreation operates free spray parks across the city, open to the public daily during the summer season. The city's seasonal wading pools are also free, though they run on rotating schedules."
+                },
+                {
+                    "q": "When do Seattle spray parks and wading pools open?",
+                    "a": "Seattle's spray parks and wading pools open for a short summer window, generally from around late June through Labor Day. Wading pools in particular open on warmer days based on temperature, so schedules vary. Check Seattle Parks and Recreation for current dates."
+                },
+                {
+                    "q": "What's the difference between a spray park and a wading pool in Seattle?",
+                    "a": "Spray parks are zero-depth water-play areas with sprayers and jets and no standing water, open daily in season. Wading pools are shallow pools that fill on warm days on a rotating, weather-dependent schedule. Seattle Parks runs both, free of charge, across the city."
+                }
+            ]
+        },
+    ],
 }
 
 # Build Settings
