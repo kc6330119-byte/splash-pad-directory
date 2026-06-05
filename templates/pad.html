@@ -436,6 +436,9 @@
     {% if pad.last_verified %}
     "dateModified": {{ pad.last_verified | tojson }},
     {% endif %}
+    {% if pad.admission == "Free" %}
+    "priceRange": "Free",
+    {% endif %}
     "isAccessibleForFree": {{ "true" if pad.admission == "Free" else "false" }}
 }
 </script>
