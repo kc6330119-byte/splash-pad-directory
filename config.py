@@ -867,6 +867,10 @@ PAD_EXCLUDE_SLUGS.update({
     "bobbi-s-world-morgantown": "20260602 user spot-check; off-scope venue removed from AdSense review surface.",
 })
 
+PAD_EXCLUDE_SLUGS.update({
+    "ed-austin-regional-park-jacksonville": "20260606 owner swap - removed from public site, replaced with Murray Hill Playground.",
+})
+
 # Name-level hard-drop guard for obvious false-positive venue classes. The
 # water-name allowlist keeps legitimate "Splash Pad", "Waterpark", "Pool",
 # etc. listings from being removed just because they are attached to a park.
