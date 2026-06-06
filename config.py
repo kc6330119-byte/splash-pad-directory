@@ -1355,6 +1355,28 @@ CITY_PAGES = {
                 }
             ]
         },
+        {
+            "name": "Jacksonville",
+            "slug": "jacksonville-florida",
+            "state": "Florida",
+            "state_slug": "florida",
+            "meta_description": "Find splash pads in Jacksonville, FL — free JaxParks spray features and water playgrounds across the city. Family water play updated for 2026.",
+            "description": "Jacksonville is the largest city by land area in the country, sprawling across northeast Florida along the St. Johns River and the Atlantic coast — and its hot, humid subtropical summers make free water play a staple of family life. The City of Jacksonville's parks system (JaxParks) operates splash pads and spray features at neighborhood parks across the city, from the Westside to the beaches, giving families no-cost places to cool off. Most of these water features run on a seasonal schedule, opening around Memorial Day weekend and operating into the fall, with the heaviest use through the brutal July and August heat. Sites range from compact community parks like Wiley Road Playground and Abess Park — which pair their splash pads with playgrounds, ball fields, and picnic shelters — to larger draws like the splash pad inside oceanfront Kathryn Abbey Hanna Park. Because Jacksonville is so spread out, splash pads are distributed widely, and the surrounding beach towns of Jacksonville Beach and Atlantic Beach add their own. Most JaxParks splash pads are free and open during park hours through the season, though a few sites within larger parks may charge a gate fee. Morning visits are the most comfortable in peak summer. Check JaxParks for current splash pad locations, seasonal opening dates, and hours before your visit.",
+            "faq": [
+                {
+                    "q": "Are Jacksonville splash pads free?",
+                    "a": "Most City of Jacksonville (JaxParks) splash pads are free and open to the public during park hours. A few water features within larger parks — such as the splash pad at oceanfront Hanna Park — sit inside a park that charges a gate fee. Check the specific location before visiting."
+                },
+                {
+                    "q": "When do Jacksonville splash pads open for the season?",
+                    "a": "Jacksonville's splash pads typically open around Memorial Day weekend and run into the fall, often staying on into October depending on the weather. Peak season is the hot, humid stretch from June through September. Check JaxParks for current dates by location."
+                },
+                {
+                    "q": "Which Jacksonville parks have splash pads?",
+                    "a": "JaxParks operates splash pad sites at neighborhood parks across the city, including Wiley Road Playground, Abess Park, and Losco Regional Park, plus the splash pad inside Kathryn Abbey Hanna Park. The surrounding beach communities of Jacksonville Beach and Atlantic Beach have their own as well."
+                }
+            ]
+        },
     ],
     "washington": [
         {
