@@ -871,6 +871,11 @@ PAD_EXCLUDE_SLUGS.update({
     "ed-austin-regional-park-jacksonville": "20260606 owner swap - removed from public site, replaced with Murray Hill Playground.",
 })
 
+PAD_EXCLUDE_SLUGS.update({
+    "busch-gardens-tampa-bay-tampa": "20260606 owner removal - amusement park, not a splash pad.",
+    "fountains-at-gateway-murfreesboro": "20260606 duplicate of fountains-splash-pad-murfreesboro (same address/coords).",
+})
+
 # Name-level hard-drop guard for obvious false-positive venue classes. The
 # water-name allowlist keeps legitimate "Splash Pad", "Waterpark", "Pool",
 # etc. listings from being removed just because they are attached to a park.
