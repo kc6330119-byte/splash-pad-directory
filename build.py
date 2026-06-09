@@ -5,6 +5,7 @@ Splash Pad Finder - Static Site Generator
 Fetches splash pad listings from Airtable and generates a static HTML site.
 Falls back to sample data if Airtable is not configured.
 """
+import hashlib
 import json
 import os
 import re
@@ -1189,6 +1190,46 @@ def build_search_index(pads):
     print(f"Built: search-index.json ({len(index)} indexable pads)")
 
 
+LASTMOD_STORE = Path(__file__).resolve().parent / "sitemap_lastmod.json"
+
+
+def _stable_lastmods(entries):
+    """Per-URL lastmod from a committed content-hash datestore (sitemap_lastmod.json).
+
+    A URL's date bumps to the build date only when its rendered HTML actually
+    changed since the stored hash — so lastmod stays consistently accurate and
+    Google can trust it, instead of seeing every URL restamped on every build
+    (a pattern crawlers learn to ignore). The store is committed to git so
+    Netlify builds read the same dates; it must be rendered AFTER the pages
+    (build_sitemap runs after all page builds in main()).
+    """
+    try:
+        store = json.loads(LASTMOD_STORE.read_text())
+    except (OSError, ValueError):
+        store = {}
+    today = datetime.now().strftime("%Y-%m-%d")
+    dates = {}
+    new_store = {}
+    for url, _priority, _default in entries:
+        rel = url.replace(config.SITE_URL, "").strip("/")
+        page = config.OUTPUT_DIR / (f"{rel}.html" if rel else "index.html")
+        rec = store.get(url) or {}
+        try:
+            digest = hashlib.sha256(page.read_bytes()).hexdigest()[:16]
+        except OSError:
+            digest = rec.get("hash", "")
+        if digest and digest == rec.get("hash"):
+            date = rec.get("date") or today  # unchanged content keeps its date
+        elif not digest:
+            date = rec.get("date") or today  # page file missing — keep prior date
+        else:
+            date = today  # new or changed content
+        dates[url] = date
+        new_store[url] = {"hash": digest, "date": date}
+    LASTMOD_STORE.write_text(json.dumps(new_store, indent=0, sort_keys=True) + "\n")
+    return dates
+
+
 def build_sitemap(pads, posts):
     """Generate sitemap.xml with lastmod and priority to accelerate Google indexing."""
     today = datetime.now().strftime("%Y-%m-%d")
@@ -1235,10 +1276,12 @@ def build_sitemap(pads, posts):
         if post.get("slug"):
             entries.append((f"{config.SITE_URL}/blog/{post['slug']}", "0.8", today))
 
+    lastmods = _stable_lastmods(entries)
+
     sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n'
     sitemap += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
     for url, priority, lastmod in entries:
-        sitemap += f"  <url><loc>{url}</loc><lastmod>{lastmod}</lastmod><priority>{priority}</priority></url>\n"
+        sitemap += f"  <url><loc>{url}</loc><lastmod>{lastmods.get(url, lastmod)}</lastmod><priority>{priority}</priority></url>\n"
     sitemap += "</urlset>"
 
     output_path = config.OUTPUT_DIR / "sitemap.xml"
@@ -1287,8 +1330,16 @@ def build_redirects(pads, posts, dropped_pads=None):
 
     # Hard-dropped false positives: send old URLs to the relevant state page
     # so users and crawlers do not land on deleted off-topic detail pages.
+    # Duplicate-cleanup drops 301 to their kept twin instead (PAD_REDIRECT_OVERRIDES)
+    # so link equity and user intent land on the surviving listing.
+    overrides = getattr(config, "PAD_REDIRECT_OVERRIDES", {})
+    kept_slugs = {p["slug"] for p in pads}
     for pad in dropped_pads:
-        target = f"/state/{pad.get('state_slug')}" if pad.get("state_slug") else "/"
+        target = overrides.get(pad["slug"])
+        if target and target.startswith("/pad/") and target[len("/pad/"):] not in kept_slugs:
+            target = None  # twin missing from this build — fall back to the state hub
+        if not target:
+            target = f"/state/{pad.get('state_slug')}" if pad.get("state_slug") else "/"
         rules.append(f"/pad/{pad['slug']}.html  {target}  301!")
         rules.append(f"/pad/{pad['slug']}  {target}  301!")
 

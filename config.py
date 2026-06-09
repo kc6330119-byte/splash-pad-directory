@@ -1441,3 +1441,102 @@ CITY_PAGES = {
 ITEMS_PER_PAGE = 24
 FEATURED_COUNT = 6
 RECENT_COUNT = 8
+
+# ── Duplicate cleanup (2026-06-09 audit) ────────────────────────────────────────
+# 74 same-address groups → keep one listing per venue, drop the 82 duplicates.
+# Keep-rule: protected (GSC-trafficked) slug > venue-level name > longest description.
+# Review artifact: data/dup_cleanup_proposal_20260609.txt (local).
+PAD_EXCLUDE_SLUGS.update({
+    "all-seasons-center-vernon-arena-and-siouxnami-waterpark-sioux-center": "duplicate of siouxnami-waterpark-sioux-center (same address)",
+    "american-dream-east-rutherford": "duplicate of nickelodeon-universe-theme-park-east-rutherford (same address)",
+    "aquatica-san-antonio-san-antonio": "duplicate of seaworld-san-antonio-san-antonio (same address)",
+    "big-splash-interactive-fountain-suwanee": "duplicate of town-center-park-suwanee (same address)",
+    "billy-beez-crossgates-mall-albany": "duplicate of 5-wits-albany-albany (same address)",
+    "billy-beez-destiny-syracuse": "duplicate of wonderworks-destiny-syracuse (same address)",
+    "blanchette-park-st-charles": "duplicate of blanchette-aquatic-facility-st-charles (same address)",
+    "bridges-bay-resort-arnolds-park": "duplicate of boji-splash-indoor-waterpark-arnolds-park (same address)",
+    "c-b-smith-park-pembroke-pines": "duplicate of paradise-cove-water-park-pembroke-pines (same address)",
+    "calypso-cove-morgans-wonderland-san-antonio": "duplicate of rainbow-reef-morgan-s-inspiration-island-san-antonio (same address)",
+    "cameron-run-regional-park-alexandria": "duplicate of great-waves-waterpark-alexandria (same address)",
+    "cape-cod-inflatable-park-west-yarmouth": "duplicate of wicked-waves-cape-cod-west-yarmouth (same address)",
+    "casitas-water-adventure-ventura": "duplicate of lake-casitas-recreation-area-ventura (same address)",
+    "castaway-island-salem": "duplicate of canobie-lake-park-salem (same address)",
+    "centennial-park-naperville": "duplicate of centennial-beach-naperville (same address)",
+    "centennial-park-orland-park-orland-park": "duplicate of centennial-park-aquatic-center-orland-park-pool-orland-park (same address)",
+    "central-park-carmel": "duplicate of carmel-clay-parks-recreation-carmel (same address)",
+    "cheetah-chase-santa-claus": "duplicate of holiday-world-splashin-safari-santa-claus (same address)",
+    "cove-point-pool-lusby": "duplicate of cove-point-park-lusby (same address)",
+    "dansbury-park-swimming-pool-east-stroudsburg": "duplicate of dansbury-park-east-stroudsburg (same address)",
+    "dixon-park-fredericksburg": "duplicate of doris-buffett-swimming-pool-fredericksburg (same address)",
+    "dollywood-pigeon-forge": "duplicate of dollywood-s-splash-country-pigeon-forge (same address)",
+    "doral-central-park-doral": "duplicate of doral-central-park-aquatic-center-doral (same address)",
+    "dreamworks-water-park-east-rutherford": "duplicate of nickelodeon-universe-theme-park-east-rutherford (same address)",
+    "edith-pettus-park-splash-pad-clarksville": "duplicate of edith-pettus-park-clarksville (same address)",
+    "fins-up-water-park-seasonal-buford": "duplicate of margaritaville-at-lanier-islands-buford (same address)",
+    "franklin-recreation-complex-franklin": "duplicate of franklin-splash-park-franklin (same address)",
+    "freedom-pool-tucson": "duplicate of freedom-park-tucson (same address)",
+    "frisco-athletic-center-frisco": "duplicate of frisco-water-park-frisco (same address)",
+    "gwynn-family-aquatic-center-peoria": "duplicate of john-h-gwynn-jr-park-peoria (same address)",
+    "heritage-park-splash-pad-clarksville": "duplicate of heritage-park-sports-complex-clarksville (same address)",
+    "john-sevier-pool-maryville": "duplicate of john-sevier-park-maryville (same address)",
+    "jurassic-park-river-adventuretm-orlando": "duplicate of universal-islands-of-adventure-orlando (same address)",
+    "kasey-meadow-s-play-ground-hickory-hills": "duplicate of kasey-meadow-park-cynthia-neal-center-hickory-hills (same address)",
+    "killens-pond-state-park-felton": "duplicate of killens-pond-water-park-felton (same address)",
+    "kiwanis-wave-pool-tempe": "duplicate of kiwanis-recreation-center-tempe (same address)",
+    "krakatau-aqua-coaster-orlando": "duplicate of universal-islands-of-adventure-orlando (same address)",
+    "lake-george-expedition-park-lake-george": "duplicate of dino-roar-valley-lake-george (same address)",
+    "lake-highlands-north-community-aquatic-center-dallas": "duplicate of lake-highlands-aquatic-center-dallas (same address)",
+    "memorial-park-pool-blue-island": "duplicate of blue-island-memorial-park-blue-island (same address)",
+    "morgan-s-wonderland-san-antonio": "duplicate of rainbow-reef-morgan-s-inspiration-island-san-antonio (same address)",
+    "north-charleston-wannamaker-county-park-north-charleston": "duplicate of whirlin-waters-adventure-waterpark-north-charleston (same address)",
+    "oasis-swim-center-surprise": "duplicate of rescue-oasis-surprise (same address)",
+    "ohno-drop-slide-orlando": "duplicate of universal-islands-of-adventure-orlando (same address)",
+    "otter-cove-aquatic-park-st-charles": "duplicate of otter-cove-splash-park-st-charles (same address)",
+    "paradise-falls-kansas-city": "duplicate of typhoon-kansas-city (same address)",
+    "parkwood-sports-complex-great-neck": "duplicate of great-neck-park-district-great-neck (same address)",
+    "planet-snoopy-kansas-city": "duplicate of oceans-of-fun-kansas-city (same address)",
+    "quiet-waters-park-deerfield-beach": "duplicate of ski-rixen-usa-deerfield-beach (same address)",
+    "rec-aquatic-center-sulphur-parks-and-recreation-sulphur": "duplicate of spar-waterpark-sulphur-parks-and-recreation-sulphur (same address)",
+    "rhodes-jordan-aquatic-center-lawrenceville": "duplicate of rhodes-jordan-park-lawrenceville (same address)",
+    "rigby-s-entertainment-complex-warner-robins": "duplicate of rigby-s-water-world-warner-robins (same address)",
+    "rio-vista-community-park-peoria": "duplicate of rio-vista-recreation-center-peoria (same address)",
+    "riptide-raceway-kansas-city": "duplicate of typhoon-kansas-city (same address)",
+    "saxon-woods-pool-white-plains": "duplicate of saxon-woods-park-white-plains (same address)",
+    "sears-splash-abilene": "duplicate of arthur-sears-park-abilene (same address)",
+    "soakya-water-park-rossville": "duplicate of lake-winnepesaukah-amusement-park-rossville (same address)",
+    "sobelsohn-playground-richmond-hill": "duplicate of jackson-pond-playground-richmond-hill (same address)",
+    "south-bay-shores-santa-clara": "duplicate of california-s-great-america-santa-clara (same address)",
+    "spivey-splash-water-park-jonesboro": "duplicate of clayton-county-international-park-jonesboro (same address)",
+    "splash-summit-waterpark-provo": "duplicate of seven-peaks-water-park-provo-provo (same address)",
+    "spooky-world-presents-nightmare-new-england-litchfield": "duplicate of mel-s-funway-park-litchfield (same address)",
+    "sprayground-at-dorbrook-recreation-area-colts-neck": "duplicate of dorbrook-recreation-area-colts-neck (same address)",
+    "springbrook-pool-alcoa": "duplicate of alcoa-duck-pond-alcoa (same address)",
+    "stewart-heights-park-tacoma": "duplicate of stewart-heights-pool-tacoma (same address)",
+    "t-y-topeekeegee-yugnee-park-hollywood": "duplicate of castaway-island-ty-park-closed-for-season-hollywood (same address)",
+    "the-boardwalk-at-hersheypark-hershey": "duplicate of hersheypark-hershey (same address)",
+    "the-grove-resort-water-park-orlando-winter-garden": "duplicate of surfari-water-park-at-the-grove-resort-winter-garden (same address)",
+    "tike-s-peak-orlando": "duplicate of teamboat-springs-orlando (same address)",
+    "tomahawk-lake-sparta": "duplicate of tomahawk-lake-waterpark-sparta (same address)",
+    "tropical-splash-currently-closed-lauderhill": "duplicate of central-broward-park-broward-county-stadium-lauderhill (same address)",
+    "universal-orlando-resort-orlando": "duplicate of universal-islands-of-adventure-orlando (same address)",
+    "universal-volcano-bay-orlando": "duplicate of universal-islands-of-adventure-orlando (same address)",
+    "wake-zone-cable-park-oklahoma-city": "duplicate of lost-lakes-adventure-park-oklahoma-city (same address)",
+    "warner-park-pool-splash-pad-chattanooga": "duplicate of warner-park-pool-chattanooga (same address)",
+    "water-works-park-cuyahoga-falls": "duplicate of water-works-family-aquatic-center-cuyahoga-falls (same address)",
+    "wave-pool-fairmont": "duplicate of east-marion-park-fairmont (same address)",
+    "wedge-slides-waco": "duplicate of waco-surf-waco (same address)",
+    "whatz-up-fun-park-seven-points": "duplicate of whatz-up-water-park-seven-points (same address)",
+    "wildwater-adventure-muskegon": "duplicate of michigan-s-adventure-muskegon (same address)",
+    "william-m-allen-park-wentzville": "duplicate of splash-station-aquatic-center-wentzville (same address)",
+    "worlds-of-fun-kansas-city": "duplicate of oceans-of-fun-kansas-city (same address)",
+})
+
+# Dropped duplicates 301 to their kept twin instead of the generic state hub, so
+# link equity and user intent land on the surviving page. Derived from the
+# "duplicate of <slug>" reason strings above; build_redirects validates each
+# target against the current build and falls back to the state hub if missing.
+PAD_REDIRECT_OVERRIDES = {
+    slug: "/pad/" + reason.split("duplicate of ", 1)[1].split(" ")[0]
+    for slug, reason in PAD_EXCLUDE_SLUGS.items()
+    if reason.startswith("duplicate of ")
+}
