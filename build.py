@@ -1193,16 +1193,22 @@ def build_search_index(pads):
 LASTMOD_STORE = Path(__file__).resolve().parent / "sitemap_lastmod.json"
 
 
-def _stable_lastmods(entries):
+def _stable_lastmods(entries, data_by_url=None):
     """Per-URL lastmod from a committed content-hash datestore (sitemap_lastmod.json).
 
-    A URL's date bumps to the build date only when its rendered HTML actually
-    changed since the stored hash — so lastmod stays consistently accurate and
-    Google can trust it, instead of seeing every URL restamped on every build
-    (a pattern crawlers learn to ignore). The store is committed to git so
-    Netlify builds read the same dates; it must be rendered AFTER the pages
-    (build_sitemap runs after all page builds in main()).
+    A URL's date bumps to the build date only when its content actually changed
+    since the stored hash — so lastmod stays consistently accurate and Google
+    can trust it, instead of seeing every URL restamped on every build (a
+    pattern crawlers learn to ignore). The store is committed to git so Netlify
+    builds read the same dates.
+
+    Pad/blog URLs hash their SOURCE DATA (canonical JSON of the Airtable
+    record), not the rendered HTML — rendered output varies across
+    environments (Python/library versions on Netlify vs local), which would
+    flip every hash on deploy and restamp the whole sitemap. Data hashes are
+    environment-independent. The few hub/static URLs still hash rendered files.
     """
+    data_by_url = data_by_url or {}
     try:
         store = json.loads(LASTMOD_STORE.read_text())
     except (OSError, ValueError):
@@ -1211,13 +1217,18 @@ def _stable_lastmods(entries):
     dates = {}
     new_store = {}
     for url, _priority, _default in entries:
-        rel = url.replace(config.SITE_URL, "").strip("/")
-        page = config.OUTPUT_DIR / (f"{rel}.html" if rel else "index.html")
         rec = store.get(url) or {}
-        try:
-            digest = hashlib.sha256(page.read_bytes()).hexdigest()[:16]
-        except OSError:
-            digest = rec.get("hash", "")
+        data = data_by_url.get(url)
+        if data is not None:
+            basis = json.dumps(data, sort_keys=True, ensure_ascii=True, default=str)
+            digest = hashlib.sha256(basis.encode("utf-8")).hexdigest()[:16]
+        else:
+            rel = url.replace(config.SITE_URL, "").strip("/")
+            page = config.OUTPUT_DIR / (f"{rel}.html" if rel else "index.html")
+            try:
+                digest = hashlib.sha256(page.read_bytes()).hexdigest()[:16]
+            except OSError:
+                digest = rec.get("hash", "")
         if digest and digest == rec.get("hash"):
             date = rec.get("date") or today  # unchanged content keeps its date
         elif not digest:
@@ -1276,7 +1287,11 @@ def build_sitemap(pads, posts):
         if post.get("slug"):
             entries.append((f"{config.SITE_URL}/blog/{post['slug']}", "0.8", today))
 
-    lastmods = _stable_lastmods(entries)
+    data_by_url = {f"{config.SITE_URL}/pad/{p['slug']}": p for p in indexable_pads}
+    for post in posts:
+        if post.get("slug"):
+            data_by_url[f"{config.SITE_URL}/blog/{post['slug']}"] = post
+    lastmods = _stable_lastmods(entries, data_by_url)
 
     sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n'
     sitemap += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
