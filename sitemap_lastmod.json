@@ -1,11 +1,11 @@
 {
 "https://splashpadlocator.com/": {
 "date": "2026-06-09",
-"hash": "3d5a17984941c65a"
+"hash": "12b19ce2615a3a77"
 },
 "https://splashpadlocator.com/about": {
 "date": "2026-06-09",
-"hash": "69b5f624b1766010"
+"hash": "7114d48554358362"
 },
 "https://splashpadlocator.com/blog": {
 "date": "2026-06-09",
@@ -129,7 +129,7 @@
 },
 "https://splashpadlocator.com/category/accessible": {
 "date": "2026-06-09",
-"hash": "7079d296ecd40470"
+"hash": "7af381dd771d3598"
 },
 "https://splashpadlocator.com/category/amusement-parks": {
 "date": "2026-06-09",
@@ -137,11 +137,11 @@
 },
 "https://splashpadlocator.com/category/families": {
 "date": "2026-06-09",
-"hash": "b558d6aa18b5aa02"
+"hash": "6c489d648b07cc63"
 },
 "https://splashpadlocator.com/category/free-admission": {
 "date": "2026-06-09",
-"hash": "5427b779aac49fdc"
+"hash": "67593d7d3eebb9db"
 },
 "https://splashpadlocator.com/category/indoor": {
 "date": "2026-06-09",
@@ -149,7 +149,7 @@
 },
 "https://splashpadlocator.com/category/toddlers": {
 "date": "2026-06-09",
-"hash": "620108afe70aa527"
+"hash": "9f80005637704a1a"
 },
 "https://splashpadlocator.com/category/water-parks": {
 "date": "2026-06-09",
@@ -157,7 +157,7 @@
 },
 "https://splashpadlocator.com/category/with-picnic-areas": {
 "date": "2026-06-09",
-"hash": "b6eb768ae50ec1bc"
+"hash": "80020181112c5d76"
 },
 "https://splashpadlocator.com/category/with-restrooms": {
 "date": "2026-06-09",
@@ -165,11 +165,11 @@
 },
 "https://splashpadlocator.com/category/with-shade": {
 "date": "2026-06-09",
-"hash": "5ec6be5dea94c30d"
+"hash": "c1380c842e309973"
 },
 "https://splashpadlocator.com/city/brooklyn-new-york": {
 "date": "2026-06-09",
-"hash": "82ab67a8ad8d7254"
+"hash": "f4512678cb73046c"
 },
 "https://splashpadlocator.com/city/chicago-illinois": {
 "date": "2026-06-09",
@@ -185,7 +185,7 @@
 },
 "https://splashpadlocator.com/city/houston-texas": {
 "date": "2026-06-09",
-"hash": "a438f62aab046d6f"
+"hash": "4a4dd049cf2a589b"
 },
 "https://splashpadlocator.com/city/indianapolis-indiana": {
 "date": "2026-06-09",
@@ -197,11 +197,11 @@
 },
 "https://splashpadlocator.com/city/miami-florida": {
 "date": "2026-06-09",
-"hash": "05a9258d36e8a6eb"
+"hash": "aa81bcf54531e7a7"
 },
 "https://splashpadlocator.com/city/new-york-new-york": {
 "date": "2026-06-09",
-"hash": "b9a4ef632550f1f1"
+"hash": "f6400cf963be5b72"
 },
 "https://splashpadlocator.com/city/phoenix-arizona": {
 "date": "2026-06-09",
@@ -217,7 +217,7 @@
 },
 "https://splashpadlocator.com/city/tempe-arizona": {
 "date": "2026-06-09",
-"hash": "b0221d746ceb278d"
+"hash": "1e7c1d25e831a072"
 },
 "https://splashpadlocator.com/contact": {
 "date": "2026-06-09",
@@ -307,10 +307,6 @@
 "date": "2026-05-29",
 "hash": "95fa8f18524ba170"
 },
-"https://splashpadlocator.com/pad/adventure-city-anaheim": {
-"date": "2026-05-29",
-"hash": "2398e02db6571902"
-},
 "https://splashpadlocator.com/pad/adventure-cove-abilene": {
 "date": "2026-05-29",
 "hash": "4db366296aed25bb"
@@ -330,10 +326,6 @@
 "https://splashpadlocator.com/pad/adventure-island-tampa": {
 "date": "2026-05-29",
 "hash": "49bea2b0c3c7e3ad"
-},
-"https://splashpadlocator.com/pad/adventure-landing-gastonia-gastonia": {
-"date": "2026-05-29",
-"hash": "92a0e460e7bf4f46"
 },
 "https://splashpadlocator.com/pad/adventure-landing-raleigh": {
 "date": "2026-05-29",
@@ -431,10 +423,6 @@
 "date": "2026-05-29",
 "hash": "2f8ecc570d19e402"
 },
-"https://splashpadlocator.com/pad/alley-pond-park-oakland-gardens": {
-"date": "2026-05-29",
-"hash": "c93d87df6165a8cc"
-},
 "https://splashpadlocator.com/pad/alligator-s-creek-aquatic-center-o-fallon": {
 "date": "2026-05-29",
 "hash": "0937356dfeef1abc"
@@ -506,10 +494,6 @@
 "https://splashpadlocator.com/pad/anderson-park-normal": {
 "date": "2026-05-29",
 "hash": "5ef2b23fe1603551"
-},
-"https://splashpadlocator.com/pad/andretti-thrill-park-melbourne": {
-"date": "2026-05-29",
-"hash": "84be22e99728ddf3"
 },
 "https://splashpadlocator.com/pad/andrew-ramsey-park-indianapolis": {
 "date": "2026-05-29",
@@ -674,10 +658,6 @@
 "https://splashpadlocator.com/pad/armco-park-splash-pad-slippery-rock": {
 "date": "2026-05-29",
 "hash": "5880fb423faf75f5"
-},
-"https://splashpadlocator.com/pad/armstrong-park-duncanville": {
-"date": "2026-05-29",
-"hash": "c47dce9675444fe5"
 },
 "https://splashpadlocator.com/pad/arnold-recreational-complex-arnold": {
 "date": "2026-05-29",
@@ -963,10 +943,6 @@
 "date": "2026-05-29",
 "hash": "0aee33325eea6414"
 },
-"https://splashpadlocator.com/pad/betti-stradling-park-coral-springs": {
-"date": "2026-05-29",
-"hash": "131c4084663159ef"
-},
 "https://splashpadlocator.com/pad/bever-park-cedar-rapids": {
 "date": "2026-05-29",
 "hash": "2e995eefa8fb0b90"
@@ -1111,14 +1087,6 @@
 "date": "2026-05-29",
 "hash": "dc4edaf080106b13"
 },
-"https://splashpadlocator.com/pad/boomers-livermore-livermore": {
-"date": "2026-05-29",
-"hash": "893c25de5eb3f5e6"
-},
-"https://splashpadlocator.com/pad/boomers-modesto-modesto": {
-"date": "2026-05-29",
-"hash": "35f9eeab771eb228"
-},
 "https://splashpadlocator.com/pad/boomtown-bay-family-aquatic-center-burkburnett": {
 "date": "2026-05-29",
 "hash": "38afbdd6a817d1e5"
@@ -1215,17 +1183,9 @@
 "date": "2026-06-09",
 "hash": "89d8e310349f44ed"
 },
-"https://splashpadlocator.com/pad/brooklyn-bridge-park-pier-5-brooklyn-heights": {
-"date": "2026-05-29",
-"hash": "cf756c4e50f3d67d"
-},
 "https://splashpadlocator.com/pad/brooklyn-bridge-park-pier-6-liberty-lawn-brooklyn": {
 "date": "2026-05-29",
 "hash": "e9832765aa181921"
-},
-"https://splashpadlocator.com/pad/brooklyn-heights-promenade-brooklyn": {
-"date": "2026-05-29",
-"hash": "0e0182fc4c028e8b"
 },
 "https://splashpadlocator.com/pad/brookside-pool-ashland": {
 "date": "2026-05-29",
@@ -1327,10 +1287,6 @@
 "date": "2026-05-29",
 "hash": "72df9b78dbb3cda7"
 },
-"https://splashpadlocator.com/pad/bushkill-park-easton": {
-"date": "2026-05-29",
-"hash": "ef378b1b72a94bb6"
-},
 "https://splashpadlocator.com/pad/buttonwoods-beach-warwick-city-park-warwick": {
 "date": "2026-06-09",
 "hash": "33d18809f3f320aa"
@@ -1374,10 +1330,6 @@
 "https://splashpadlocator.com/pad/calypso-cove-aquatic-facility-margate": {
 "date": "2026-05-29",
 "hash": "b391d2910d10ee8d"
-},
-"https://splashpadlocator.com/pad/camden-park-huntington": {
-"date": "2026-05-29",
-"hash": "98d8d68ad1c2f252"
 },
 "https://splashpadlocator.com/pad/camelbeach-outdoor-waterpark-at-camelback-resort-tannersville": {
 "date": "2026-05-29",
@@ -1459,10 +1411,6 @@
 "date": "2026-05-29",
 "hash": "fa3e96be8d75858c"
 },
-"https://splashpadlocator.com/pad/carolyn-crayton-park-macon": {
-"date": "2026-05-29",
-"hash": "82e68b83e34862e9"
-},
 "https://splashpadlocator.com/pad/carondelet-park-rec-complex-st-louis": {
 "date": "2026-06-09",
 "hash": "aaedfa3b2a785339"
@@ -1470,10 +1418,6 @@
 "https://splashpadlocator.com/pad/carowinds-us": {
 "date": "2026-05-29",
 "hash": "f0a126e24dfafb3a"
-},
-"https://splashpadlocator.com/pad/carpenter-park-recreation-center-plano": {
-"date": "2026-05-29",
-"hash": "a35f1fb54e6dcf47"
 },
 "https://splashpadlocator.com/pad/carroll-butts-park-westminster": {
 "date": "2026-05-29",
@@ -1514,14 +1458,6 @@
 "https://splashpadlocator.com/pad/cascade-falls-aquatic-center-ankeny": {
 "date": "2026-05-29",
 "hash": "b2cf34591bc99413"
-},
-"https://splashpadlocator.com/pad/cascade-valley-metro-park-chuckery-area-akron": {
-"date": "2026-05-29",
-"hash": "b260ace7d098646d"
-},
-"https://splashpadlocator.com/pad/cascade-valley-metro-park-schumacher-valley-area-akron": {
-"date": "2026-05-29",
-"hash": "8088260e5f5e26f7"
 },
 "https://splashpadlocator.com/pad/casey-swim-center-chestertown": {
 "date": "2026-05-29",
@@ -1622,10 +1558,6 @@
 "https://splashpadlocator.com/pad/centennial-park-aquatic-center-orland-park-pool-orland-park": {
 "date": "2026-05-29",
 "hash": "75312245e45409ce"
-},
-"https://splashpadlocator.com/pad/centennial-park-davenport": {
-"date": "2026-05-29",
-"hash": "28519484988caa14"
 },
 "https://splashpadlocator.com/pad/center-park-at-centerville-centerville": {
 "date": "2026-05-29",
@@ -1907,10 +1839,6 @@
 "date": "2026-05-29",
 "hash": "37706c9980f5252b"
 },
-"https://splashpadlocator.com/pad/clemyjontri-park-mclean": {
-"date": "2026-05-29",
-"hash": "7298e22ce3ce1be7"
-},
 "https://splashpadlocator.com/pad/cleopatra-playground-bronx": {
 "date": "2026-05-29",
 "hash": "5b7febc757db57e7"
@@ -1934,10 +1862,6 @@
 "https://splashpadlocator.com/pad/clive-aquatic-center-clive": {
 "date": "2026-05-29",
 "hash": "41b013eefa71b868"
-},
-"https://splashpadlocator.com/pad/clove-lakes-park-staten-island": {
-"date": "2026-05-29",
-"hash": "6779b17547c1f29d"
 },
 "https://splashpadlocator.com/pad/coal-creek-park-erie": {
 "date": "2026-06-06",
@@ -2019,10 +1943,6 @@
 "date": "2026-05-29",
 "hash": "be8140341dd84bd6"
 },
-"https://splashpadlocator.com/pad/columbus-park-new-york": {
-"date": "2026-05-29",
-"hash": "d655a6ef8ed94cfa"
-},
 "https://splashpadlocator.com/pad/comeford-park-marysville": {
 "date": "2026-06-09",
 "hash": "d21ff9d3cbd45b10"
@@ -2074,10 +1994,6 @@
 "https://splashpadlocator.com/pad/conroe-parks-recreation-conroe": {
 "date": "2026-05-29",
 "hash": "4d93eb88ece297e4"
-},
-"https://splashpadlocator.com/pad/conservatory-water-new-york": {
-"date": "2026-05-29",
-"hash": "95a5a2e22d2960e1"
 },
 "https://splashpadlocator.com/pad/cook-creek-pool-waterslide-lone-tree": {
 "date": "2026-05-29",
@@ -2203,10 +2119,6 @@
 "date": "2026-05-29",
 "hash": "7731e214a2091199"
 },
-"https://splashpadlocator.com/pad/croton-gorge-park-croton-on-hudson": {
-"date": "2026-05-29",
-"hash": "f832a67bb7d7e20a"
-},
 "https://splashpadlocator.com/pad/croton-point-park-croton-on-hudson": {
 "date": "2026-06-09",
 "hash": "4a7b23d1e86afaa7"
@@ -2287,10 +2199,6 @@
 "date": "2026-05-29",
 "hash": "fc9c84d8d40b8e46"
 },
-"https://splashpadlocator.com/pad/cypress-park-coral-springs": {
-"date": "2026-05-29",
-"hash": "bfb56a3bea2f4b81"
-},
 "https://splashpadlocator.com/pad/cypress-water-park-coral-springs": {
 "date": "2026-05-29",
 "hash": "c839ec99e5a40740"
@@ -2355,10 +2263,6 @@
 "date": "2026-05-29",
 "hash": "05204561b55f1464"
 },
-"https://splashpadlocator.com/pad/des-moines-water-works-park-des-moines": {
-"date": "2026-05-29",
-"hash": "b33d470739151241"
-},
 "https://splashpadlocator.com/pad/desalvio-playground-new-york": {
 "date": "2026-05-29",
 "hash": "a3327f7990853a5c"
@@ -2402,10 +2306,6 @@
 "https://splashpadlocator.com/pad/discovery-cove-orlando": {
 "date": "2026-05-29",
 "hash": "665609cb432541de"
-},
-"https://splashpadlocator.com/pad/discovery-green-houston": {
-"date": "2026-05-29",
-"hash": "3a3bc50443ed9ab4"
 },
 "https://splashpadlocator.com/pad/discovery-island-simpsonville": {
 "date": "2026-05-29",
@@ -2511,10 +2411,6 @@
 "date": "2026-05-29",
 "hash": "9eb54380a14e98ac"
 },
-"https://splashpadlocator.com/pad/doylestown-ymca-doylestown": {
-"date": "2026-05-29",
-"hash": "f718877dbe04761e"
-},
 "https://splashpadlocator.com/pad/dragonland-water-park-pekin-park-district-pekin": {
 "date": "2026-05-29",
 "hash": "023c2b65225a08a1"
@@ -2535,10 +2431,6 @@
 "date": "2026-05-29",
 "hash": "e0aa5453cd81c6bb"
 },
-"https://splashpadlocator.com/pad/dumbo-archway-plaza-brooklyn": {
-"date": "2026-05-29",
-"hash": "45f8b1d3f7b86b6d"
-},
 "https://splashpadlocator.com/pad/dunkin-wall-water-park-manila": {
 "date": "2026-05-29",
 "hash": "3a54229035f52b65"
@@ -2554,10 +2446,6 @@
 "https://splashpadlocator.com/pad/dunworth-pool-water-park-dearborn": {
 "date": "2026-05-29",
 "hash": "782db8534e791b3b"
-},
-"https://splashpadlocator.com/pad/durant-park-lansing": {
-"date": "2026-05-29",
-"hash": "3cb23daf95514f50"
 },
 "https://splashpadlocator.com/pad/dyess-family-pool-dyess-afb": {
 "date": "2026-05-29",
@@ -2651,10 +2539,6 @@
 "date": "2026-05-29",
 "hash": "7d05f25849cc5bde"
 },
-"https://splashpadlocator.com/pad/edora-park-fort-collins": {
-"date": "2026-05-29",
-"hash": "535f715a37823dc8"
-},
 "https://splashpadlocator.com/pad/edora-pool-ice-center-epic-fort-collins": {
 "date": "2026-05-29",
 "hash": "d9ec47370e558b7a"
@@ -2670,10 +2554,6 @@
 "https://splashpadlocator.com/pad/eldridge-park-elmira": {
 "date": "2026-05-29",
 "hash": "0c054d6aa4b848fb"
-},
-"https://splashpadlocator.com/pad/elevated-acre-new-york": {
-"date": "2026-05-29",
-"hash": "ff75e4af6a58c839"
 },
 "https://splashpadlocator.com/pad/elitch-gardens-denver": {
 "date": "2026-05-29",
@@ -2706,10 +2586,6 @@
 "https://splashpadlocator.com/pad/elysian-park-hoboken": {
 "date": "2026-06-09",
 "hash": "39cad5c32320333d"
-},
-"https://splashpadlocator.com/pad/emerald-falls-family-recreation-center-panama-city": {
-"date": "2026-05-29",
-"hash": "a81189a30985e5ec"
 },
 "https://splashpadlocator.com/pad/emerald-park-eugene": {
 "date": "2026-05-29",
@@ -2827,10 +2703,6 @@
 "date": "2026-05-29",
 "hash": "a6b0a2bd6ef7bcf2"
 },
-"https://splashpadlocator.com/pad/falls-park-sioux-falls": {
-"date": "2026-05-29",
-"hash": "bb9314bd6f3d7fe7"
-},
 "https://splashpadlocator.com/pad/family-aquatic-center-at-heritage-park-wheeling": {
 "date": "2026-05-29",
 "hash": "06af87f48a401cdc"
@@ -2895,10 +2767,6 @@
 "date": "2026-05-29",
 "hash": "306cd192a14b8df6"
 },
-"https://splashpadlocator.com/pad/firefighter-s-memorial-park-union-city": {
-"date": "2026-05-29",
-"hash": "5b7c71ef889d78cc"
-},
 "https://splashpadlocator.com/pad/fishers-parks-fishers": {
 "date": "2026-05-29",
 "hash": "b657fb50fe74bf57"
@@ -2910,10 +2778,6 @@
 "https://splashpadlocator.com/pad/flagstaff-aquaplex-flagstaff": {
 "date": "2026-05-29",
 "hash": "9a52eefd489884a9"
-},
-"https://splashpadlocator.com/pad/flat-fork-creek-park-fishers": {
-"date": "2026-05-29",
-"hash": "e10f4c5340bb1f4b"
 },
 "https://splashpadlocator.com/pad/fletcher-cove-beach-park-solana-beach": {
 "date": "2026-06-09",
@@ -2975,10 +2839,6 @@
 "date": "2026-05-29",
 "hash": "d8fb9cbd45dafbd3"
 },
-"https://splashpadlocator.com/pad/forest-park-woodhaven": {
-"date": "2026-05-29",
-"hash": "be13f22580127f2d"
-},
 "https://splashpadlocator.com/pad/forsyth-park-savannah": {
 "date": "2026-05-29",
 "hash": "e6b69ac21b93ee51"
@@ -3027,10 +2887,6 @@
 "date": "2026-06-05",
 "hash": "fa0fc91253b70a54"
 },
-"https://splashpadlocator.com/pad/fossil-creek-park-fort-collins": {
-"date": "2026-05-29",
-"hash": "0351787f85133422"
-},
 "https://splashpadlocator.com/pad/founder-s-park-at-campbell-station-farragut": {
 "date": "2026-05-29",
 "hash": "ccd2b74cf1c541a2"
@@ -3067,17 +2923,9 @@
 "date": "2026-05-29",
 "hash": "4753988229c545f1"
 },
-"https://splashpadlocator.com/pad/frankie-s-of-raleigh-raleigh": {
-"date": "2026-05-29",
-"hash": "1c7bc8b3457bd524"
-},
 "https://splashpadlocator.com/pad/franklin-d-roosevelt-boardwalk-and-beach-staten-island": {
 "date": "2026-05-29",
 "hash": "93277b4d5ff80f04"
-},
-"https://splashpadlocator.com/pad/franklin-d-roosevelt-four-freedoms-state-park-roosevelt-island": {
-"date": "2026-05-29",
-"hash": "20c3ccc1ac73df51"
 },
 "https://splashpadlocator.com/pad/franklin-splash-park-franklin": {
 "date": "2026-05-29",
@@ -3139,10 +2987,6 @@
 "date": "2026-05-29",
 "hash": "46ca367243f57caf"
 },
-"https://splashpadlocator.com/pad/frontier-park-st-charles": {
-"date": "2026-05-29",
-"hash": "05622b8622156486"
-},
 "https://splashpadlocator.com/pad/fun-forest-park-tyler": {
 "date": "2026-05-29",
 "hash": "10353029d42aeb54"
@@ -3150,10 +2994,6 @@
 "https://splashpadlocator.com/pad/fun-junktion-elizabeth-city": {
 "date": "2026-05-29",
 "hash": "919ba045126cef18"
-},
-"https://splashpadlocator.com/pad/fun-land-of-fredericksburg-fredericksburg": {
-"date": "2026-05-29",
-"hash": "4290553d93b54c25"
 },
 "https://splashpadlocator.com/pad/fun-plex-waterpark-rides-omaha": {
 "date": "2026-05-29",
@@ -3171,10 +3011,6 @@
 "date": "2026-05-29",
 "hash": "5ef0ab15df7c574b"
 },
-"https://splashpadlocator.com/pad/fun-world-nashua": {
-"date": "2026-05-29",
-"hash": "bb6e9a67c1b5f665"
-},
 "https://splashpadlocator.com/pad/funbox-lawrenceville-sugarloaf-mills-lawrenceville": {
 "date": "2026-05-29",
 "hash": "23fb9393510843f2"
@@ -3186,10 +3022,6 @@
 "https://splashpadlocator.com/pad/funderland-amusement-park-sacramento": {
 "date": "2026-05-29",
 "hash": "d8566a6c29e7439c"
-},
-"https://splashpadlocator.com/pad/funland-idaho-falls": {
-"date": "2026-05-29",
-"hash": "dae76bd94a3be5ec"
 },
 "https://splashpadlocator.com/pad/funtastic-island-owasso": {
 "date": "2026-05-29",
@@ -3238,10 +3070,6 @@
 "https://splashpadlocator.com/pad/garfield-park-indianapolis": {
 "date": "2026-05-29",
 "hash": "cacbff0bcc55cfb4"
-},
-"https://splashpadlocator.com/pad/garlic-creek-park-buda": {
-"date": "2026-05-29",
-"hash": "88bb0c77b8643638"
 },
 "https://splashpadlocator.com/pad/garnet-park-rock-springs": {
 "date": "2026-05-29",
@@ -3403,10 +3231,6 @@
 "date": "2026-05-29",
 "hash": "128aaa43e962b7ee"
 },
-"https://splashpadlocator.com/pad/great-river-park-east-hartford": {
-"date": "2026-05-29",
-"hash": "cb7f497e2540a212"
-},
 "https://splashpadlocator.com/pad/great-river-water-park-st-paul": {
 "date": "2026-05-29",
 "hash": "38a24db2e67a2821"
@@ -3526,10 +3350,6 @@
 "https://splashpadlocator.com/pad/h2obx-waterpark-powells-point": {
 "date": "2026-05-29",
 "hash": "f6f1219877edeeb3"
-},
-"https://splashpadlocator.com/pad/haggard-park-plano": {
-"date": "2026-05-29",
-"hash": "11b257eadad0206b"
 },
 "https://splashpadlocator.com/pad/hal-and-berni-hanson-regional-park-aldie": {
 "date": "2026-05-29",
@@ -3851,10 +3671,6 @@
 "date": "2026-05-29",
 "hash": "d747366a29691f3a"
 },
-"https://splashpadlocator.com/pad/huck-finn-s-playland-albany": {
-"date": "2026-05-29",
-"hash": "ef7b188217efa8b7"
-},
 "https://splashpadlocator.com/pad/hudson-river-park-trust-new-york": {
 "date": "2026-06-09",
 "hash": "8f8cb41c008c1518"
@@ -4147,10 +3963,6 @@
 "date": "2026-05-29",
 "hash": "5bd0ae814004cbc1"
 },
-"https://splashpadlocator.com/pad/john-golden-park-bayside": {
-"date": "2026-05-29",
-"hash": "098a2766b51969e2"
-},
 "https://splashpadlocator.com/pad/john-h-gwynn-jr-park-peoria": {
 "date": "2026-05-29",
 "hash": "a4992241db4897ce"
@@ -4162,10 +3974,6 @@
 "https://splashpadlocator.com/pad/john-sevier-park-maryville": {
 "date": "2026-05-29",
 "hash": "b88083284068f81e"
-},
-"https://splashpadlocator.com/pad/john-street-park-brooklyn": {
-"date": "2026-05-29",
-"hash": "568ee8a47ae26f68"
 },
 "https://splashpadlocator.com/pad/john-v-lindsay-east-river-park-new-york": {
 "date": "2026-06-09",
@@ -4335,17 +4143,9 @@
 "date": "2026-05-29",
 "hash": "9e9b16694a4a8a0f"
 },
-"https://splashpadlocator.com/pad/kids-castle-central-park-doylestown": {
-"date": "2026-05-29",
-"hash": "59d16cfcbbb2d4f5"
-},
 "https://splashpadlocator.com/pad/kids-splash-park-jacksonville": {
 "date": "2026-06-06",
 "hash": "62b43a890effb667"
-},
-"https://splashpadlocator.com/pad/kidstar-park-port-charlotte": {
-"date": "2026-05-29",
-"hash": "b96b08f11a951fff"
 },
 "https://splashpadlocator.com/pad/killens-pond-water-park-felton": {
 "date": "2026-05-29",
@@ -4551,10 +4351,6 @@
 "date": "2026-05-29",
 "hash": "b0e387ba47fe70d5"
 },
-"https://splashpadlocator.com/pad/lakeside-park-fort-wayne": {
-"date": "2026-05-29",
-"hash": "e4b6f722cdad4822"
-},
 "https://splashpadlocator.com/pad/lakeside-water-park-galesburg": {
 "date": "2026-05-29",
 "hash": "307ef4525efad6d4"
@@ -4662,10 +4458,6 @@
 "https://splashpadlocator.com/pad/legion-field-pensacola": {
 "date": "2026-05-29",
 "hash": "f242e2d040f0a88a"
-},
-"https://splashpadlocator.com/pad/legoland-r-discovery-center-arizona-tempe": {
-"date": "2026-05-29",
-"hash": "42c30c58f2e00458"
 },
 "https://splashpadlocator.com/pad/legoland-r-florida-water-park-winter-haven": {
 "date": "2026-05-29",
@@ -4783,10 +4575,6 @@
 "date": "2026-05-29",
 "hash": "6df62ca344534820"
 },
-"https://splashpadlocator.com/pad/little-island-new-york": {
-"date": "2026-05-29",
-"hash": "c3684601cec4f983"
-},
 "https://splashpadlocator.com/pad/little-tallapoosa-park-carrollton": {
 "date": "2026-05-29",
 "hash": "e5e0d3458b30c00d"
@@ -4843,10 +4631,6 @@
 "date": "2026-05-29",
 "hash": "d4b5121521f6f576"
 },
-"https://splashpadlocator.com/pad/louis-valentino-jr-park-and-pier-brooklyn": {
-"date": "2026-05-29",
-"hash": "92257f4ce8b693da"
-},
 "https://splashpadlocator.com/pad/lower-huron-metropark-turtle-cove-family-aquatic-center-belleville": {
 "date": "2026-05-29",
 "hash": "4077d5b7c9648825"
@@ -4898,10 +4682,6 @@
 "https://splashpadlocator.com/pad/malibu-jack-s-ashland-ashland": {
 "date": "2026-05-29",
 "hash": "ac1a7d1621cf92ac"
-},
-"https://splashpadlocator.com/pad/malibu-jack-s-lexington-lexington": {
-"date": "2026-05-29",
-"hash": "0021fdd397d3029e"
 },
 "https://splashpadlocator.com/pad/malibu-jack-s-louisville-louisville": {
 "date": "2026-05-29",
@@ -5071,10 +4851,6 @@
 "date": "2026-05-29",
 "hash": "3156c2e11ce20ed8"
 },
-"https://splashpadlocator.com/pad/mel-s-funway-park-litchfield": {
-"date": "2026-05-29",
-"hash": "d3c04734403c5946"
-},
 "https://splashpadlocator.com/pad/melrose-park-playground-splashpad-chelsea": {
 "date": "2026-05-29",
 "hash": "7412050121531ee1"
@@ -5155,10 +4931,6 @@
 "date": "2026-05-29",
 "hash": "4b8d74e3e752294f"
 },
-"https://splashpadlocator.com/pad/mill-river-park-stamford": {
-"date": "2026-05-29",
-"hash": "cb5d4313af043b5b"
-},
 "https://splashpadlocator.com/pad/mill-valley-community-center-mill-valley": {
 "date": "2026-05-29",
 "hash": "5b5f26aebe208654"
@@ -5199,10 +4971,6 @@
 "date": "2026-05-29",
 "hash": "0ce6b5f852563627"
 },
-"https://splashpadlocator.com/pad/miramar-pineland-park-miramar": {
-"date": "2026-05-29",
-"hash": "4035a462ecde517c"
-},
 "https://splashpadlocator.com/pad/mission-hills-park-henderson": {
 "date": "2026-06-09",
 "hash": "7eb829edf29fa395"
@@ -5234,10 +5002,6 @@
 "https://splashpadlocator.com/pad/monogram-foods-smith-river-sports-complex-axton": {
 "date": "2026-05-29",
 "hash": "f668c2573963f4cf"
-},
-"https://splashpadlocator.com/pad/monroeville-community-park-west-monroeville": {
-"date": "2026-05-29",
-"hash": "a5a9a0e5d081447e"
 },
 "https://splashpadlocator.com/pad/monroeville-veterans-park-monroeville": {
 "date": "2026-05-29",
@@ -5879,10 +5643,6 @@
 "date": "2026-05-29",
 "hash": "b0dc2d51954b24f7"
 },
-"https://splashpadlocator.com/pad/pacific-park-on-the-santa-monica-pier-santa-monica": {
-"date": "2026-05-29",
-"hash": "15bc804305df9b5e"
-},
 "https://splashpadlocator.com/pad/paiute-park-scottsdale": {
 "date": "2026-06-07",
 "hash": "f934ce568b9d94c2"
@@ -5938,10 +5698,6 @@
 "https://splashpadlocator.com/pad/paradise-cove-water-park-pembroke-pines": {
 "date": "2026-05-29",
 "hash": "092562de8ae9928e"
-},
-"https://splashpadlocator.com/pad/paradise-gardens-park-anaheim": {
-"date": "2026-05-29",
-"hash": "75cb7c8e6188b47e"
 },
 "https://splashpadlocator.com/pad/paradise-water-park-las-vegas": {
 "date": "2026-05-29",
@@ -6031,10 +5787,6 @@
 "date": "2026-06-09",
 "hash": "1f6d660fbdf074a6"
 },
-"https://splashpadlocator.com/pad/peace-valley-park-doylestown": {
-"date": "2026-05-29",
-"hash": "5a8e72bb78ebebca"
-},
 "https://splashpadlocator.com/pad/peak-health-aquatic-center-at-mylan-park-morgantown": {
 "date": "2026-05-29",
 "hash": "5ee443ab76716fde"
@@ -6115,17 +5867,9 @@
 "date": "2026-05-29",
 "hash": "a6be2f4bc4f06e79"
 },
-"https://splashpadlocator.com/pad/pictured-rocks-national-lakeshore-munising": {
-"date": "2026-05-29",
-"hash": "7545721835bc13f1"
-},
 "https://splashpadlocator.com/pad/piedmont-park-aquatic-center-atlanta": {
 "date": "2026-05-29",
 "hash": "789551455da23bf6"
-},
-"https://splashpadlocator.com/pad/pier-1-playground-brooklyn": {
-"date": "2026-05-29",
-"hash": "9de981f8a075b1a7"
 },
 "https://splashpadlocator.com/pad/pier-25-at-hudson-river-park-new-york": {
 "date": "2026-05-29",
@@ -6134,10 +5878,6 @@
 "https://splashpadlocator.com/pad/pier-26-at-hudson-river-park-new-york": {
 "date": "2026-05-29",
 "hash": "0d1b79090db10243"
-},
-"https://splashpadlocator.com/pad/pier-46-at-hudson-river-park-new-york": {
-"date": "2026-05-29",
-"hash": "5b01b14358144c79"
 },
 "https://splashpadlocator.com/pad/pier-51-at-hudson-river-park-new-york": {
 "date": "2026-06-09",
@@ -6150,14 +5890,6 @@
 "https://splashpadlocator.com/pad/pier-66-at-hudson-river-park-new-york": {
 "date": "2026-05-29",
 "hash": "56178dd6f0923324"
-},
-"https://splashpadlocator.com/pad/pier-84-at-hudson-river-park-new-york": {
-"date": "2026-05-29",
-"hash": "063d01fd8426f964"
-},
-"https://splashpadlocator.com/pad/pier-96-at-hudson-river-park-new-york": {
-"date": "2026-05-29",
-"hash": "7d09290d8a37f459"
 },
 "https://splashpadlocator.com/pad/pine-lake-waterpark-berne": {
 "date": "2026-05-29",
@@ -6363,10 +6095,6 @@
 "date": "2026-05-29",
 "hash": "85a0e1c7e5a6a0fc"
 },
-"https://splashpadlocator.com/pad/promenade-park-toledo": {
-"date": "2026-05-29",
-"hash": "7e13402fb4d8e2b3"
-},
 "https://splashpadlocator.com/pad/prophetstown-aquatic-center-west-lafayette": {
 "date": "2026-05-29",
 "hash": "ae9a1e6473b7a061"
@@ -6383,10 +6111,6 @@
 "date": "2026-05-29",
 "hash": "e7568a0b9d92a6aa"
 },
-"https://splashpadlocator.com/pad/prospect-playground-bronx": {
-"date": "2026-05-29",
-"hash": "e982c27c44c892fa"
-},
 "https://splashpadlocator.com/pad/ps-46-playground-mini-pool-staten-island": {
 "date": "2026-05-29",
 "hash": "fa8186a51dfc98f9"
@@ -6402,10 +6126,6 @@
 "https://splashpadlocator.com/pad/purple-heart-park-tucson": {
 "date": "2026-05-29",
 "hash": "2c586bdf6d9b2c22"
-},
-"https://splashpadlocator.com/pad/quail-hollow-park-hartville": {
-"date": "2026-05-29",
-"hash": "77d04385e0b2e4a6"
 },
 "https://splashpadlocator.com/pad/quassy-amusement-waterpark-middlebury": {
 "date": "2026-05-29",
@@ -6479,10 +6199,6 @@
 "date": "2026-05-29",
 "hash": "0a217d04728b97af"
 },
-"https://splashpadlocator.com/pad/rancho-san-rafael-regional-park-reno": {
-"date": "2026-05-29",
-"hash": "cc8cff37076fffb3"
-},
 "https://splashpadlocator.com/pad/rancho-simi-recreation-and-park-district-activity-center-simi-valley": {
 "date": "2026-05-29",
 "hash": "5b7eb55ff4732c26"
@@ -6535,10 +6251,6 @@
 "date": "2026-05-29",
 "hash": "f0f3543931c08bcb"
 },
-"https://splashpadlocator.com/pad/redbud-park-abilene": {
-"date": "2026-05-29",
-"hash": "33e56c7548d7391c"
-},
 "https://splashpadlocator.com/pad/redmond-pool-redmond": {
 "date": "2026-05-29",
 "hash": "ac5c1208016d3d93"
@@ -6571,10 +6283,6 @@
 "date": "2026-05-29",
 "hash": "be2f3af47bc27a63"
 },
-"https://splashpadlocator.com/pad/revolution-cable-park-north-fort-myers": {
-"date": "2026-05-29",
-"hash": "1eae8322c681c1c3"
-},
 "https://splashpadlocator.com/pad/rexburg-rapids-rexburg": {
 "date": "2026-05-29",
 "hash": "c180af7e57b97cf0"
@@ -6587,10 +6295,6 @@
 "date": "2026-05-29",
 "hash": "11b4e08672e8da4b"
 },
-"https://splashpadlocator.com/pad/richard-w-dekorte-park-lyndhurst": {
-"date": "2026-05-29",
-"hash": "bfe7355c571720b4"
-},
 "https://splashpadlocator.com/pad/richardson-park-day-lake-reverend-joseph-day-mobile": {
 "date": "2026-05-29",
 "hash": "20410fbfef53adeb"
@@ -6598,10 +6302,6 @@
 "https://splashpadlocator.com/pad/richardson-s-lake-water-park-warrenville": {
 "date": "2026-05-29",
 "hash": "07b1cb84fe0dd10d"
-},
-"https://splashpadlocator.com/pad/richman-echo-park-bronx": {
-"date": "2026-05-29",
-"hash": "404d2bcb51fef880"
 },
 "https://splashpadlocator.com/pad/ricky-guerrero-splash-pad-austin": {
 "date": "2026-05-29",
@@ -7331,10 +7031,6 @@
 "date": "2026-05-29",
 "hash": "50ce2fbff2b7c2a3"
 },
-"https://splashpadlocator.com/pad/solar-one-environmental-education-center-at-stuyvesant-cove-park-new-york": {
-"date": "2026-05-29",
-"hash": "49ea975bb70d0524"
-},
 "https://splashpadlocator.com/pad/somersplash-waterpark-somerset": {
 "date": "2026-05-29",
 "hash": "d62b60773d73b181"
@@ -7667,10 +7363,6 @@
 "date": "2026-05-29",
 "hash": "e67fef5a7075e57b"
 },
-"https://splashpadlocator.com/pad/spring-canyon-park-fort-collins": {
-"date": "2026-05-29",
-"hash": "d01b78b00c126721"
-},
 "https://splashpadlocator.com/pad/spring-hill-rec-center-mclean": {
 "date": "2026-05-29",
 "hash": "0f3304ab9c81465d"
@@ -7747,10 +7439,6 @@
 "date": "2026-06-09",
 "hash": "42d49171272b4321"
 },
-"https://splashpadlocator.com/pad/staten-island-funpark-staten-island": {
-"date": "2026-05-29",
-"hash": "f59ec01c8876114e"
-},
 "https://splashpadlocator.com/pad/statesville-leisure-pool-statesville": {
 "date": "2026-05-29",
 "hash": "2931d98f5882041a"
@@ -7791,10 +7479,6 @@
 "date": "2026-05-29",
 "hash": "c41e8051f1f7d45a"
 },
-"https://splashpadlocator.com/pad/storybook-land-egg-harbor-township": {
-"date": "2026-05-29",
-"hash": "c1c104303a7a2f2e"
-},
 "https://splashpadlocator.com/pad/strawberry-water-park-pasadena": {
 "date": "2026-05-29",
 "hash": "9e5f5baa1c3ccf31"
@@ -7814,10 +7498,6 @@
 "https://splashpadlocator.com/pad/suffoletta-family-aquatic-center-georgetown": {
 "date": "2026-05-29",
 "hash": "43aa7a1a45a16663"
-},
-"https://splashpadlocator.com/pad/sugarcreek-metropark-bellbrook": {
-"date": "2026-05-29",
-"hash": "74278070569c4d09"
 },
 "https://splashpadlocator.com/pad/suggs-water-spray-park-collierville": {
 "date": "2026-05-29",
@@ -7895,10 +7575,6 @@
 "date": "2026-05-29",
 "hash": "dd6570ffd6e3ab66"
 },
-"https://splashpadlocator.com/pad/super-silly-fun-land-studio-city": {
-"date": "2026-05-29",
-"hash": "05de383fa3482910"
-},
 "https://splashpadlocator.com/pad/super-slide-amusement-park-bismarck": {
 "date": "2026-05-29",
 "hash": "0b4d3f349e10abbb"
@@ -7954,10 +7630,6 @@
 "https://splashpadlocator.com/pad/sweetwater-park-tampa": {
 "date": "2026-05-29",
 "hash": "590207c6d1410611"
-},
-"https://splashpadlocator.com/pad/sweetwater-wetlands-park-tucson": {
-"date": "2026-05-29",
-"hash": "3d7d8235e11e4261"
 },
 "https://splashpadlocator.com/pad/swimply-aljurelandia-plant-city": {
 "date": "2026-05-29",
@@ -8070,10 +7742,6 @@
 "https://splashpadlocator.com/pad/the-aqua-pit-coldwater": {
 "date": "2026-05-29",
 "hash": "0a137abe93480d98"
-},
-"https://splashpadlocator.com/pad/the-battery-new-york": {
-"date": "2026-05-29",
-"hash": "5b3135d73c630999"
 },
 "https://splashpadlocator.com/pad/the-beach-waterpark-wood-dale": {
 "date": "2026-05-29",
@@ -8247,10 +7915,6 @@
 "date": "2026-05-29",
 "hash": "b0875d5d0cc9fc35"
 },
-"https://splashpadlocator.com/pad/the-water-works-in-buffalo-bayou-park-houston": {
-"date": "2026-05-29",
-"hash": "691973357565cf9f"
-},
 "https://splashpadlocator.com/pad/the-water-works-indoor-water-park-schaumburg": {
 "date": "2026-05-29",
 "hash": "b9c3ddfb4ed9b3c2"
@@ -8278,14 +7942,6 @@
 "https://splashpadlocator.com/pad/the-yard-flx-watkins-glen": {
 "date": "2026-05-29",
 "hash": "e470da3e2da546ad"
-},
-"https://splashpadlocator.com/pad/the-yards-park-washington": {
-"date": "2026-05-29",
-"hash": "ab82ad9cf44704e8"
-},
-"https://splashpadlocator.com/pad/theodore-roosevelt-park-new-york": {
-"date": "2026-05-29",
-"hash": "fdc172ad34115599"
 },
 "https://splashpadlocator.com/pad/thomas-a-cloud-memorial-park-huber-heights": {
 "date": "2026-05-29",
@@ -8322,10 +7978,6 @@
 "https://splashpadlocator.com/pad/thunder-junction-all-abilities-park-st-george": {
 "date": "2026-05-29",
 "hash": "815814ad9dac1ec7"
-},
-"https://splashpadlocator.com/pad/thunder-road-of-sioux-falls-sioux-falls": {
-"date": "2026-05-29",
-"hash": "92999357194b2764"
 },
 "https://splashpadlocator.com/pad/thundering-surf-waterpark-beach-haven": {
 "date": "2026-05-29",
@@ -8394,10 +8046,6 @@
 "https://splashpadlocator.com/pad/tonganoxie-water-park-tonganoxie": {
 "date": "2026-05-29",
 "hash": "be6c98663a83d472"
-},
-"https://splashpadlocator.com/pad/tonsler-recreation-center-charlottesville": {
-"date": "2026-05-29",
-"hash": "f53c8ef52d2a133e"
 },
 "https://splashpadlocator.com/pad/tooele-city-parks-recreation-tooele": {
 "date": "2026-05-29",
@@ -8483,10 +8131,6 @@
 "date": "2026-05-29",
 "hash": "1bc2f4571fc46f4c"
 },
-"https://splashpadlocator.com/pad/tropical-park-miami": {
-"date": "2026-05-29",
-"hash": "cb93c6ff7e4b5762"
-},
 "https://splashpadlocator.com/pad/tropical-point-park-st-james-city": {
 "date": "2026-05-29",
 "hash": "fcf19659060304bb"
@@ -8530,10 +8174,6 @@
 "https://splashpadlocator.com/pad/tuscumbia-spring-park-tuscumbia": {
 "date": "2026-05-29",
 "hash": "3a587731814c222e"
-},
-"https://splashpadlocator.com/pad/tweetsie-railroad-blowing-rock": {
-"date": "2026-05-29",
-"hash": "cf5b591b7585d05e"
 },
 "https://splashpadlocator.com/pad/twin-hickory-park-recreation-center-glen-allen": {
 "date": "2026-05-29",
@@ -8586,10 +8226,6 @@
 "https://splashpadlocator.com/pad/ulster-county-pool-new-paltz": {
 "date": "2026-05-29",
 "hash": "ee8a749d1105067d"
-},
-"https://splashpadlocator.com/pad/universal-islands-of-adventure-orlando": {
-"date": "2026-05-29",
-"hash": "8d31d865e1b5c4f7"
 },
 "https://splashpadlocator.com/pad/upper-valley-aquatic-center-white-river-junction": {
 "date": "2026-05-29",
@@ -8679,10 +8315,6 @@
 "date": "2026-05-29",
 "hash": "2b8ba3f00fbda7ab"
 },
-"https://splashpadlocator.com/pad/virginia-highlands-park-arlington": {
-"date": "2026-05-29",
-"hash": "de0291d6ebd05b9c"
-},
 "https://splashpadlocator.com/pad/volcano-island-waterpark-sterling": {
 "date": "2026-05-29",
 "hash": "1a4a1d988f1cdd4e"
@@ -8727,10 +8359,6 @@
 "date": "2026-05-29",
 "hash": "3782db856e45c786"
 },
-"https://splashpadlocator.com/pad/walden-ponds-wildlife-habitat-boulder": {
-"date": "2026-05-29",
-"hash": "96a5891f26fc5382"
-},
 "https://splashpadlocator.com/pad/waldo-pool-waldo": {
 "date": "2026-05-29",
 "hash": "9a9c91ea0d341d3d"
@@ -8746,10 +8374,6 @@
 "https://splashpadlocator.com/pad/walnut-island-river-park-alexander": {
 "date": "2026-05-29",
 "hash": "49c735a7f5ad3cf0"
-},
-"https://splashpadlocator.com/pad/walt-whitman-park-brooklyn": {
-"date": "2026-05-29",
-"hash": "d562f4f4b6435600"
 },
 "https://splashpadlocator.com/pad/walter-gladwin-park-bronx": {
 "date": "2026-05-29",
@@ -8775,10 +8399,6 @@
 "date": "2026-05-29",
 "hash": "cdfc572a7c19f14d"
 },
-"https://splashpadlocator.com/pad/wards-island-park-new-york": {
-"date": "2026-05-29",
-"hash": "f068f8f916cd58b4"
-},
 "https://splashpadlocator.com/pad/warner-park-pool-chattanooga": {
 "date": "2026-05-29",
 "hash": "2fb8b96e91af1138"
@@ -8798,10 +8418,6 @@
 "https://splashpadlocator.com/pad/washington-hall-park-brooklyn": {
 "date": "2026-05-29",
 "hash": "8f74a72acdca2571"
-},
-"https://splashpadlocator.com/pad/washington-market-park-new-york": {
-"date": "2026-05-29",
-"hash": "b1d011bbf203f948"
 },
 "https://splashpadlocator.com/pad/washington-park-cincinnati": {
 "date": "2026-05-29",
@@ -8955,10 +8571,6 @@
 "date": "2026-05-29",
 "hash": "97f843dfc662c1a7"
 },
-"https://splashpadlocator.com/pad/waterfront-park-alexandria": {
-"date": "2026-05-29",
-"hash": "fa38afb49f1f1f80"
-},
 "https://splashpadlocator.com/pad/waterfront-park-east-stroudsburg": {
 "date": "2026-05-29",
 "hash": "e438a177165911b0"
@@ -9071,10 +8683,6 @@
 "date": "2026-05-29",
 "hash": "144de22361947157"
 },
-"https://splashpadlocator.com/pad/west-boynton-park-and-recreation-center-lake-worth-beach": {
-"date": "2026-05-29",
-"hash": "a884ec9235f12994"
-},
 "https://splashpadlocator.com/pad/west-cobb-aquatic-center-powder-springs": {
 "date": "2026-05-29",
 "hash": "2313c7bb489aec48"
@@ -9090,10 +8698,6 @@
 "https://splashpadlocator.com/pad/west-gwinnett-park-aquatic-center-norcross": {
 "date": "2026-05-29",
 "hash": "c79a53248146e6f1"
-},
-"https://splashpadlocator.com/pad/west-harlem-piers-new-york": {
-"date": "2026-05-29",
-"hash": "92e317b90ff3d68a"
 },
 "https://splashpadlocator.com/pad/west-irving-aquatic-center-irving": {
 "date": "2026-05-29",
@@ -9138,10 +8742,6 @@
 "https://splashpadlocator.com/pad/weston-parks-recreation-weston": {
 "date": "2026-05-29",
 "hash": "e5a806e296529366"
-},
-"https://splashpadlocator.com/pad/westwind-lakes-park-miami": {
-"date": "2026-05-29",
-"hash": "fc905b227328c1f4"
 },
 "https://splashpadlocator.com/pad/westwold-park-bakersfield": {
 "date": "2026-05-29",
@@ -9331,10 +8931,6 @@
 "date": "2026-05-29",
 "hash": "478b512d16bb5697"
 },
-"https://splashpadlocator.com/pad/wildwood-park-harrisburg": {
-"date": "2026-05-29",
-"hash": "418da4f973e14f99"
-},
 "https://splashpadlocator.com/pad/wildwood-park-indianapolis": {
 "date": "2026-05-29",
 "hash": "9ecfe2d1e35d10b4"
@@ -9427,10 +9023,6 @@
 "date": "2026-05-29",
 "hash": "14d82a0b2deda4c5"
 },
-"https://splashpadlocator.com/pad/wnyc-transmitter-park-brooklyn": {
-"date": "2026-05-29",
-"hash": "28b4afafd2c25c38"
-},
 "https://splashpadlocator.com/pad/woka-whitewater-park-watts": {
 "date": "2026-05-29",
 "hash": "fd67368587894020"
@@ -9450,10 +9042,6 @@
 "https://splashpadlocator.com/pad/wonderland-play-and-party-south-hackensack": {
 "date": "2026-05-29",
 "hash": "37bd5782800ed8d5"
-},
-"https://splashpadlocator.com/pad/wonderworks-destiny-syracuse": {
-"date": "2026-05-29",
-"hash": "c1548a101fb3904d"
 },
 "https://splashpadlocator.com/pad/woodland-aquatic-center-lexington": {
 "date": "2026-05-29",
@@ -9569,7 +9157,7 @@
 },
 "https://splashpadlocator.com/splash-pad-guide": {
 "date": "2026-06-09",
-"hash": "f4e61ee3dd634f6b"
+"hash": "f9d9d1e29d3e2bc0"
 },
 "https://splashpadlocator.com/state/alabama": {
 "date": "2026-06-09",
@@ -9577,7 +9165,7 @@
 },
 "https://splashpadlocator.com/state/arizona": {
 "date": "2026-06-09",
-"hash": "488b353b732695f9"
+"hash": "51d18e5fa380b856"
 },
 "https://splashpadlocator.com/state/arkansas": {
 "date": "2026-06-09",
@@ -9585,27 +9173,27 @@
 },
 "https://splashpadlocator.com/state/california": {
 "date": "2026-06-09",
-"hash": "b8a4154a6a133a68"
+"hash": "66c02685f84062bf"
 },
 "https://splashpadlocator.com/state/colorado": {
 "date": "2026-06-09",
-"hash": "7596e7363ac5d8d6"
+"hash": "0731eb711220b8ea"
 },
 "https://splashpadlocator.com/state/connecticut": {
 "date": "2026-06-09",
-"hash": "9b99a92bb1813ee6"
+"hash": "d7d84f76614401fd"
 },
 "https://splashpadlocator.com/state/florida": {
 "date": "2026-06-09",
-"hash": "11bf857e0a6cceb8"
+"hash": "f5463bce37438cce"
 },
 "https://splashpadlocator.com/state/georgia": {
 "date": "2026-06-09",
-"hash": "00fdffa1472a4521"
+"hash": "d9e67d93b8e1c152"
 },
 "https://splashpadlocator.com/state/idaho": {
 "date": "2026-06-09",
-"hash": "bc433298f5447116"
+"hash": "2c52e44bcaf8ba73"
 },
 "https://splashpadlocator.com/state/illinois": {
 "date": "2026-06-09",
@@ -9613,11 +9201,11 @@
 },
 "https://splashpadlocator.com/state/indiana": {
 "date": "2026-06-09",
-"hash": "c8429bc9a50354bb"
+"hash": "30207d69cc25ea6d"
 },
 "https://splashpadlocator.com/state/iowa": {
 "date": "2026-06-09",
-"hash": "7b7b028e25f89d0c"
+"hash": "a0f6cb93007dc68e"
 },
 "https://splashpadlocator.com/state/kansas": {
 "date": "2026-06-09",
@@ -9625,7 +9213,7 @@
 },
 "https://splashpadlocator.com/state/kentucky": {
 "date": "2026-06-09",
-"hash": "a57f0ba9a60b86c1"
+"hash": "c30002ea3de1be9d"
 },
 "https://splashpadlocator.com/state/louisiana": {
 "date": "2026-06-09",
@@ -9645,7 +9233,7 @@
 },
 "https://splashpadlocator.com/state/michigan": {
 "date": "2026-06-09",
-"hash": "b65ae23fb99b07c8"
+"hash": "ca85e443e1b39098"
 },
 "https://splashpadlocator.com/state/minnesota": {
 "date": "2026-06-09",
@@ -9657,7 +9245,7 @@
 },
 "https://splashpadlocator.com/state/missouri": {
 "date": "2026-06-09",
-"hash": "3a7c7f1c945d16fb"
+"hash": "58d2cff6bf1670c0"
 },
 "https://splashpadlocator.com/state/montana": {
 "date": "2026-06-09",
@@ -9669,15 +9257,15 @@
 },
 "https://splashpadlocator.com/state/nevada": {
 "date": "2026-06-09",
-"hash": "ac16a061219ff527"
+"hash": "8b3af4173d9b1563"
 },
 "https://splashpadlocator.com/state/new-hampshire": {
 "date": "2026-06-09",
-"hash": "2ada7fa10ec380f4"
+"hash": "a2885f6fe996e33e"
 },
 "https://splashpadlocator.com/state/new-jersey": {
 "date": "2026-06-09",
-"hash": "c5266adb1aefa3eb"
+"hash": "76f82f7fff3667d8"
 },
 "https://splashpadlocator.com/state/new-mexico": {
 "date": "2026-06-09",
@@ -9685,11 +9273,11 @@
 },
 "https://splashpadlocator.com/state/new-york": {
 "date": "2026-06-09",
-"hash": "ed56661c4a2b4979"
+"hash": "a1b9ad71515e0b14"
 },
 "https://splashpadlocator.com/state/north-carolina": {
 "date": "2026-06-09",
-"hash": "dee6648bcbc9ddc1"
+"hash": "d303019eb01727bd"
 },
 "https://splashpadlocator.com/state/north-dakota": {
 "date": "2026-06-09",
@@ -9697,7 +9285,7 @@
 },
 "https://splashpadlocator.com/state/ohio": {
 "date": "2026-06-09",
-"hash": "3eadd761754b1d59"
+"hash": "d56bf969971d31a2"
 },
 "https://splashpadlocator.com/state/oklahoma": {
 "date": "2026-06-09",
@@ -9709,7 +9297,7 @@
 },
 "https://splashpadlocator.com/state/pennsylvania": {
 "date": "2026-06-09",
-"hash": "3b6cc4bed7b6626e"
+"hash": "e9606fa274381fa2"
 },
 "https://splashpadlocator.com/state/south-carolina": {
 "date": "2026-06-09",
@@ -9717,7 +9305,7 @@
 },
 "https://splashpadlocator.com/state/south-dakota": {
 "date": "2026-06-09",
-"hash": "3891e6cd637d18b7"
+"hash": "8477f9882e329480"
 },
 "https://splashpadlocator.com/state/tennessee": {
 "date": "2026-06-09",
@@ -9725,7 +9313,7 @@
 },
 "https://splashpadlocator.com/state/texas": {
 "date": "2026-06-09",
-"hash": "b23d205a2238e9de"
+"hash": "f807c8271059a3b7"
 },
 "https://splashpadlocator.com/state/utah": {
 "date": "2026-06-09",
@@ -9733,7 +9321,7 @@
 },
 "https://splashpadlocator.com/state/virginia": {
 "date": "2026-06-09",
-"hash": "d84207daf1901237"
+"hash": "7012511d2ea3b279"
 },
 "https://splashpadlocator.com/state/washington": {
 "date": "2026-06-09",
@@ -9741,7 +9329,7 @@
 },
 "https://splashpadlocator.com/state/west-virginia": {
 "date": "2026-06-09",
-"hash": "49bc612779e8adcf"
+"hash": "baf0544a8492eac2"
 },
 "https://splashpadlocator.com/state/wisconsin": {
 "date": "2026-06-09",
