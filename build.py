@@ -438,7 +438,11 @@ def fetch_blog_posts():
                 "slug": (fields.get("Slug", "") or slugify(title)).strip(),
                 "content": clean_description(fields.get("Content", "")),
                 "excerpt": clean_description(fields.get("Excerpt", "")),
-                "author": fields.get("Author", "Splash Pad Locator Staff"),
+                # E-E-A-T remediation (2026-06): bylines are normalized at build
+                # time to the organization-level editorial team, regardless of
+                # the Airtable "Author" value. Airtable data is left untouched;
+                # no individual personas are rendered as authors.
+                "author": "Splash Pad Locator Editorial Team",
                 "publish_date": fields.get("Publish Date", ""),
                 "featured_image": fields.get("Featured Image", ""),
                 "meta_description": clean_description(fields.get("Meta Description", "")),

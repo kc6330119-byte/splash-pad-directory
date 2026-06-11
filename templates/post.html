@@ -13,7 +13,13 @@
     {% endif %}
     "author": {
         "@type": "Organization",
-        "name": {{ post.author | tojson }}
+        "name": "Splash Pad Locator Editorial Team",
+        "url": {{ site_url | tojson }}
+    },
+    "editor": {
+        "@type": "Person",
+        "name": "Kevin Collins",
+        "sameAs": "https://www.linkedin.com/in/kevin-collins-48934a7"
     },
     "publisher": {
         "@type": "Organization",
