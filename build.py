@@ -658,6 +658,11 @@ def build_city_pages(env, pads):
 
 
 _ARTIFACT_RE = re.compile("|".join(config.PAD_ARTIFACT_PATTERNS), re.I)
+
+# The Phase-1 fallback composer's signature opener. Pads still carrying it are
+# fact-stub pages (~80-120 words); evaluate_pad rule 4 noindexes them unless
+# GSC-protected. See the 2026-07-18 fewer-but-richer decision.
+_SKELETON_RE = re.compile(r"\bis a water play area in\b", re.I)
 _OFF_TOPIC_NAME_RE = re.compile("|".join(config.PAD_OFF_TOPIC_NAME_PATTERNS), re.I)
 _WATER_NAME_RE = re.compile("|".join(config.PAD_WATER_NAME_PATTERNS), re.I)
 
@@ -787,6 +792,16 @@ def evaluate_pad(pad, protected_slugs):
     type_val = str(pad.get("type", "")).strip()
     if type_val not in config.PAD_TYPE_WHITELIST:
         return ("queued_type" if is_protected else "noindex_type", type_val or "(empty type)")
+
+    # 4. Skeleton fallback opener (fewer-but-richer, post-rejection #3 2026-07-18).
+    #    Descriptions still opening with the Phase-1 fact-stub frame are
+    #    true-but-thin 80-120 word stubs; at ~28% of the index they are the
+    #    "thin content" the AdSense rejections keep pointing at. Concentrate the
+    #    index on substantial pages: noindex the stubs but keep them live for
+    #    users and hub navigation. GSC-protected (trafficked) slugs stay
+    #    indexed — real search traffic outranks composition purity.
+    if _SKELETON_RE.search(desc) and not is_protected:
+        return ("noindex_skeleton", "skeleton fallback description")
 
     return ("ok", None)
 
