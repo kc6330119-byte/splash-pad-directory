@@ -53,6 +53,7 @@ US_STATES = [
     {"name": "Delaware", "slug": "delaware", "abbr": "DE",
      "meta_description": "Find splash pads in Delaware — free water play areas in Wilmington, Newark, and Dover. Mid-Atlantic family spray parks near you, 2026.",
      "description": "Delaware may be the nation's second-smallest state, but its communities take summer recreation seriously, and splash pads have become a welcome fixture in parks across the First State. Wilmington, the state's largest city, operates spray features in community parks that serve families throughout New Castle County, with free access during operating hours. Newark, home to the University of Delaware, has invested in community park improvements that include water play areas suited to the city's family-friendly neighborhoods. Dover, the state capital, offers water play options through its parks and recreation department, serving families in Kent County. Rehoboth Beach and the Delaware shore communities attract summer visitors from across the mid-Atlantic region, and some beach-adjacent parks feature spray features alongside their other amenities. The season in Delaware runs from Memorial Day through Labor Day, with peak demand in July and August when mid-Atlantic humidity makes the state's warm temperatures feel particularly intense. Most municipal splash pads in Delaware are free of charge and open to all residents during park hours. Delaware's small size is actually an advantage for families — no community in the state is more than an hour from multiple water play options. Checking local parks department websites is the most reliable way to find current operating hours and seasonal schedules before heading out."},
+    {"name": "District of Columbia", "slug": "district-of-columbia", "abbr": "DC", "meta_description": "Find splash pads and spray parks in Washington, D.C. — free water play areas across the District's parks. Family fun updated for 2026.", "description": "Washington, D.C.'s hot, humid summers make water play a genuine necessity, and the District has responded with spray parks and interactive fountains woven through its neighborhoods. The Department of Parks and Recreation operates splash areas at community parks across the city's wards, while destination spots like the fountains along the redeveloped waterfront draw families from across the region. Most DPR spray parks are free to use and run daily through the warm months, typically from Memorial Day weekend into early September. The District's compact size means most families are within a short Metro or bus ride of a water-play option, and many splash areas sit beside playgrounds and picnic space that stretch a visit into a full morning. Summer heat in Washington regularly climbs into the 90s with high humidity from June through August, so mornings are the most comfortable window for younger children. Weekday visits are noticeably quieter than weekends, when the most popular waterfront fountains fill quickly. Bring sunscreen, water bottles, and a change of clothes, and check the DC Department of Parks and Recreation for current operating schedules before you visit, as hours and seasonal opening dates vary by site."},
     {"name": "Florida", "slug": "florida", "abbr": "FL",
      "meta_description": "Find 200+ splash pads in Florida — free spray parks in Orlando, Tampa, Jacksonville, and Miami. Year-round family water play, 2026.",
      "description": "Florida is genuinely one of the best states in the country for splash pads, and the sheer volume of options reflects a culture built around water and outdoor recreation. The combination of year-round warm weather and a large, family-oriented population has driven investment in water play facilities at every scale, from small neighborhood spray features to elaborate aquatic parks. Orlando and the surrounding communities offer dozens of splash pads, both free municipal options and paid attractions tied to the area's resort and theme park economy. Tampa Bay communities — including Tampa, St. Petersburg, and Clearwater — operate free community splash pads in neighborhood parks throughout the metro area. Jacksonville, the largest city by area in the contiguous United States, has distributed water play facilities across its sprawling park system. Miami-Dade County offers splash pads that operate well into the fall, taking advantage of the region's subtropical climate. Many Florida splash pads operate year-round or close only during the mildest winter months. The summer rainy season, which runs roughly June through September, brings daily afternoon thunderstorms that can interrupt outdoor plans — morning visits are the safest bet. Most municipal splash pads are free. Always check local parks department websites for hours, as facilities in Florida often have specific operating schedules."},
@@ -1659,4 +1660,34 @@ PAD_EXCLUDE_SLUGS.update({
     "wildwood-park-harrisburg": "no water evidence in any source (skeleton fabrication risk)",
     "wnyc-transmitter-park-brooklyn": "no water evidence in any source (skeleton fabrication risk)",
     "wonderworks-destiny-syracuse": "no water evidence in any source (skeleton fabrication risk)",
+})
+
+
+# ── Reviewer-lens audit round 3 (2026-07-18): accommodation-first listings ──────
+# Hotels / casinos / RV parks / condo rentals whose water feature is a guest
+# amenity, not a public attraction — off-topic for a splash-pad directory per
+# the AdSense low-value policy links. Destination waterpark-resorts (Kalahari
+# class, 5/30 precedent) stay indexed. Manual noindex: pages stay live,
+# reversible, intentionally bypasses the GSC-protected guardrail.
+PAD_NOINDEX_SLUGS.update({
+    "7-clans-first-council-casino-hotel-newkirk": "accommodation-first business (reviewer audit 2026-07-18)",
+    "arizona-grand-resort-spa-phoenix": "accommodation-first business (reviewer audit 2026-07-18)",
+    "atlantis-family-waterpark-hotel-ascend-hotel-collection-wisconsin-dells": "accommodation-first business (reviewer audit 2026-07-18)",
+    "bismarck-hotel-conference-center-bismarck": "accommodation-first business (reviewer audit 2026-07-18)",
+    "country-inn-suites-by-radisson-bismarck-waterpark-bismarck": "accommodation-first business (reviewer audit 2026-07-18)",
+    "crown-choice-inn-suites-lakeview-waterpark-mackinaw-city": "accommodation-first business (reviewer audit 2026-07-18)",
+    "crown-reef-beach-resort-and-waterpark-myrtle-beach": "accommodation-first business (reviewer audit 2026-07-18)",
+    "currents-waterpark-at-embassy-suites-myrtle-beach-resort-myrtle-beach": "accommodation-first business (reviewer audit 2026-07-18)",
+    "edgewater-hotel-and-waterpark-duluth": "accommodation-first business (reviewer audit 2026-07-18)",
+    "holiday-inn-omaha-downtown-waterpark-by-ihg-omaha": "accommodation-first business (reviewer audit 2026-07-18)",
+    "margaritaville-resort-orlando-kissimmee": "accommodation-first business (reviewer audit 2026-07-18)",
+    "perryville-rv-resort-pool-splash-pad-perryville": "accommodation-first business (reviewer audit 2026-07-18)",
+    "piney-river-resort-bon-aqua": "accommodation-first business (reviewer audit 2026-07-18)",
+    "ramada-by-wyndham-hotel-water-park-kissimmee": "accommodation-first business (reviewer audit 2026-07-18)",
+    "seven-clans-casino-thief-river-falls-thief-river-falls": "accommodation-first business (reviewer audit 2026-07-18)",
+    "shores-of-asbury-rv-resort-anderson": "accommodation-first business (reviewer audit 2026-07-18)",
+    "splash-beach-resort-water-slide-park-condo-rentals-panama-city-beach": "accommodation-first business (reviewer audit 2026-07-18)",
+    "summer-breeze-usa-rv-resort-waterpark-brookshire": "accommodation-first business (reviewer audit 2026-07-18)",
+    "terraqueous-rv-resort-blanco": "accommodation-first business (reviewer audit 2026-07-18)",
+    "the-country-place-resort-east-durham": "accommodation-first business (reviewer audit 2026-07-18)",
 })

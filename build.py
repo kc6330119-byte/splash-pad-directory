@@ -1443,6 +1443,9 @@ STATIC_PAGES = [
         "output": "success/index.html",
         "title": "Message Sent",
         "description": "Thank you for contacting us.",
+        # Form-confirmation screen — a "behavioral purpose" page per AdSense
+        # inventory-value policy; never index it (2026-07-18 reviewer audit).
+        "noindex": True,
     },
     {
         "template": "submit.html",
@@ -1463,6 +1466,7 @@ def build_static_pages(env, pads=None):
             meta_description=page["description"],
             request_path=f"/{page['output'].replace('/index.html', '').replace('.html', '')}",
             total_count=total_count,
+            noindex=page.get("noindex", False),
         )
         output_path = config.OUTPUT_DIR / page["output"]
         output_path.parent.mkdir(parents=True, exist_ok=True)
