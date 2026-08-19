@@ -1691,3 +1691,9 @@ PAD_NOINDEX_SLUGS.update({
     "terraqueous-rv-resort-blanco": "accommodation-first business (reviewer audit 2026-07-18)",
     "the-country-place-resort-east-durham": "accommodation-first business (reviewer audit 2026-07-18)",
 })
+
+
+# Post-Airtable data sources (2026-08-19): committed CSV exports the build
+# prefers/falls back to, so the site needs no Airtable subscription.
+PADS_CSV = BASE_DIR / "data" / "pads.csv"
+BLOG_POSTS_CSV = BASE_DIR / "data" / "blog_posts.csv"

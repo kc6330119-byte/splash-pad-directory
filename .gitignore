@@ -14,7 +14,9 @@ dist/
 blog-drafts/
 
 # Data files (Outscraper extracts, Search Console exports, working CSVs)
-data/
+data/*
+!data/pads.csv
+!data/blog_posts.csv
 
 # AdSense planning docs (internal only)
 ADSENSE_RESUBMISSION_PLAN.md

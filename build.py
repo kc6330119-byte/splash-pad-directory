@@ -6,6 +6,7 @@ Fetches splash pad listings from Airtable and generates a static HTML site.
 Falls back to sample data if Airtable is not configured.
 """
 import hashlib
+import csv
 import json
 import os
 import re
@@ -404,17 +405,109 @@ def clear_airtable_photo_url(airtable_id):
         print(f"  Warning: could not clear Airtable photo_url for {airtable_id}: {e}")
 
 
+def load_pads_from_csv(path=None):
+    """Load splash pads from the committed CSV export (data/pads.csv) — the
+    post-Airtable data source. Mirrors fetch_from_airtable()'s record mapping
+    exactly so both paths produce identical pad dicts; returns None when the
+    file is absent so the Airtable fallback can take over."""
+    path = Path(path) if path else config.PADS_CSV
+    if not path or not path.exists():
+        return None
+    OFF_TOPIC_PREFIXES = (
+        "Six Flags", "Great Wolf Lodge", "Kings Island",
+        "Kings Dominion", "Kroger Aquatic Center", "Rivertown",
+    )
+
+    def _iso_date(v):
+        # Airtable CSV exports dates US-style ("3/1/2026"); the API returns ISO
+        # ("2026-03-01"). Normalize so both paths hash and render identically.
+        try:
+            from datetime import datetime as _dt
+            return _dt.strptime(str(v).strip(), "%m/%d/%Y").strftime("%Y-%m-%d")
+        except (ValueError, TypeError):
+            return v
+
+    def num(v):
+        try:
+            f = float(v)
+            return int(f) if f.is_integer() else f
+        except (TypeError, ValueError):
+            return v
+
+    pads = []
+    with open(path, encoding="utf-8-sig", newline="") as fh:
+        for row in csv.DictReader(fh):
+            fields = {k: v for k, v in row.items()
+                      if k and v is not None and str(v).strip() != ""}
+            if fields.get("Status") == "Draft":
+                continue
+            if any(fields.get("Name", "").startswith(p) for p in OFF_TOPIC_PREFIXES):
+                continue
+            state_name = fields.get("State", "")
+            raw_faq = fields.get("FAQ", "")
+            custom_faq = []
+            if raw_faq:
+                try:
+                    custom_faq = json.loads(raw_faq)
+                except (json.JSONDecodeError, TypeError):
+                    lines = [l.strip() for l in raw_faq.strip().splitlines() if l.strip()]
+                    current_q = None
+                    for line in lines:
+                        if line.startswith("Q:"):
+                            current_q = line[2:].strip()
+                        elif line.startswith("A:") and current_q:
+                            custom_faq.append({"q": current_q, "a": line[2:].strip()})
+                            current_q = None
+            pads.append({
+                "_airtable_id": "",
+                "name": fields.get("Name", ""),
+                "slug": slugify(fields.get("Name", "") + "-" + fields.get("City", "")),
+                "description": clean_description(fields.get("Description", "")),
+                "address": fields.get("Address", ""),
+                "city": fields.get("City", ""),
+                "state": state_name,
+                "state_slug": slugify(state_name),
+                "zip": fields.get("Zip", ""),
+                "phone": fields.get("Phone", ""),
+                "website_url": normalize_url(fields.get("Website URL", "")),
+                "google_maps_url": fields.get("Google Maps URL", ""),
+                "photo_url": fields.get("Photo URL", ""),
+                "hours": fields.get("Hours", ""),
+                "admission": fields.get("Admission", ""),
+                "price": fields.get("Price", ""),
+                "age_range": [s.strip() for s in str(fields.get("Age Range", "")).split(",") if s.strip()],
+                "features": [s.strip() for s in str(fields.get("Features", "")).split(",") if s.strip()],
+                "type": fields.get("Type", "Splash Pad"),
+                "season": fields.get("Season", ""),
+                "status": fields.get("Status", "Active"),
+                "featured": str(fields.get("Featured", "")).strip().lower() in ("true", "1", "yes", "checked"),
+                "date_added": _iso_date(fields.get("Date Added", "")),
+                "rating": num(fields.get("Rating", 0)),
+                "review_count": num(fields.get("Review Count", 0)),
+                "latitude": num(fields.get("Latitude", "")),
+                "longitude": num(fields.get("Longitude", "")),
+                "last_verified": fields.get("Last Verified", ""),
+                "faq": custom_faq,
+            })
+    print(f"Loaded {len(pads)} splash pads from {path.name}.")
+    return pads
+
+
 def get_pads():
-    """Get splash pads from Airtable or fall back to sample data."""
+    """Get splash pads. Prefers the committed CSV (data/pads.csv) so the site
+    builds with no Airtable dependency; falls back to Airtable, then samples."""
+    pads = load_pads_from_csv()
+    if pads:
+        return pads
     pads = fetch_from_airtable()
-    if pads is None:
+    if not pads:
         pads = get_sample_data()
         print(f"Using {len(pads)} sample splash pads.")
     return pads
 
 
-def fetch_blog_posts():
-    """Fetch published blog posts from Airtable."""
+def _fetch_blog_posts_airtable():
+    """Fetch published blog posts from the Airtable Blog Posts table."""
     if not config.AIRTABLE_API_KEY or not config.AIRTABLE_BASE_ID:
         return []
 
@@ -458,6 +551,45 @@ def fetch_blog_posts():
     except Exception as e:
         print(f"Note: Could not fetch blog posts ({e})")
         return []
+
+
+def load_blog_posts_from_csv(path=None):
+    """Blog fallback: load posts from the committed CSV export of the Airtable
+    Blog Posts table so the blog still builds when Airtable is unavailable."""
+    path = Path(path) if path else config.BLOG_POSTS_CSV
+    if not path or not path.exists():
+        return []
+    posts = []
+    with open(path, encoding="utf-8-sig", newline="") as fh:
+        for row in csv.DictReader(fh):
+            if (row.get("Status") or "").strip() != "Published":
+                continue
+            title = (row.get("Title") or "").strip()
+            posts.append({
+                "title": title,
+                "slug": ((row.get("Slug") or "") or slugify(title)).strip(),
+                "content": clean_description(row.get("Content", "") or ""),
+                "excerpt": clean_description(row.get("Excerpt", "") or ""),
+                "author": "Splash Pad Locator Editorial Team",
+                "publish_date": row.get("Publish Date", "") or "",
+                "featured_image": row.get("Featured Image", "") or "",
+                "meta_description": clean_description(row.get("Meta Description", "") or ""),
+                "status": "Published",
+                "featured": str(row.get("Featured", "")).strip().lower() in ("true", "1", "yes", "checked"),
+            })
+    posts.sort(key=lambda x: x.get("publish_date", ""), reverse=True)
+    return posts
+
+
+def fetch_blog_posts():
+    """Fetch blog posts: Airtable when available, else the committed CSV export."""
+    posts = _fetch_blog_posts_airtable()
+    if posts:
+        return posts
+    posts = load_blog_posts_from_csv()
+    if posts:
+        print(f"Loaded {len(posts)} blog posts from {config.BLOG_POSTS_CSV.name}.")
+    return posts
 
 
 def setup_output_directory():
@@ -1239,7 +1371,10 @@ def _stable_lastmods(entries, data_by_url=None):
         rec = store.get(url) or {}
         data = data_by_url.get(url)
         if data is not None:
-            basis = json.dumps(data, sort_keys=True, ensure_ascii=True, default=str)
+            # _airtable_id is build-internal metadata, not page content — exclude
+            # it so the CSV-sourced and Airtable-sourced paths hash identically.
+            basis = json.dumps({k: v for k, v in data.items() if k != "_airtable_id"},
+                               sort_keys=True, ensure_ascii=True, default=str)
             digest = hashlib.sha256(basis.encode("utf-8")).hexdigest()[:16]
         else:
             rel = url.replace(config.SITE_URL, "").strip("/")
